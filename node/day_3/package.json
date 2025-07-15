@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "start": "node file-app.js",
+    "test": "node --test",
+    "watch": "node --watch file-app.js"
+  }
+}
