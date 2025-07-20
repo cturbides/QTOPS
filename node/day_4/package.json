@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "start": "node cluster-app.js",
+    "test": "autocannon -c 100 -d 30 http://localhost:3000",
+    "monitor": "node --trace-warnings cluster-app.js"
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1",
+    "ioredis": "^5.6.1",
+    "pidusage": "^4.0.1"
+  },
+  "devDependencies": {
+    "autocannon": "^8.0.0"
+  }
+}
