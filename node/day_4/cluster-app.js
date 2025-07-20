@@ -4,6 +4,7 @@
 // Sistema híbrido de clustering + worker threads
 const os = require("os");
 const http = require("http");
+const crypto = require("crypto");
 const Redis = require("ioredis");
 const cluster = require("cluster");
 const httpProxy = require("http-proxy");
@@ -481,6 +482,10 @@ class RedisTaskQueue {
   }
 
   async enqueue(task) {
+    if (!task.id) {
+      task.id = crypto.randomUUID();
+    }
+
     await this.redis.rpush(this.queueName, JSON.stringify(task));
   }
 
@@ -625,22 +630,22 @@ class HybridScalingSystem {
         if (!task) continue;
 
         console.log(
-          `[Redis Queue - Worker PID '${process.pid}'] Received task: ${task.taskType}`,
+          `[Redis Queue - Worker PID '${process.pid}'] Received task id '${task.id}': ${task.taskType}`,
         );
 
         this.threadPool
           .processTask(task.taskType, task.data, {
-            timeout: task.timeout || GENERAL_TIMEOUT,
+            timeout: task.timeout ?? GENERAL_TIMEOUT,
           })
           .then((result) => {
             console.log(
-              `[Redis Queue - Worker PID '${process.pid}'] Task complete:`,
+              `[Redis Queue - Worker PID '${process.pid}'] Task '${task.id}' complete:`,
               result,
             );
           })
           .catch((err) => {
             console.error(
-              `[Redis Queue - Worker PID '${process.pid}'] Task failed:`,
+              `[Redis Queue - Worker PID '${process.pid}'] Task '${task.id}' failed:`,
               err.message,
             );
           });
