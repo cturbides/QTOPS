@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "start": "node --expose-gc --inspect app.js",
+    "profile": "clinic doctor -- node app.js",
+    "flame": "clinic flame -- node app.js",
+    "bubble": "clinic bubbleprof -- node app.js",
+    "heap": "node --expose-gc --inspect --max-old-space-size=4096 app.js"
+  },
+  "dependencies": {
+    "prom-client": "^15.1.3"
+  }
+}
