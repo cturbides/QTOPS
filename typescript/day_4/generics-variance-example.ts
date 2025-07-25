@@ -32,7 +32,9 @@ interface Order extends Entity {
 
 
 // Codigo nuevo
-// For unknown reason, the following interface is being confused with JS Event type.
+// Real reason for this workaround is because declaration merging problem with JS Event type.
+
+// Ignore this: For unknown reason, the following interface is being confused with JS Event type.
 // This is a workaround to ensure they are treated as events (using this interface).
 interface mEvent {
     id: string;
