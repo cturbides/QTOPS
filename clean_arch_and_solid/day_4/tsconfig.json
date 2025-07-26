@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "paths": {
+      "@customer-management/*": [
+        "customer-management/*"
+      ],
+      "@inventory/*": [
+        "inventory/*"
+      ],
+      "@order-management/*": [
+        "order-management/*"
+      ],
+      "@shared-kernel/*": [
+        "shared-kernel/*"
+      ],
+      "@main/*": [
+        "main/*"
+      ],
+    },
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "ts-node": {
+    "files": true,
+  }
+}
