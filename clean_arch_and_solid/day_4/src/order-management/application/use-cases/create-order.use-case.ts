@@ -2,8 +2,8 @@ import { Order } from '@order-management/domain/entities/order.entity';
 import { ProductId } from '@order-management/domain/value-objects/product-id';
 import { CustomerId } from '@order-management/domain/value-objects/customer-id';
 import { OrderRepository } from '@order-management/domain/repository/order.repository';
+import { CreateOrderInput } from '@order-management/application/dto/create-order.input';
 import { ProductCatalogService } from '@order-management/domain/services/product-catalog.service'
-import { CreateOrderInput } from '../dto/create-order.input';
 
 export class CreateOrderUseCase {
     constructor(

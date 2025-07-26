@@ -6,6 +6,6 @@ import { OrderController } from '@order-management/infrastructure/controllers/or
 const router = Router();
 const controller = container.get<OrderController>(CONTAINER_TOKENS.OrderController);
 
-router.post('/orders', (req, res) => controller.create(req, res));
+router.post('/', (req, res) => controller.create(req, res));
 
 export { router as orderRoutes };

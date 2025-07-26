@@ -8,6 +8,12 @@ export class OrderController {
 
     async create(req: any, res: any) {
         try {
+            if (!req.body) {
+                return res.status(400).json({ success: false, message: 'Invalid input data' });
+            }
+
+            console.log('Received order creation request:', req.body);
+
             const input: CreateOrderInput = req.body;
             const order = await this.createOrderUseCase.execute(input);
             return res.status(201).json({ success: true, data: order });

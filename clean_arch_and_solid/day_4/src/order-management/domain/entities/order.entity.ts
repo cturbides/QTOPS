@@ -9,7 +9,10 @@ export class Order {
     constructor(
         private readonly id: string,
         private readonly customerId: CustomerId
-    ) { }
+    ) {
+        if (!id) throw new Error('El ID del pedido es obligatorio');
+        if (!customerId) throw new Error('El ID del cliente es obligatorio');
+    }
 
     addItem(productId: ProductId, quantity: number, unitPrice: Money): void {
         const existing = this.items.find(item => item['productId'].getValue() === productId.getValue());

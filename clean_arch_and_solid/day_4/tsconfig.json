@@ -20,6 +20,9 @@
       "@shared-kernel/*": [
         "shared-kernel/*"
       ],
+      "@shipping/*": [
+        "shipping/*"
+      ],
       "@main/*": [
         "main/*"
       ],
