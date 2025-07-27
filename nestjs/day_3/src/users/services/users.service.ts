@@ -28,6 +28,10 @@ export class UsersService {
     return this.userRepository.findOne({ where: { email } });
   }
 
+  async findById(id: string): Promise<User | null> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
   public toResponseDto(user: User): UserResponseDto {
     return {
       id: user.id,

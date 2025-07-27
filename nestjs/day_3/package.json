@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "seeds": "bash src/seed/run-seeds.sh",
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "start:dev": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/app.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",

@@ -1,5 +1,7 @@
-import { IsEmail, IsString, MinLength } from "class-validator";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
+import { Role } from "@common/constants/roles.enum";
+import { Order } from "@orders/entities/order.entity";
+import { IsArray, IsEmail, IsEnum, IsString, MinLength } from "class-validator";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToMany } from "typeorm";
 
 @Entity()
 export class User {
@@ -22,4 +24,15 @@ export class User {
 
     @CreateDateColumn()
     createdAt: Date;
+
+    @Column({ default: true })
+    isActive: boolean;
+
+    @Column('simple-array')
+    @IsArray()
+    @IsEnum(Role, { each: true })
+    roles: Role[];
+
+    @OneToMany(() => Order, order => order.user)
+    orders: Order[];
 }
