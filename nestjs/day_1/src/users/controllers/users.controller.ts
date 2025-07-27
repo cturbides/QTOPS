@@ -2,11 +2,16 @@ import { User } from '@users/entities/user.entity';
 import { CreateUserDto } from '@users/dto/create-user.dto';
 import { UsersService } from '@users/services/users.service';
 import { UserResponseDto } from '@users/dto/user-response.dto';
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { UpdateProfileDto } from '@users/dto/update-profile.dto';
+import { ProfileService } from '@users/services/profile.service';
+import { Controller, Get, Post, Body, Param, Patch } from '@nestjs/common';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly profileService: ProfileService,
+  ) { }
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<UserResponseDto> {
@@ -14,12 +19,7 @@ export class UsersController {
 
     const user: User = await this.usersService.create(createUserDto);
 
-    return {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      createdAt: user.createdAt
-    };
+    return this.usersService.toResponseDto(user);
   }
 
   @Get(':email')
@@ -32,11 +32,21 @@ export class UsersController {
       throw new Error(`User with email ${email} not found`);
     }
 
-    return {
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      createdAt: user.createdAt
-    };
+    return this.usersService.toResponseDto(user);
+  }
+
+  @Patch(':email')
+  async updateProfile(
+    @Param('email') email: string,
+    @Body() dto: UpdateProfileDto,
+  ): Promise<UserResponseDto> {
+    console.log(
+      'Updating profile for user with email:', email, 'with data:',
+      { ...dto, password: dto.password ? '***' : undefined }
+    );
+
+    const updatedUser: User = await this.profileService.updateProfile(email, dto);
+
+    return this.usersService.toResponseDto(updatedUser);
   }
 }

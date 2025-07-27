@@ -1,14 +1,4 @@
-import { IsEmail, IsString, MinLength } from "class-validator";
+import { PickType } from "@nestjs/mapped-types";
+import { User } from "@users/entities/user.entity";
 
-export class CreateUserDto {
-    @IsEmail()
-    email: string;
-
-    @IsString()
-    @MinLength(2)
-    name: string;
-
-    @IsString()
-    @MinLength(6)
-    password: string;
-}
+export class CreateUserDto extends PickType(User, ['email', 'name', 'password'] as const) { }
