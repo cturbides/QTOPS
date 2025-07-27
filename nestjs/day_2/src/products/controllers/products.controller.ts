@@ -1,8 +1,9 @@
 import { Product } from '@products/entities/product.entity';
+import { SearchProductDto } from '@products/dto/search-product.dto';
 import { CreateProductDto } from '@products/dto/create-product.dto';
 import { ProductsService } from '@products/services/products.service';
 import { ProductResponseDto } from '@products/dto/product-response.dto';
-import { Controller, Get, Post, Body, Param, Patch, UseInterceptors, ClassSerializerInterceptor, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseInterceptors, ClassSerializerInterceptor, UsePipes, ValidationPipe, Query } from '@nestjs/common';
 
 @Controller('products')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -22,10 +23,11 @@ export class ProductsController {
   }
 
   @Get()
-  async findAll(): Promise<ProductResponseDto[]> {
-    console.log('Retrieving all products');
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async findAll(@Query() searchProductDto: SearchProductDto): Promise<ProductResponseDto[]> {
+    console.log('Retrieving all products with filters:', searchProductDto);
 
-    const products: Product[] = await this.productsService.findAll();
+    const products: Product[] = await this.productsService.findAll(searchProductDto);
 
     return products.map(product => this.productsService.toResponseDto(product));
   }
