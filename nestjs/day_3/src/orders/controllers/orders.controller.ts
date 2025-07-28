@@ -7,6 +7,7 @@ import { UpdateOrderDto } from '@orders/dto/update-order.dto';
 import { CreateOrderDto } from '@orders/dto/create-order.dto';
 import { OrdersService } from '@orders/services/orders.service';
 import { OrderResponseDto } from '@orders/dto/order.response.dto';
+import { CacheInterceptor } from '@common/interceptors/cache.interceptor';
 import { AuditInterceptor } from '@common/interceptors/audit.interceptor';
 import { LoggingInterceptor } from '@common/interceptors/logging.interceptor';
 import { AuthenticatedRequest } from '@common/types/authenticated-request.type';
@@ -16,7 +17,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Request, UseGuards, 
 @Controller('orders')
 @UsePipes(new ValidationPipe({ transform: true }))
 @UseGuards(AuthGuard, RolesGuard)
-@UseInterceptors(LoggingInterceptor, AuditInterceptor, ResponseTransformInterceptor)
+@UseInterceptors(CacheInterceptor, LoggingInterceptor, AuditInterceptor, ResponseTransformInterceptor)
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) { }
 

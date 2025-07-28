@@ -2,6 +2,9 @@
 //  de endpoints GET durante 5 minutos, invalidando el caché cuando
 //  se realizan operaciones de escritura (POST, PUT, DELETE).
 
+// Ojo: Agregado en @common/interceptors/cache.interceptor.ts
+//  Aplicado en @orders/controllers/orders.controller.ts
+
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
