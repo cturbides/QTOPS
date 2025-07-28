@@ -39,7 +39,7 @@ export class ProductsService {
   }
 
   async remove(id: string): Promise<void> {
-    const product = await this.productRepo.findOne({ where: { id }, relations: ['orderItems'] });
+    const product = await this.productRepo.findOne({ where: { id }, relations: ['orders'] });
 
     if (!product) {
       throw new EntityNotFoundException('Producto no encontrado', id);

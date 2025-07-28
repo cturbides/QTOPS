@@ -50,7 +50,6 @@ export class ProductsController {
   @ApiOperation({ summary: 'Create a new product' })
   async create(@Body() dto: CreateProductDto): Promise<ProductResponseDto> {
     this.logger.log('Creating a new product');
-    this.logger.debug(`Product DTO: ${JSON.stringify(dto)}`);
 
     const product = await this.productsService.create(dto);
     return this.productsService.toResponseDto(product);

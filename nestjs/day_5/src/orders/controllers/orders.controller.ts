@@ -52,8 +52,6 @@ export class OrdersController {
 
     const orders: Order[] = await this.ordersService.findAll(req.user);
 
-    console.log({ orders })
-
     return orders.map(order => this.ordersService.toResponseDto(order));
   }
 

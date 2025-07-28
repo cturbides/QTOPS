@@ -15,6 +15,7 @@ module.exports = {
     ...tsJestTransformCfg,
   },
   moduleNameMapper: {
+    "^@test/(.*)$": '<rootDir>/test/$1',
     '^@common/(.*)$': '<rootDir>/src/common/$1',
     '^@orders/(.*)$': '<rootDir>/src/orders/$1',
     '^@products/(.*)$': '<rootDir>/src/products/$1',

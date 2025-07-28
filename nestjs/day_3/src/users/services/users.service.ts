@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '@users/entities/user.entity';
+import { Role } from '@common/constants/roles.enum';
 import { CreateUserDto } from '@users/dto/create-user.dto';
 import { UserResponseDto } from '@users/dto/user-response.dto';
 
@@ -19,6 +20,7 @@ export class UsersService {
     const user = this.userRepository.create({
       ...createUserDto,
       password: hashedPassword,
+      roles: [Role.USER], // Default role
     });
 
     return this.userRepository.save(user);
