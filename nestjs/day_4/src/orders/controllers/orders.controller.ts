@@ -2,6 +2,7 @@ import { Role } from '@common/constants/roles.enum';
 import { Order } from '@orders/entities/order.entity';
 import { AuthGuard } from '@common/decorators/auth.guard';
 import { Roles } from '@common/decorators/roles.decorator';
+import { Retry  } from '@common/decorators/retry.decorator';
 import { RolesGuard } from '@common/decorators/roles.guard';
 import { UpdateOrderDto } from '@orders/dto/update-order.dto';
 import { CreateOrderDto } from '@orders/dto/create-order.dto';
@@ -26,6 +27,7 @@ export class OrdersController {
 
   @Post()
   @Roles(Role.USER, Role.ADMIN)
+  @Retry({ attempts: 3, delay: 1000 })
   async create(@Body() createOrderDto: CreateOrderDto, @Request() req: AuthenticatedRequest): Promise<OrderResponseDto> {
     this.logger.log('Creating order', { user: req.user.id, createOrderDto });
 
@@ -58,6 +60,7 @@ export class OrdersController {
 
   @Patch(':id')
   @Roles(Role.ADMIN)
+  @Retry({ attempts: 3, delay: 1000 })
   async update(
     @Param('id') id: string,
     @Body() updateOrderDto: UpdateOrderDto,
@@ -72,6 +75,7 @@ export class OrdersController {
 
   @Patch(':id/cancel')
   @Roles(Role.USER, Role.ADMIN)
+  @Retry({ attempts: 3, delay: 1000 })
   async cancel(
     @Param('id') id: string,
     @Request() req: AuthenticatedRequest
@@ -84,6 +88,7 @@ export class OrdersController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
+  @Retry({ attempts: 3, delay: 1000 })
   async remove(
     @Param('id') id: string,
     @Request() req: AuthenticatedRequest

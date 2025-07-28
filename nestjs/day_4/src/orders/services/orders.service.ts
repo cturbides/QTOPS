@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '@users/entities/user.entity';
 import { Role } from '@common/constants/roles.enum';
 import { Order } from '@orders/entities/order.entity';
-import { Product } from '@products/entities/product.entity';
 import { CreateOrderDto } from '@orders/dto/create-order.dto';
 import { UpdateOrderDto } from '@orders/dto/update-order.dto';
 import { OrderItem } from '@orders/entities/order-item.entity';
@@ -11,8 +10,8 @@ import { OrderStatus } from '@orders/constants/order-status.enum';
 import { OrderResponseDto } from '@orders/dto/order.response.dto';
 import { ProductsService } from '@products/services/products.service';
 import { ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { InsufficientStockException, InvalidOrderStateException, ProductNotFoundException } from '@common/exceptions/ecommerce.exceptions';
 import { EntityNotFoundException, InsufficientPermissionsException } from '@common/exceptions/domain.exceptions';
+import { InsufficientStockException, InvalidOrderStateException, ProductNotFoundException } from '@common/exceptions/ecommerce.exceptions';
 
 @Injectable()
 export class OrdersService {
