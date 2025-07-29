@@ -2,6 +2,7 @@
 //  de procesamiento de órdenes, utilizando test containers para la base
 //  de datos y mocks para servicios externos
 
+import 'reflect-metadata';
 import express from 'express';
 import { shippingRoutes } from '@shipping/infrastructure/routes/shipping.routes';
 import { orderRoutes } from '@order-management/infrastructure/routes/order.routes';
@@ -12,6 +13,10 @@ app.use(express.json());
 app.use('/api/orders', orderRoutes);
 app.use('/api/shipments', shippingRoutes);
 
-app.listen(3000, () => {
-    console.log('Servidor corriendo en http://localhost:3000');
-});
+if (require.main === module) {
+    app.listen(3000, () => {
+        console.log('Servidor corriendo en http://localhost:3000');
+    });
+}
+
+export { app };

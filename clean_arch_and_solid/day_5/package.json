@@ -4,31 +4,41 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "start": "ts-node -r tsconfig-paths/register src/main/app.ts"
+    "start": "ts-node -r tsconfig-paths/register src/main/app.ts",
+    "test": "jest --config jest.config.js",
+    "test:unit": "jest --config jest.config.js --testMatch '**/tests/unit/**/*.(test|spec).ts'",
+    "test:integration": "jest --config jest.config.js --testMatch '**/tests/integration/**/*.(test|spec).ts'",
+    "test:integration:containers": "jest --passWithNoTests --config jest.config.js --setupFilesAfterEnv ./tests/integration/setup.with-test-container.ts --testMatch '**/tests/integration/**/*.test-container.(test|spec).ts' --runInBand"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/jest": "^30.0.0",
-    "@types/supertest": "^6.0.3",
+    "@nestjs/mapped-types": "^2.1.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "inversify": "^7.6.1",
-    "jest": "^30.0.5",
-    "reflect-metadata": "^0.2.2",
-    "supertest": "^7.1.4",
-    "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.8.3",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "@testcontainers/postgresql": "^11.4.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "@types/uuid": "^10.0.0"
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
+    "@types/uuid": "^10.0.0",
+    "jest": "^30.0.5",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "supertest": "^7.1.4",
+    "testcontainers": "^11.4.0",
+    "ts-jest": "^29.4.0",
+    "typeorm": "^0.3.25"
   }
 }

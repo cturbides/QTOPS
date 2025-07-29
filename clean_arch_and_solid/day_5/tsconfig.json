@@ -5,6 +5,7 @@
     "strict": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "baseUrl": "./src",
     "outDir": "./dist",
     "paths": {
@@ -25,17 +26,18 @@
       ],
       "@main/*": [
         "main/*"
-      ],
-    },
+      ]
+    }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tests/**/*"
   ],
   "exclude": [
     "node_modules",
     "dist"
   ],
   "ts-node": {
-    "files": true,
+    "files": true
   }
 }
