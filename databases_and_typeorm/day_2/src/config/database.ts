@@ -9,7 +9,7 @@ export const dataSourceOptions: DataSourceOptions = {
   password: process.env.DB_PASS || 'password',
   database: process.env.DB_NAME || 'elearning_dev',
   entities: [join(__dirname, '..', '**', '*.entity.{ts,js}')],
-  migrations: [join(__dirname, '..', 'migrations', '*.{ts,js}')],
+  migrations: [join(__dirname, '..', '**', '*.migration.{ts,js}')],
   synchronize: false,
   logging: (process.env.TYPEORM_LOGGING?.split(',') as any) || ['error'],
   cache: { duration: 3000 }

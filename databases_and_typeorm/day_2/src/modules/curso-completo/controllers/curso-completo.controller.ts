@@ -13,21 +13,25 @@ export class CursoCompletoController {
 
     @Post()
     create(@Body() dto: CreateCursoCompletoDto): Promise<CursoCompleto> {
+        console.log(`Creando curso completo`);
         return this.cursoService.saveCursoCompleto(dto);
     }
 
     @Get(':id')
     findOne(@Param('id') id: string): Promise<CursoCompleto | null> {
+        console.log(`Buscando curso completo con ID: ${id}`);
         return this.cursoService.obtenerCursoConTodoDetalle(id);
     }
 
     @Post('etiquetas')
     crearEtiqueta(@Body() dto: CreateEtiquetaDto): Promise<Etiqueta> {
+        console.log(`Creando etiqueta`);
         return this.cursoService.crearEtiqueta(dto);
     }
 
     @Post('instructores')
     crearInstructor(@Body() dto: CreateInstructorDto): Promise<Instructor> {
+        console.log(`Creando instructor`);
         return this.cursoService.crearInstructor(dto);
     }
 }
