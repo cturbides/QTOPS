@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { Etiqueta } from "./etiqueta.entity";
+import { Evaluacion } from "./evaluacion.entity";
 import { Instructor } from "./instructor.entity";
 import { DetalleCurso } from "./detalle-curso.entity";
 import { IsNotEmpty, MinLength } from 'class-validator';
@@ -38,5 +39,9 @@ export class CursoCompleto extends BaseEntity {
   // ManyToOne: Instructor del curso
   @ManyToOne(() => Instructor, instructor => instructor.cursos)
   instructor: Instructor;
+
+  // Un curso tiene muchas evaluaciones
+  @OneToMany(() => Evaluacion, evaluacion => evaluacion.curso, { cascade: true })
+  evaluaciones: Evaluacion[];
 }
 
