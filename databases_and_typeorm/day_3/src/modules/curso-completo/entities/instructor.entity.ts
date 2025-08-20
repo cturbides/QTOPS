@@ -1,9 +1,10 @@
 import 'reflect-metadata';
 import { CursoCompleto } from './curso-completo.entity';
+import { BaseEntity } from './templates/base-entity.template';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity('instructores')
-export class Instructor {
+export class Instructor extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
