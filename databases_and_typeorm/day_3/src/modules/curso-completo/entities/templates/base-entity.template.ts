@@ -1,5 +1,5 @@
 import { IsOptional } from 'class-validator';
-import { CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Column } from 'typeorm';
+import { CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
 export class BaseEntity {
     @IsOptional()
@@ -13,10 +13,4 @@ export class BaseEntity {
     @IsOptional()
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt?: Date;
-
-    @Column({ name: 'created_at' })
-    fechaCreacion: Date;
-
-    @Column({ name: 'updated_at' })
-    fechaActualizacion: Date;
 }
