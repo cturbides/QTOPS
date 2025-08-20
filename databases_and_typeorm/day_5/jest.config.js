@@ -2,10 +2,11 @@
  * For a detailed explanation regarding each configuration property, visit:
  * https://jestjs.io/docs/configuration
  */
+const { compilerOptions } = require('./tsconfig.json');
+const { pathsToModuleNameMapper } = require('ts-jest');
 
-import type { Config } from 'jest';
-
-const config: Config = {
+/** @type {import('jest').Config} */
+const config = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -23,6 +24,11 @@ const config: Config = {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: undefined,
+  "collectCoverageFrom": [
+    "src/**/*.ts",
+    "!src/**/*.d.ts",
+    "!src/main/**"
+  ],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
@@ -33,7 +39,7 @@ const config: Config = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  // coverageProvider: "babel",
+  coverageProvider: "v8",
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -45,7 +51,6 @@ const config: Config = {
 
   // An object that configures minimum threshold enforcement for coverage results
   // coverageThreshold: undefined,
-
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,
 
@@ -93,6 +98,8 @@ const config: Config = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
+
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -105,6 +112,7 @@ const config: Config = {
 
   // A preset that is used as a base for Jest's configuration
   // preset: undefined,
+  "preset": "ts-jest",
 
   // Run tests from one or more projects
   // projects: undefined,
@@ -140,8 +148,7 @@ const config: Config = {
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
-  setupFilesAfterEnv: ["<rootDir>/test/setup.ts"],
-  testTimeout: 30000,
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -150,7 +157,8 @@ const config: Config = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "node",
+  // testEnvironment: "jest-environment-node",
+  "testEnvironment": "node",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -159,16 +167,17 @@ const config: Config = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ["**/*.spec.ts", "**/*.integration.spec.ts"],
   // testMatch: [
   //   "**/__tests__/**/*.?([mc])[jt]s?(x)",
   //   "**/?(*.)+(spec|test).?([mc])[jt]s?(x)"
   // ],
+  testMatch: ['**/tests/integration/**/*.(test|spec).ts', '**/tests/unit/**/*.(test|spec).ts'],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [
   //   "/node_modules/"
   // ],
+  "testTimeout": 30000, // Set a timeout for tests to avoid hanging
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],
@@ -201,4 +210,4 @@ const config: Config = {
   // watchman: true,
 };
 
-export default config;
+module.exports = config;

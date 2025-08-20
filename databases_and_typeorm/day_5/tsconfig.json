@@ -9,24 +9,26 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@config/*": ["config/*"],
-      "@modules/*": ["modules/*"],
-      "@cache/*": ["modules/cache/*"],
-      "@health/*": ["modules/health/*"],
-      "@performance/*": ["modules/performance/*"],
-      "@curso-completo/*": ["modules/curso-completo/*"],
-    },
+      "@tests/*": ["tests/*"],
+      "@config/*": ["src/config/*"],
+      "@modules/*": ["src/modules/*"],
+      "@cache/*": ["src/modules/cache/*"],
+      "@health/*": ["src/modules/health/*"],
+      "@performance/*": ["src/modules/performance/*"],
+      "@curso-completo/*": ["src/modules/curso-completo/*"]
+    }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tests/**/*"
   ],
   "exclude": [
     "node_modules",
     "dist"
   ],
   "ts-node": {
-    "files": true,
+    "files": true
   }
 }

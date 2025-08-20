@@ -1,5 +1,6 @@
 import { Cache } from 'cache-manager';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { In, Repository, SelectQueryBuilder } from 'typeorm';
 import { Etiqueta } from '@curso-completo/entities/etiqueta.entity';
 import { Evaluacion } from '@curso-completo/entities/evaluacion.entity';
@@ -14,7 +15,6 @@ import { LeccionCompleta } from '@curso-completo/entities/leccion-completa.entit
 import { CreateCursoCompletoDto } from '@curso-completo/dtos/create-curso-completo.dto';
 import { CursoCompletoAdvanceSearchDto } from '@curso-completo/dtos/curso-completo-advance-search.dto';
 import { DEFAULT_CURSO_COMPLETO_SEARCH_LIMIT, DEFAULT_CURSO_COMPLETO_SEARCH_OFFSET, DEFAULT_CURSOC_COMPLETO_SEARCH_CACHE_TTL } from '@curso-completo/constants/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
 export class CursoCompletoService {
