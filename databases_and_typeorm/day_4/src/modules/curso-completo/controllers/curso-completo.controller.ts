@@ -1,12 +1,13 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Etiqueta } from '@curso-completo/entities/etiqueta.entity';
 import { Instructor } from '@curso-completo/entities/instructor.entity';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateEtiquetaDto } from '@curso-completo/dtos/create-etiqueta.dto';
 import { CursoCompleto } from '@curso-completo/entities/curso-completo.entity';
 import { CreateInstructorDto } from '@curso-completo/dtos/create-instructor.dto';
 import { CreateEvaluacionDto } from '@curso-completo/dtos/create-evaluacion.dto';
 import { CursoCompletoService } from '@curso-completo/services/curso-completo.service';
 import { CreateCursoCompletoDto } from '@curso-completo/dtos/create-curso-completo.dto';
+import { CursoCompletoAdvanceSearchDto } from "@curso-completo/dtos/curso-completo-advance-search.dto";
 import { GetCursoCompletoConEvaluacionesDto } from "@curso-completo/dtos/get-curso-completo-con-evaluaciones.dto";
 
 @Controller('cursos')
@@ -23,6 +24,12 @@ export class CursoCompletoController {
     findOne(@Param('id') id: string): Promise<CursoCompleto | null> {
         console.log(`Buscando curso completo con ID: ${id}`);
         return this.cursoService.obtenerCursoConTodoDetalle(id);
+    }
+
+    @Get('/search/advanced')
+    async findUsingAdvanceSearch(@Query() params: CursoCompletoAdvanceSearchDto): Promise<CursoCompleto[] | null[]> {
+        console.log(`Buscando cursos con búsqueda avanzada`);
+        return this.cursoService.busquedaAvanzadaOptimizada(params);
     }
 
     @Post('etiquetas')

@@ -9,8 +9,8 @@ class BaseCursoCompletoDto extends OmitType(CursoCompleto, [
     'lecciones',
     'etiquetas',
     'instructor',
-    'fechaCreacion',
-    'fechaActualizacion',
+    'createdAt',
+    'updatedAt'
 ] as const) { }
 
 export class CreateCursoCompletoDto extends BaseCursoCompletoDto {

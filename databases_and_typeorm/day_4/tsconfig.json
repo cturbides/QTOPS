@@ -13,6 +13,9 @@
     "paths": {
       "@config/*": ["config/*"],
       "@modules/*": ["modules/*"],
+      "@cache/*": ["modules/cache/*"],
+      "@health/*": ["modules/health/*"],
+      "@performance/*": ["modules/performance/*"],
       "@curso-completo/*": ["modules/curso-completo/*"],
     },
   },

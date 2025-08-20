@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CacheModule } from '@nestjs/cache-manager';
+import { cacheModuleOptions } from "@cache/config/index";
 import { Etiqueta } from '@curso-completo/entities/etiqueta.entity';
 import { Instructor } from '@curso-completo/entities/instructor.entity';
 import { Evaluacion } from '@curso-completo/entities/evaluacion.entity';
@@ -8,11 +11,21 @@ import { CursoCompleto } from '@curso-completo/entities/curso-completo.entity';
 import { LeccionCompleta } from '@curso-completo/entities/leccion-completa.entity';
 import { CursoCompletoService } from '@curso-completo/services/curso-completo.service';
 import { CursoCompletoController } from '@curso-completo/controllers/curso-completo.controller';
+import { DatabasePerformanceInterceptor } from '@performance/interceptors/database.interceptor';
 
 @Module({
     exports: [CursoCompletoService],
-    providers: [CursoCompletoService],
     controllers: [CursoCompletoController],
-    imports: [TypeOrmModule.forFeature([CursoCompleto, DetalleCurso, LeccionCompleta, Etiqueta, Instructor, Evaluacion])],
+    imports: [
+        CacheModule.register(cacheModuleOptions),
+        TypeOrmModule.forFeature([CursoCompleto, DetalleCurso, LeccionCompleta, Etiqueta, Instructor, Evaluacion])
+    ],
+    providers: [
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: DatabasePerformanceInterceptor
+        },
+        CursoCompletoService
+    ],
 })
 export class CursoCompletoModule { }

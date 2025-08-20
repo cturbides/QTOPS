@@ -1,5 +1,6 @@
 import { join } from 'path';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { TypeOrmQueryLogger } from '@performance/loggers/typeorm-query.logger';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
@@ -12,6 +13,8 @@ export const dataSourceOptions: DataSourceOptions = {
   migrations: [join(__dirname, '..', '**', '*.migration.{ts,js}')],
   synchronize: false,
   logging: (process.env.TYPEORM_LOGGING?.split(',') as any) || ['error'],
+  logger: new TypeOrmQueryLogger(),
+  migrationsTransactionMode: 'each',
   cache: { duration: 3000 }
 };
 

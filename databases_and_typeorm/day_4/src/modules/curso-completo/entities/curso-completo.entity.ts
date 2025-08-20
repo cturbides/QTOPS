@@ -3,7 +3,7 @@ import { Etiqueta } from "./etiqueta.entity";
 import { Evaluacion } from "./evaluacion.entity";
 import { Instructor } from "./instructor.entity";
 import { DetalleCurso } from "./detalle-curso.entity";
-import { IsNotEmpty, MinLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, MinLength } from 'class-validator';
 import { LeccionCompleta } from "./leccion-completa.entity";
 import { BaseEntity } from "@curso-completo/entities/templates/base-entity.template";
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, ManyToMany, JoinColumn, ManyToOne, JoinTable } from 'typeorm';
@@ -12,6 +12,10 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, ManyToMany
 export class CursoCompleto extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @IsOptional()
+  @Column({ type: 'boolean', default: true })
+  activo?: boolean;
 
   @Column({ type: 'varchar', length: 200 })
   @IsNotEmpty({ message: 'El título es obligatorio' })

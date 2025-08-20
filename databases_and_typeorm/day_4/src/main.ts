@@ -1,6 +1,6 @@
-// Task: Crea una migración para agregar auditoría completa
-//  (createdAt, updatedAt, deletedAt) a todas las tablas
-//  existentes manteniendo compatibilidad hacia atrás.
+// Task: Implementa un sistema de análisis de performance
+//  que identifique automáticamente queries N+1 y
+//  sugiera optimizaciones de eager loading
 
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
