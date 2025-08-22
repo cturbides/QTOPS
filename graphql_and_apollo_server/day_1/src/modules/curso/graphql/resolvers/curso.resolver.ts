@@ -5,7 +5,9 @@ import { Usuario } from '@modules/curso/graphql/types/usuario.model';
 import { CrearCursoInput } from '@modules/curso/graphql/inputs/crear-curso.input';
 import { EstadisticasService } from '@modules/curso/services/estadisticas.service';
 import { EstadisticasCurso } from '@modules/curso/graphql/types/estadisticas-curso.model';
+import { InscribirEnCursoArgs } from '@modules/curso/graphql/args/inscribir-en-curso.args';
 import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { GenericResponseMessage } from '@modules/curso/graphql/types/generic/response-message.model';
 
 @Resolver(() => Curso)
 export class CursoResolver {
@@ -44,5 +46,12 @@ export class CursoResolver {
     @ResolveField(() => EstadisticasCurso, { name: 'estadisticas' })
     async estadisticas(@Parent() curso: Curso): Promise<EstadisticasCurso> {
         return this.estadisticasService.calcularParaCurso(curso.id);
+    }
+
+    @Mutation(() => GenericResponseMessage, { name: 'inscribirEnCurso' })
+    async inscribirEnCurso(
+        @Args() { cursoId, estudianteId }: InscribirEnCursoArgs
+    ): Promise<GenericResponseMessage> {
+        return this.cursoService.inscribir(cursoId, estudianteId);
     }
 }

@@ -31,6 +31,18 @@ type Curso {
   estadisticas: EstadisticasCurso!
 }
 
+type GenericResponseMessage {
+  message: String!
+  success: Boolean!
+}
+
+type InscripcionNotificacion {
+  cursoId: ID!
+  estudianteId: String!
+  mensaje: String!
+  timestamp: String!
+}
+
 type Query {
   curso(id: ID!): Curso!
   cursos: [Curso!]!
@@ -38,6 +50,7 @@ type Query {
 
 type Mutation {
   crearCurso(datos: CrearCursoInput!): Curso!
+  inscribirEnCurso(cursoId: ID!, estudianteId: ID!): GenericResponseMessage!
 }
 
 input CrearCursoInput {
@@ -45,4 +58,8 @@ input CrearCursoInput {
   descripcion: String!
   instructorId: ID!
   etiquetas: [String!]
+}
+
+type Subscription {
+  estudianteInscritoEnCurso(cursoId: ID!): InscripcionNotificacion!
 }

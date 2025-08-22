@@ -1,3 +1,7 @@
+// Task: Extiende el esquema agregando subscriptions para 
+//  notificaciones en tiempo real cuando un usuario se
+//  inscribe a un curso
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 

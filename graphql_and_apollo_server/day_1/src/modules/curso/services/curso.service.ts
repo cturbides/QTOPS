@@ -1,4 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { PubSub } from 'graphql-subscriptions';
+import { PUB_SUB } from 'src/constants/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { dataSource } from '@modules/curso/data-source/index';
 import { Curso } from '@modules/curso/graphql/types/curso.model';
 import { Usuario } from '@modules/curso/graphql/types/usuario.model';
@@ -6,9 +8,17 @@ import { Leccion } from '@modules/curso/graphql/types/leccion.model';
 import { Curso as CursoEntity } from "@modules/curso/entities/curso.entitiy";
 import { Leccion as LeccionEntity } from '@modules/curso/entities/leccion.entity';
 import { CrearCursoInput } from '@modules/curso/graphql/inputs/crear-curso.input';
+import { GenericResponseMessage } from '@modules/curso/graphql/types/generic/response-message.model';
+import { ESTUDIANTE_INSCRITO_EN_CURSO_SUB } from '@modules/curso/graphql/common/subscription.constants';
+import { InscripcionNotificacion } from '@modules/curso/graphql/types/notifications/inscription-notification.model';
 
 @Injectable()
 export class CursoService {
+    constructor(
+        @Inject(PUB_SUB)
+        private readonly pubSub: PubSub
+    ) { }
+
     async crear(datos: CrearCursoInput): Promise<Curso> {
         const instructor = await this.obtenerInstructor(datos.instructorId);
 
@@ -122,12 +132,43 @@ export class CursoService {
         curso.ratings.push(rating);
     }
 
-    async inscribir(cursoId: string, estudianteId: string) {
-        const curso = await this.obtenerRecord(cursoId);
-        await this.obtenerEstudiante(estudianteId);
+    private async sendEstudianteInscritoNotification(cursoId: string, estudianteId: string): Promise<void> {
+        console.log(`Enviando notificación de inscripción para estudiante ${estudianteId} en curso ${cursoId}`);
 
-        if (!curso.estudianteIds.includes(estudianteId)) {
-            curso.estudianteIds.push(estudianteId);
+        const payload: InscripcionNotificacion = {
+            cursoId: cursoId,
+            estudianteId: estudianteId,
+            timestamp: new Date().toISOString(),
+            mensaje: `Usuario ${estudianteId} inscrito en el curso ${cursoId}`,
+        };
+
+        await this.pubSub.publish(ESTUDIANTE_INSCRITO_EN_CURSO_SUB, payload);
+
+        console.log(`Notificación de inscripción enviada para estudiante ${estudianteId} en curso ${cursoId}`);
+    }
+
+    async inscribir(cursoId: string, estudianteId: string): Promise<GenericResponseMessage> {
+        try {
+            const curso = await this.obtenerRecord(cursoId);
+            await this.obtenerEstudiante(estudianteId);
+
+            if (!curso.estudianteIds.includes(estudianteId)) {
+                curso.estudianteIds.push(estudianteId);
+            }
+
+            this.sendEstudianteInscritoNotification(cursoId, estudianteId)
+                .catch((err: unknown) => console.error('Error enviando notificación de inscripción:', err));
+
+            return {
+                success: true,
+                message: `Estudiante ${estudianteId} inscrito en curso ${cursoId} exitosamente.`,
+            }
+        } catch (error) {
+            return {
+                success: false,
+                message: `Error al inscribir al estudiante ${estudianteId} en el curso ${cursoId}: ${error.message}`,
+            }
         }
+
     }
 }
