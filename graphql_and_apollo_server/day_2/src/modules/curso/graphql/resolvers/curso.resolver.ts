@@ -6,7 +6,8 @@ import { CrearCursoInput } from '@modules/curso/graphql/inputs/crear-curso.input
 import { EstadisticasService } from '@modules/curso/services/estadisticas.service';
 import { EstadisticasCurso } from '@modules/curso/graphql/types/estadisticas-curso.model';
 import { InscribirEnCursoArgs } from '@modules/curso/graphql/args/inscribir-en-curso.args';
-import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import type { GraphQLContextWithLoaders } from '@modules/curso/graphql/common/context-with-loader'; 
+import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver, Context } from '@nestjs/graphql';
 import { GenericResponseMessage } from '@modules/curso/graphql/types/generic/response-message.model';
 
 @Resolver(() => Curso)
@@ -34,17 +35,31 @@ export class CursoResolver {
     }
 
     @ResolveField(() => [Leccion], { name: 'lecciones' })
-    async lecciones(@Parent() curso: Curso): Promise<Leccion[]> {
-        return this.cursoService.obtenerLecciones(curso.id);
+    async lecciones(
+        @Parent() curso: Curso,
+        @Context() context: GraphQLContextWithLoaders
+    ): Promise<Leccion[]> {
+        return context.loaders.leccion.load(curso.id);
     }
 
     @ResolveField(() => Usuario, { name: 'instructor' })
-    async instructor(@Parent() curso: Curso): Promise<Usuario> {
-        return this.cursoService.obtenerInstructor(curso.instructor.id);
+    async instructor(
+        @Parent() curso: Curso,
+        @Context() context: GraphQLContextWithLoaders
+    ): Promise<Usuario> {
+        const usuario = await context.loaders.usuario.load(curso.instructor.id);
+
+        if (!usuario) {
+            throw new Error(`Instructor con ID ${curso.instructor.id} no encontrado`);
+        }
+
+        return usuario;
     }
 
     @ResolveField(() => EstadisticasCurso, { name: 'estadisticas' })
-    async estadisticas(@Parent() curso: Curso): Promise<EstadisticasCurso> {
+    async estadisticas(
+        @Parent() curso: Curso,
+    ): Promise<EstadisticasCurso> {
         return this.estadisticasService.calcularParaCurso(curso.id);
     }
 

@@ -36,6 +36,20 @@ type GenericResponseMessage {
   success: Boolean!
 }
 
+type ProgresoEstudiante {
+  estudianteId: ID!
+  cursoId: ID!
+  porcentajeCompletado: Int!
+  leccionesVistas: [ID!]!
+  tiempoInvertido: Int
+  ultimaActividad: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type InscripcionNotificacion {
   cursoId: ID!
   estudianteId: String!
@@ -46,6 +60,19 @@ type InscripcionNotificacion {
 type Query {
   curso(id: ID!): Curso!
   cursos: [Curso!]!
+  lecciones(cursoId: String!): [Leccion!]!
+  leccionesPorCursosEnOrden(cursoIds: [String!]!): [Leccion!]!
+  usuarios: [Usuario!]!
+  usuario(id: String!): Usuario!
+  progresoPorCurso(estudianteId: ID!, cursoId: ID!): ProgresoEstudiante!
+
+  """Obtiene el progreso de múltiples estudiantes"""
+  progresoMultiple(consultas: [ProgresoInput!]!): [ProgresoEstudiante!]!
+}
+
+input ProgresoInput {
+  estudianteId: ID!
+  cursoId: ID!
 }
 
 type Mutation {

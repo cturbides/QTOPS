@@ -11,5 +11,14 @@ export const mockCursos: Curso[] = [
         titulo: 'Introducción a GraphQL',
         estudianteIds: [mockUsuarios[1].id],
         descripcion: 'Aprende GraphQL desde cero',
+    },
+    {
+        id: generateId(),
+        ratings: [5, 5, 5, 4, 5],
+        titulo: 'Introducción a React',
+        etiquetas: ['react', 'frontend'],
+        instructorId: mockUsuarios[1].id,
+        estudianteIds: [mockUsuarios[0].id],
+        descripcion: 'Aprende React desde cero',
     }
 ];

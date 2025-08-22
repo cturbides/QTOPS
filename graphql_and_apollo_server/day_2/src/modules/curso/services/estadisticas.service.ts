@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
+import { CursoService } from './curso.service';
 import { dataSource } from '@modules/curso/data-source/index';
 import { EstadisticasCurso } from '@modules/curso/graphql/types/estadisticas-curso.model';
-import { CursoService } from './curso.service';
 
 @Injectable()
 export class EstadisticasService {

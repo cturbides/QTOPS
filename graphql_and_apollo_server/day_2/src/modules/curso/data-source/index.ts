@@ -2,6 +2,8 @@ import { mockCursos } from "./mock/curso.entity.mock";
 import { generateId } from "./utils/generate-id.util";
 import { mockUsuarios } from "./mock/usuario.entity.mock";
 import { mockLecciones } from "./mock/leccion.entity.mock";
+import { mockProgresoEstudiante } from "./mock/progreso-estudiante.entity.mock";
+import { mockHistorialEstudiante } from "./mock/historial-estudiante.entity.mock";
 
 // Dummy data source
 export const dataSource = {
@@ -9,4 +11,6 @@ export const dataSource = {
     generateId: generateId,
     usuarios: mockUsuarios,
     lecciones: mockLecciones,
+    progresoEstudiante: mockProgresoEstudiante,
+    historialEstudiante: mockHistorialEstudiante,
 }

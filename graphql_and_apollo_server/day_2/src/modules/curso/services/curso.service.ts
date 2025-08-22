@@ -8,6 +8,7 @@ import { Leccion } from '@modules/curso/graphql/types/leccion.model';
 import { Curso as CursoEntity } from "@modules/curso/entities/curso.entitiy";
 import { Leccion as LeccionEntity } from '@modules/curso/entities/leccion.entity';
 import { CrearCursoInput } from '@modules/curso/graphql/inputs/crear-curso.input';
+import { HistorialEstudiante } from '@modules/curso/entities/historial-estudiante.entity';
 import { GenericResponseMessage } from '@modules/curso/graphql/types/generic/response-message.model';
 import { ESTUDIANTE_INSCRITO_EN_CURSO_SUB } from '@modules/curso/graphql/common/subscription.constants';
 import { InscripcionNotificacion } from '@modules/curso/graphql/types/notifications/inscription-notification.model';
@@ -170,5 +171,23 @@ export class CursoService {
             }
         }
 
+    }
+
+    // Calculo dummy
+    async calcularRecomendaciones(historial: HistorialEstudiante[]): Promise<Curso[]> {
+        if (historial.length === 0) {
+            return this.obtenerTodosLosCursos().then(cursos => cursos.slice(0, 3));
+        }
+
+        // Recomendar cursos similares o avanzados
+        const todosCursos = await this.obtenerTodosLosCursos();
+
+        // Filtrar cursos ya tomados
+        const cursosYaTomados = historial.map(h => h.cursoId);
+        const cursosDisponibles = todosCursos.filter(c => !cursosYaTomados.includes(c.id));
+
+        return cursosDisponibles
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 5);
     }
 }
