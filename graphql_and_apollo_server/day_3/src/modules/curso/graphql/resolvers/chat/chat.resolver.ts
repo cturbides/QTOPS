@@ -27,18 +27,33 @@ export class ChatResolver {
   async enviarMensaje(
     @Args('enviarMensajeInput') enviarMensajeInput: EnviarMensajeInput,
   ): Promise<MensajeChat> {
-    const { cursoId, usuarioId, contenido, tipo } = enviarMensajeInput;
+    const { cursoId, salaId, usuarioId, contenido, tipo, respondePor } = enviarMensajeInput;
 
-    await this.authService.validarAccesoCurso(usuarioId, cursoId);
+    // Validar que se proporcione al menos un destino
+    if (!cursoId && !salaId) {
+      throw new Error('Debe especificar un cursoId o salaId');
+    }
+
+    if (cursoId) {
+      await this.authService.validarAccesoCurso(usuarioId, cursoId);
+    }
 
     const mensaje = await this.chatService.crearMensaje({
       cursoId: cursoId,
+      salaId: salaId,
       autorId: usuarioId,
       contenido: contenido,
-      tipo: tipo || TipoMensaje.TEXTO
+      tipo: tipo || TipoMensaje.TEXTO,
+      respondePor: respondePor
     });
 
-    await this.eventPublisher.publicarNuevoMensaje(mensaje);
+    if (cursoId) {
+      await this.eventPublisher.publicarNuevoMensaje(mensaje);
+    }
+
+    if (salaId) {
+      await this.eventPublisher.publicarNuevoMensajeSala(mensaje);
+    }
 
     const menciones = this.chatService.extraerMenciones(contenido);
 

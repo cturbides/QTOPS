@@ -6,8 +6,11 @@ export class EnviarMensajeInput {
     @Field(() => ID)
     usuarioId: string;
 
-    @Field(() => ID)
-    cursoId: string;
+    @Field(() => ID, { nullable: true })
+    cursoId?: string;
+
+    @Field(() => ID, { nullable: true })
+    salaId?: string;
 
     @Field()
     contenido: string;
@@ -17,4 +20,7 @@ export class EnviarMensajeInput {
 
     @Field(() => [String], { nullable: true })
     adjuntos?: string[];
+
+    @Field(() => ID, { nullable: true })
+    respondePor?: string;
 }

@@ -7,6 +7,9 @@ import { mockProgresoEstudiante } from "./mock/progreso-estudiante.entity.mock";
 import { EstadoUsuario } from "@modules/curso/entities/chat/estado-usuario.type";
 import { mockHistorialEstudiante } from "./mock/historial-estudiante.entity.mock";
 import { IConnectionInfo } from "@modules/curso/services/interfaces/websocket/connection-info.interface";
+import { SalaPrivada } from "@modules/curso/entities/chat/sala-privada.entity";
+import { SincronizacionEstado } from "@modules/curso/entities/chat/sincronizacion-estado.entity";
+import { mockSalasPrivadas } from "./mock/sala-privada.entity.mock";
 
 // Dummy data source
 export const dataSource = {
@@ -29,4 +32,26 @@ export const dataSource = {
     conexionesActivas: new Map<string, IConnectionInfo>(),
     timeoutsEscritura: new Map<string, NodeJS.Timeout>(),
     usuariosEscribiendoMap: new Map<string, Set<string>>(),
+
+    // Salas privadas
+    salasPrivadas: new Map<string, SalaPrivada>(
+        mockSalasPrivadas.map(sala => [sala.id, sala])
+    ),
+    mensajesPorSala: new Map<string, string[]>(),
+    participantesPorSala: new Map<string, Set<string>>(
+        mockSalasPrivadas.map(sala => [
+            sala.id, 
+            new Set(sala.participantes.map(p => p.id))
+        ])
+    ),
+    salasPorUsuario: new Map<string, Set<string>>([
+        [mockUsuarios[0].id, new Set(['sala_1'])],
+        [mockUsuarios[1].id, new Set(['sala_1', 'sala_2'])],
+        [mockUsuarios[2].id, new Set(['sala_2'])]
+    ]),
+
+    // Sincronización de estado
+    sincronizacionEstados: new Map<string, SincronizacionEstado>(),
+    eventosPendientesPorUsuario: new Map<string, string[]>(),
+    historialEventos: new Map<string, any[]>(),
 }

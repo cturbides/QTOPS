@@ -1,4 +1,5 @@
 import { Usuario } from './usuario.model';
+import { MensajeVoz } from './chat/mensaje-voz.model';
 import { ArchivoAdjunto } from './chat/archivo-adjunto.model';
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Estado } from '@modules/curso/entities/chat/estado-usuario.type';
@@ -34,6 +35,9 @@ export class MensajeChat {
   @Field(() => ID)
   cursoId: string;
 
+  @Field(() => ID, { nullable: true })
+  salaId?: string;
+
   @Field(() => Date)
   fechaEnvio: Date;
 
@@ -48,6 +52,12 @@ export class MensajeChat {
 
   @Field(() => Date, { nullable: true })
   fechaEdicion?: Date;
+
+  @Field(() => MensajeVoz, { nullable: true })
+  mensajeVoz?: MensajeVoz;
+
+  @Field(() => ID, { nullable: true })
+  respondePor?: string;
 }
 
 
