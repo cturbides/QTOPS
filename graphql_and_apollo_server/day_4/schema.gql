@@ -1,0 +1,375 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Usuario {
+  id: ID!
+  nombreCompleto: String!
+  avatar: String
+}
+
+type Leccion {
+  id: ID!
+  titulo: String!
+  contenido: String
+  orden: Int!
+}
+
+type EstadisticasCurso {
+  totalEstudiantes: Int!
+  calificacionPromedio: Float!
+  totalLecciones: Int!
+}
+
+type Curso {
+  id: ID!
+  titulo: String!
+  descripcion: String!
+  instructor: Usuario!
+  lecciones: [Leccion!]!
+  etiquetas: [String!]
+  estadisticas: EstadisticasCurso!
+}
+
+type GenericResponseMessage {
+  message: String!
+  success: Boolean!
+}
+
+type MetadatosAudio {
+  calidad: String!
+  formatoCompresion: String!
+  tamanoBytes: Float!
+  fechaCreacion: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type MensajeVoz {
+  id: ID!
+  duracion: Float!
+  urlAudio: String!
+  transcripcion: String
+  estadoReproduccion: EstadoReproduccion!
+  metadatos: MetadatosAudio!
+}
+
+"""Estados de reproducción de mensaje de voz"""
+enum EstadoReproduccion {
+  PAUSADO
+  REPRODUCIDO
+  REPRODUCIENDO
+  NO_REPRODUCIDO
+}
+
+type ArchivoAdjunto {
+  id: ID!
+  nombre: String!
+  url: String!
+  tipo: String!
+  tamano: Float!
+}
+
+type MensajeChat {
+  id: ID!
+  contenido: String!
+  autor: Usuario!
+  cursoId: ID!
+  salaId: ID
+  fechaEnvio: DateTime!
+  tipo: TipoMensaje!
+  adjuntos: [ArchivoAdjunto!]
+  editado: Boolean!
+  fechaEdicion: DateTime
+  mensajeVoz: MensajeVoz
+  respondePor: ID
+}
+
+"""Tipos de mensaje en el chat"""
+enum TipoMensaje {
+  TEXTO
+  AUDIO
+  IMAGEN
+  ARCHIVO
+  SISTEMA
+}
+
+type EstadoUsuario {
+  usuario: Usuario!
+  cursoId: ID!
+  estado: Estado!
+  ultimaConexion: DateTime!
+}
+
+"""Estados de presencia de usuario"""
+enum Estado {
+  ONLINE
+  AUSENTE
+  OCUPADO
+  INVISIBLE
+}
+
+type ProgresoEstudiante {
+  estudianteId: ID!
+  cursoId: ID!
+  porcentajeCompletado: Int!
+  leccionesVistas: [ID!]!
+  tiempoInvertido: Int
+  ultimaActividad: DateTime
+}
+
+type ConfiguracionSala {
+  mensajesVozPermitidos: Boolean!
+  notificacionesSonido: Boolean!
+  limiteMensajes: Float
+  archivoCompartido: Boolean!
+}
+
+type SalaPrivada {
+  id: ID!
+  nombre: String!
+  descripcion: String
+  tipo: TipoSala!
+  creador: Usuario!
+  participantes: [Usuario!]!
+  fechaCreacion: DateTime!
+  ultimaActividad: DateTime!
+  configuracion: ConfiguracionSala!
+}
+
+"""Tipos de sala de chat"""
+enum TipoSala {
+  GRUPO
+  PRIVADA
+}
+
+type EventoPendiente {
+  id: ID!
+  tipo: TipoEvento!
+  datos: String!
+  fechaEvento: DateTime!
+  procesado: Boolean!
+}
+
+"""Tipos de eventos para sincronización"""
+enum TipoEvento {
+  MENSAJE_VOZ
+  MENSAJE_NUEVO
+  USUARIO_UNIDO
+  MENSAJE_EDITADO
+  USUARIO_ABANDONO
+  ESTADO_PRESENCIA
+  MENSAJE_ELIMINADO
+}
+
+type SincronizacionEstado {
+  id: ID!
+  usuarioId: ID!
+  salaId: ID!
+  ultimaConexion: DateTime!
+  mensajesSincronizados: [String!]!
+  eventosPendientes: [EventoPendiente!]!
+  estadoConexion: EstadoConexion!
+}
+
+"""Estados de conexión del usuario"""
+enum EstadoConexion {
+  CONECTADO
+  DESCONECTADO
+  SINCRONIZANDO
+  ERROR_CONEXION
+}
+
+type IndicadorEscritura {
+  usuario: Usuario!
+  cursoId: ID!
+  ultimaActividad: DateTime!
+}
+
+type NotificacionTiempoReal {
+  id: ID!
+  mensaje: String!
+  tipo: TipoNotificacion!
+  fechaCreacion: DateTime!
+  destinatario: Usuario!
+  metadatos: String
+}
+
+"""Tipos de notificación en tiempo real"""
+enum TipoNotificacion {
+  MENCION_CHAT
+  NUEVO_MENSAJE
+  INSCRIPCION_CURSO
+  LECCION_COMPLETADA
+  MENSAJE_INSTRUCTOR
+  CERTIFICADO_OBTENIDO
+}
+
+type InscripcionNotificacion {
+  cursoId: ID!
+  estudianteId: String!
+  mensaje: String!
+  timestamp: String!
+}
+
+type Query {
+  obtenerMensajesCurso(obtenerMensajesInput: ObtenerMensajesInput!): [MensajeChat!]!
+  obtenerEstadoCurso(cursoId: String!, usuarioId: String!): [EstadoUsuario!]!
+  curso(id: ID!): Curso!
+  cursos: [Curso!]!
+  lecciones(cursoId: String!): [Leccion!]!
+  leccionesPorCursosEnOrden(cursoIds: [String!]!): [Leccion!]!
+  usuarios: [Usuario!]!
+  usuario(id: String!): Usuario!
+  progresoPorCurso(estudianteId: ID!, cursoId: ID!): ProgresoEstudiante!
+
+  """Obtiene el progreso de múltiples estudiantes"""
+  progresoMultiple(consultas: [ProgresoInput!]!): [ProgresoEstudiante!]!
+  obtenerSalasUsuario(usuarioId: String!): [SalaPrivada!]!
+  obtenerMensajesSala(obtenerMensajesInput: ObtenerMensajesSalaInput!): [MensajeChat!]!
+}
+
+input ObtenerMensajesInput {
+  cursoId: ID!
+  usuarioId: ID!
+  limite: Float! = 50
+  offset: Float! = 0
+}
+
+input ProgresoInput {
+  estudianteId: ID!
+  cursoId: ID!
+}
+
+input ObtenerMensajesSalaInput {
+  usuarioId: ID!
+  salaId: ID!
+  limite: Float! = 50
+  offset: Float! = 0
+  desdeTimestamp: DateTime
+}
+
+type Mutation {
+  enviarMensaje(enviarMensajeInput: EnviarMensajeInput!): MensajeChat!
+  editarMensaje(editarMensaje: EditarMensajeInput!): MensajeChat
+  eliminarMensaje(eliminarMensajeData: EliminarMensajeInput!): Boolean!
+  indicarEscritura(indicarEscrituraInput: IndicarEscrituraInput!): Boolean!
+  cambiarEstado(cambiarEstadoInput: CambiarEstadoInput!): Boolean!
+  crearCurso(datos: CrearCursoInput!): Curso!
+  inscribirEnCurso(cursoId: ID!, estudianteId: ID!): GenericResponseMessage!
+  crearSalaPrivada(crearSalaInput: CrearSalaPrivadaInput!): SalaPrivada!
+  enviarMensajeSala(enviarMensajeInput: EnviarMensajeInput!): MensajeChat!
+  enviarMensajeVozSala(enviarMensajeVozInput: EnviarMensajeVozInput!): MensajeChat!
+  sincronizarEstado(sincronizarInput: SincronizarEstadoInput!): SincronizacionEstado!
+  abandonarSala(salaId: String!, usuarioId: String!): Boolean!
+}
+
+input EnviarMensajeInput {
+  usuarioId: ID!
+  cursoId: ID
+  salaId: ID
+  contenido: String!
+  tipo: TipoMensaje! = TEXTO
+  adjuntos: [String!]
+  respondePor: ID
+}
+
+input EditarMensajeInput {
+  usuarioId: ID!
+  mensajeId: ID!
+  contenido: String!
+}
+
+input EliminarMensajeInput {
+  mensajeId: ID!
+  usuarioId: ID!
+}
+
+input IndicarEscrituraInput {
+  usuarioId: ID!
+  cursoId: ID!
+  escribiendo: Boolean!
+}
+
+input CambiarEstadoInput {
+  usuarioId: ID!
+  cursoId: ID!
+  estado: Estado!
+}
+
+input CrearCursoInput {
+  titulo: String!
+  descripcion: String!
+  instructorId: ID!
+  etiquetas: [String!]
+}
+
+input CrearSalaPrivadaInput {
+  nombre: String!
+  descripcion: String
+  tipo: TipoSala! = PRIVADA
+  creadorId: ID!
+  participantesIds: [ID!]!
+  configuracion: ConfiguracionSalaInput
+}
+
+input ConfiguracionSalaInput {
+  mensajesVozPermitidos: Boolean! = true
+  notificacionesSonido: Boolean! = true
+  limiteMensajes: Float
+  archivoCompartido: Boolean! = true
+}
+
+input EnviarMensajeVozInput {
+  usuarioId: ID!
+  cursoId: ID
+  salaId: ID
+  duracion: Float!
+  urlAudio: String!
+  transcripcion: String
+  metadatos: MetadatosAudioInput!
+  respondePor: ID
+}
+
+input MetadatosAudioInput {
+  calidad: CalidadAudio! = MEDIA
+  formatoCompresion: FormatoDeCompresion! = MP3
+  tamanoBytes: Float!
+}
+
+"""Calidad de audio para mensajes de voz"""
+enum CalidadAudio {
+  BAJA
+  ALTA
+  MEDIA
+}
+
+"""Formatos de compresión de audio soportados"""
+enum FormatoDeCompresion {
+  MP3
+  OGG
+  WEBM
+}
+
+input SincronizarEstadoInput {
+  usuarioId: ID!
+  salaId: ID!
+  ultimaConexion: DateTime
+}
+
+type Subscription {
+  nuevoMensaje(cursoId: String!): MensajeChat!
+  usuariosEscribiendo(cursoId: String!): [IndicadorEscritura!]!
+  estadoEnCurso(cursoId: String!): EstadoUsuario!
+  notificacionesUsuario(usuarioId: String!): NotificacionTiempoReal!
+  nuevoMensajeSala(salaId: String!): MensajeChat!
+  usuarioUnidoSala(salaId: String!): String!
+  usuarioAbandonoSala(salaId: String!): String!
+  mensajeVozReproduccion(salaId: String!): String!
+  sincronizacionEstado(usuarioId: String!, salaId: String!): String!
+  eventosPendientes(usuarioId: String!): String!
+  estudianteInscritoEnCurso(cursoId: ID!): InscripcionNotificacion!
+}
