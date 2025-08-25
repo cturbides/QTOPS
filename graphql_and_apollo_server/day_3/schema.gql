@@ -1,0 +1,92 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Usuario {
+  id: ID!
+  nombreCompleto: String!
+  avatar: String
+}
+
+type Leccion {
+  id: ID!
+  titulo: String!
+  contenido: String
+  orden: Int!
+}
+
+type EstadisticasCurso {
+  totalEstudiantes: Int!
+  calificacionPromedio: Float!
+  totalLecciones: Int!
+}
+
+type Curso {
+  id: ID!
+  titulo: String!
+  descripcion: String!
+  instructor: Usuario!
+  lecciones: [Leccion!]!
+  etiquetas: [String!]
+  estadisticas: EstadisticasCurso!
+}
+
+type GenericResponseMessage {
+  message: String!
+  success: Boolean!
+}
+
+type ProgresoEstudiante {
+  estudianteId: ID!
+  cursoId: ID!
+  porcentajeCompletado: Int!
+  leccionesVistas: [ID!]!
+  tiempoInvertido: Int
+  ultimaActividad: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type InscripcionNotificacion {
+  cursoId: ID!
+  estudianteId: String!
+  mensaje: String!
+  timestamp: String!
+}
+
+type Query {
+  curso(id: ID!): Curso!
+  cursos: [Curso!]!
+  lecciones(cursoId: String!): [Leccion!]!
+  leccionesPorCursosEnOrden(cursoIds: [String!]!): [Leccion!]!
+  usuarios: [Usuario!]!
+  usuario(id: String!): Usuario!
+  progresoPorCurso(estudianteId: ID!, cursoId: ID!): ProgresoEstudiante!
+
+  """Obtiene el progreso de múltiples estudiantes"""
+  progresoMultiple(consultas: [ProgresoInput!]!): [ProgresoEstudiante!]!
+}
+
+input ProgresoInput {
+  estudianteId: ID!
+  cursoId: ID!
+}
+
+type Mutation {
+  crearCurso(datos: CrearCursoInput!): Curso!
+  inscribirEnCurso(cursoId: ID!, estudianteId: ID!): GenericResponseMessage!
+}
+
+input CrearCursoInput {
+  titulo: String!
+  descripcion: String!
+  instructorId: ID!
+  etiquetas: [String!]
+}
+
+type Subscription {
+  estudianteInscritoEnCurso(cursoId: ID!): InscripcionNotificacion!
+}
