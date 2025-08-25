@@ -8,3 +8,9 @@ export const mockUsuarios: Usuario[] = [
     { id: generateId(), nombreCompleto: 'Margaret Hamilton' },
     { id: generateId(), nombreCompleto: 'John von Neumann' },
 ];
+
+export const mockUsuariosPorJWT: Map<string, Usuario> = new Map([
+    ['token1', mockUsuarios[0]],
+    ['token2', mockUsuarios[1]],
+    ['token3', mockUsuarios[2]],
+]);

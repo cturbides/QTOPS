@@ -157,6 +157,13 @@ export class CursoService {
                 curso.estudianteIds.push(estudianteId);
             }
 
+            const cursosUsuario = dataSource.usuariosConCursos.get(estudianteId) || [];
+
+            if (!cursosUsuario.includes(cursoId)) {
+                cursosUsuario.push(cursoId);
+                dataSource.usuariosConCursos.set(estudianteId, cursosUsuario);
+            }
+
             this.sendEstudianteInscritoNotification(cursoId, estudianteId)
                 .catch((err: unknown) => console.error('Error enviando notificación de inscripción:', err));
 

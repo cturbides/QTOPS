@@ -36,6 +36,55 @@ type GenericResponseMessage {
   success: Boolean!
 }
 
+type ArchivoAdjunto {
+  id: ID!
+  nombre: String!
+  url: String!
+  tipo: String!
+  tamano: Float!
+}
+
+type MensajeChat {
+  id: ID!
+  contenido: String!
+  autor: Usuario!
+  cursoId: ID!
+  fechaEnvio: DateTime!
+  tipo: TipoMensaje!
+  adjuntos: [ArchivoAdjunto!]
+  editado: Boolean!
+  fechaEdicion: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Tipos de mensaje en el chat"""
+enum TipoMensaje {
+  TEXTO
+  AUDIO
+  IMAGEN
+  ARCHIVO
+  SISTEMA
+}
+
+type EstadoUsuario {
+  usuario: Usuario!
+  cursoId: ID!
+  estado: Estado!
+  ultimaConexion: DateTime!
+}
+
+"""Estados de presencia de usuario"""
+enum Estado {
+  ONLINE
+  AUSENTE
+  OCUPADO
+  INVISIBLE
+}
+
 type ProgresoEstudiante {
   estudianteId: ID!
   cursoId: ID!
@@ -45,10 +94,30 @@ type ProgresoEstudiante {
   ultimaActividad: DateTime
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
+type IndicadorEscritura {
+  usuario: Usuario!
+  cursoId: ID!
+  ultimaActividad: DateTime!
+}
+
+type NotificacionTiempoReal {
+  id: ID!
+  mensaje: String!
+  tipo: TipoNotificacion!
+  fechaCreacion: DateTime!
+  destinatario: Usuario!
+  metadatos: String
+}
+
+"""Tipos de notificación en tiempo real"""
+enum TipoNotificacion {
+  MENCION_CHAT
+  NUEVO_MENSAJE
+  INSCRIPCION_CURSO
+  LECCION_COMPLETADA
+  MENSAJE_INSTRUCTOR
+  CERTIFICADO_OBTENIDO
+}
 
 type InscripcionNotificacion {
   cursoId: ID!
@@ -58,6 +127,8 @@ type InscripcionNotificacion {
 }
 
 type Query {
+  obtenerMensajesCurso(obtenerMensajesInput: ObtenerMensajesInput!): [MensajeChat!]!
+  obtenerEstadoCurso(cursoId: String!, usuarioId: String!): [EstadoUsuario!]!
   curso(id: ID!): Curso!
   cursos: [Curso!]!
   lecciones(cursoId: String!): [Leccion!]!
@@ -70,14 +141,57 @@ type Query {
   progresoMultiple(consultas: [ProgresoInput!]!): [ProgresoEstudiante!]!
 }
 
+input ObtenerMensajesInput {
+  cursoId: ID!
+  usuarioId: ID!
+  limite: Float! = 50
+  offset: Float! = 0
+}
+
 input ProgresoInput {
   estudianteId: ID!
   cursoId: ID!
 }
 
 type Mutation {
+  enviarMensaje(enviarMensajeInput: EnviarMensajeInput!): MensajeChat!
+  editarMensaje(editarMensaje: EditarMensajeInput!): MensajeChat
+  eliminarMensaje(eliminarMensajeData: EliminarMensajeInput!): Boolean!
+  indicarEscritura(indicarEscrituraInput: IndicarEscrituraInput!): Boolean!
+  cambiarEstado(cambiarEstadoInput: CambiarEstadoInput!): Boolean!
   crearCurso(datos: CrearCursoInput!): Curso!
   inscribirEnCurso(cursoId: ID!, estudianteId: ID!): GenericResponseMessage!
+}
+
+input EnviarMensajeInput {
+  usuarioId: ID!
+  cursoId: ID!
+  contenido: String!
+  tipo: TipoMensaje! = TEXTO
+  adjuntos: [String!]
+}
+
+input EditarMensajeInput {
+  usuarioId: ID!
+  mensajeId: ID!
+  contenido: String!
+}
+
+input EliminarMensajeInput {
+  mensajeId: ID!
+  usuarioId: ID!
+}
+
+input IndicarEscrituraInput {
+  usuarioId: ID!
+  cursoId: ID!
+  escribiendo: Boolean!
+}
+
+input CambiarEstadoInput {
+  usuarioId: ID!
+  cursoId: ID!
+  estado: Estado!
 }
 
 input CrearCursoInput {
@@ -88,5 +202,9 @@ input CrearCursoInput {
 }
 
 type Subscription {
+  nuevoMensaje(cursoId: String!): MensajeChat!
+  usuariosEscribiendo(cursoId: String!): [IndicadorEscritura!]!
+  estadoEnCurso(cursoId: String!): EstadoUsuario!
+  notificacionesUsuario(usuarioId: String!): NotificacionTiempoReal!
   estudianteInscritoEnCurso(cursoId: ID!): InscripcionNotificacion!
 }

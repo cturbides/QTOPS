@@ -4,20 +4,25 @@ import { PubSub } from "graphql-subscriptions";
 import { GraphQLModule } from '@nestjs/graphql';
 import { CursoModule } from '@modules/curso/curso.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { CURSO_SERVICES_MAP } from '@modules/curso/services/provider';
 import { createGraphQLContext } from '@modules/curso/graphql/common/context.factory';
-import { CURSO_SERVICES, CURSO_SERVICES_MAP } from '@modules/curso/services/provider';
 
 @Module({
   imports: [
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      useFactory: () => ({
+      useFactory: (
+        cursoService: any,
+        leccionService: any,
+        usuarioService: any,
+        progresoService: any
+      ) => ({
         autoSchemaFile: 'schema.gql',
-        context: ({ req, context }) => createGraphQLContext(req, {
-          cursoService: context.injector.get(CURSO_SERVICES_MAP.cursoService),
-          usuarioService: context.injector.get(CURSO_SERVICES_MAP.usuarioService),
-          leccionService: context.injector.get(CURSO_SERVICES_MAP.leccionService),
-          progresoService: context.injector.get(CURSO_SERVICES_MAP.progresoService)
+        context: ({ req }) => createGraphQLContext(req, {
+          cursoService,
+          usuarioService,
+          leccionService,
+          progresoService
         }),
         playground: true,
         introspection: true,
@@ -27,7 +32,12 @@ import { CURSO_SERVICES, CURSO_SERVICES_MAP } from '@modules/curso/services/prov
           }
         }
       }),
-      inject: [...CURSO_SERVICES],
+      inject: [
+        CURSO_SERVICES_MAP.cursoService,
+        CURSO_SERVICES_MAP.leccionService,
+        CURSO_SERVICES_MAP.usuarioService,
+        CURSO_SERVICES_MAP.progresoService
+      ],
       imports: [CursoModule]
     }),
     CursoModule
