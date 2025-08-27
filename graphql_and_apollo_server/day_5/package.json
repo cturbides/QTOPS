@@ -17,7 +17,13 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e:watch": "jest --config ./test/jest-e2e.json --watch",
+    "test:performance": "jest --config ./test/jest-e2e.json --testNamePattern=\"Performance Tests\"",
+    "test:schema": "jest --config ./test/jest-e2e.json --testNamePattern=\"Schema Validation\"",
+    "test:resolvers": "jest --testRegex=\".*resolver\\.spec\\.ts$\"",
+    "test:integration": "jest --config ./test/jest-e2e.json --testNamePattern=\"Integration Tests\"",
+    "test:all": "npm run test && npm run test:e2e"
   },
   "dependencies": {
     "@apollo/server": "^4.12.2",
@@ -80,15 +86,16 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
+    "rootDir": ".",
+    "testRegex": "test/.*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "src/**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "coverage",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["<rootDir>/test/setup.ts"]
   }
 }
