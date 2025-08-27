@@ -1,15 +1,15 @@
 import { mockCursos } from "./mock/curso.entity.mock";
 import { generateId } from "./utils/generate-id.util";
 import { mockLecciones } from "./mock/leccion.entity.mock";
+import { mockSalasPrivadas } from "./mock/sala-privada.entity.mock";
 import { MensajeChat } from "@modules/curso/entities/mensaje-chat.entity";
 import { mockUsuarios, mockUsuariosPorJWT } from "./mock/usuario.entity.mock";
+import { SalaPrivada } from "@modules/curso/entities/chat/sala-privada.entity";
 import { mockProgresoEstudiante } from "./mock/progreso-estudiante.entity.mock";
 import { EstadoUsuario } from "@modules/curso/entities/chat/estado-usuario.type";
 import { mockHistorialEstudiante } from "./mock/historial-estudiante.entity.mock";
-import { IConnectionInfo } from "@modules/curso/services/interfaces/websocket/connection-info.interface";
-import { SalaPrivada } from "@modules/curso/entities/chat/sala-privada.entity";
 import { SincronizacionEstado } from "@modules/curso/entities/chat/sincronizacion-estado.entity";
-import { mockSalasPrivadas } from "./mock/sala-privada.entity.mock";
+import { IConnectionInfo } from "@modules/curso/services/interfaces/websocket/connection-info.interface";
 
 // Dummy data source
 export const dataSource = {
@@ -54,4 +54,7 @@ export const dataSource = {
     sincronizacionEstados: new Map<string, SincronizacionEstado>(),
     eventosPendientesPorUsuario: new Map<string, string[]>(),
     historialEventos: new Map<string, any[]>(),
+
+    // Security
+    rateLimitStorage: new Map<string, any>(),
 }

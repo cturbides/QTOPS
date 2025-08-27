@@ -1,4 +1,5 @@
 import { dataSource } from "@modules/curso/data-source/index";
+import { Usuario } from "@modules/curso/entities/usuario.entity";
 import { Injectable, UnauthorizedException, ForbiddenException } from '@nestjs/common';
 
 @Injectable()
@@ -21,7 +22,16 @@ export class AuthService {
     return Boolean(cursosUsuario && cursosUsuario.includes(cursoId));
   }
 
-  async obtenerUsuarioDesdeToken(token: string): Promise<{ id: string; email: string } | null> {
-    return dataSource.usuariosPorJWT[token] ?? null;
+  async obtenerUsuarioDesdeToken(token: string): Promise<Pick<Usuario, "id" | "email"> | null> {
+    const usuario = dataSource.usuariosPorJWT[token];
+
+    if (!usuario) {
+      return null;
+    }
+
+    return {
+      id: usuario.id,
+      email: usuario.email || ''
+    };
   }
 }

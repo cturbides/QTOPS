@@ -21,6 +21,7 @@ echo -e "  🏠 Salas Privadas"
 echo -e "  🎤 Mensajes de Voz"
 echo -e "  🔄 Sincronización de Estado"
 echo -e "  💬 Chat Tradicional"
+echo -e "  🔒 Seguridad Mejorada"
 echo ""
 
 # Función para verificar si el servidor está corriendo
@@ -109,6 +110,7 @@ tests=(
     "Tests de Salas Privadas|$SCRIPT_DIR/test_salas_privadas.sh|🏠"
     "Tests de Mensajes de Voz|$SCRIPT_DIR/test_mensajes_voz.sh|🎤"
     "Tests de Sincronización|$SCRIPT_DIR/test_sincronizacion.sh|🔄"
+    "Tests de Seguridad|$SCRIPT_DIR/test_security.sh|🔒"
 )
 
 echo -e "\n${BLUE}🏃 Iniciando ejecución de ${#tests[@]} suites de tests...${NC}"
@@ -171,6 +173,11 @@ echo -e "\n${CYAN}Nuevas Subscriptions:${NC}"
 echo -e "  🏠 nuevoMensajeSala, usuarioUnidoSala, usuarioAbandonoSala"
 echo -e "  🎤 mensajeVozReproduccion"
 echo -e "  🔄 sincronizacionEstado, eventosPendientes"
+
+echo -e "\n${CYAN}Nuevos guardrails:${NC}"
+echo -e "  🔒 Validación de permisos en resolvers"
+echo -e "  📊 Análisis de complejidad de consultas"
+echo -e "  ⏱️ Rate limiting por usuario"
 
 echo -e "\n${WHITE}🏁 Test Suite Completado${NC}"
 echo -e "${WHITE}========================${NC}"

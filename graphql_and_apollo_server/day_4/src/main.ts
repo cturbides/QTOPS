@@ -3,6 +3,8 @@
 //  con detalles de usuario, IP y resultado para
 //  compliance y monitoreo de seguridad
 
+// NOTA: Seguridad integrada SOLAMENTE en resolver de Curso (curso.resolver)
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 

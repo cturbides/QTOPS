@@ -23,8 +23,21 @@ import { ChatNotificacionResolver } from "./graphql/resolvers/chat/chat-notifica
 import { CursoNotificationResolver } from "./graphql/resolvers/notifications/curso-notification.resolver";
 import { SalaPrivadaNotificacionResolver } from "./graphql/resolvers/chat/sala-privada-notificacion.resolver";
 
+import { JwtModule } from '@nestjs/jwt';
+import { GraphQLRoleGuard } from "./graphql/guards/graphql-role.guard";
+import { GraphQLAuthService } from "./services/security/graphql-auth.service";
+import { GraphQLSecurityService } from "./services/security/graphql-security.service";
+import { GraphQLRateLimitService } from "./services/security/graphql-rate-limit.service";
+import { GraphQLSecurityMiddleware } from "./services/security/graphql-security-middleware.service";
+
 @Module({
-    imports: [forwardRef(() => AppModule)],
+    imports: [
+        forwardRef(() => AppModule),
+        JwtModule.register({
+            secret: process.env.JWT_SECRET_KEY,
+            signOptions: { expiresIn: process.env.EXPIRES_IN_TIME ?? '1h' },
+        })
+    ],
     providers: [
         Logger,
         ChatService,
@@ -49,6 +62,12 @@ import { SalaPrivadaNotificacionResolver } from "./graphql/resolvers/chat/sala-p
         WebSocketConnectionManager,
         SincronizacionEstadoService,
         SalaPrivadaNotificacionResolver,
+
+        GraphQLRoleGuard,
+        GraphQLAuthService,
+        GraphQLSecurityService,
+        GraphQLRateLimitService,
+        GraphQLSecurityMiddleware,
     ],
     exports: [
         ChatService,
@@ -62,7 +81,13 @@ import { SalaPrivadaNotificacionResolver } from "./graphql/resolvers/chat/sala-p
         EstadisticasService,
         EventPublisherService,
         WebSocketConnectionManager,
-        SincronizacionEstadoService
+        SincronizacionEstadoService,
+
+        // Servicios de seguridad
+        GraphQLAuthService,
+        GraphQLSecurityService,
+        GraphQLRateLimitService,
+        GraphQLSecurityMiddleware,
     ],
 })
 export class CursoModule { }

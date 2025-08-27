@@ -5,7 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { CursoModule } from '@modules/curso/curso.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { CURSO_SERVICES_MAP } from '@modules/curso/services/provider';
-import { createGraphQLContext } from '@modules/curso/graphql/common/context.factory';
+import { createSecureGraphQLContext } from '@modules/curso/graphql/common/secure-context.factory';
 
 @Module({
   imports: [
@@ -15,17 +15,37 @@ import { createGraphQLContext } from '@modules/curso/graphql/common/context.fact
         cursoService: any,
         leccionService: any,
         usuarioService: any,
-        progresoService: any
+        progresoService: any,
+        graphqlAuthService: any,
+        graphqlSecurityMiddleware: any
       ) => ({
         autoSchemaFile: 'schema.gql',
-        context: ({ req }) => createGraphQLContext(req, {
+        context: ({ req }) => createSecureGraphQLContext(req, {
           cursoService,
-          usuarioService,
           leccionService,
-          progresoService
+          usuarioService,
+          progresoService,
+          graphqlAuthService,
+          graphqlSecurityMiddleware
         }),
-        playground: true,
-        introspection: true,
+        playground: process.env.NODE_ENV !== 'production',
+        introspection: process.env.NODE_ENV !== 'production',
+        plugins: [
+          graphqlSecurityMiddleware.createSecurityPlugin(),
+          {
+            requestDidStart() {
+              return {
+                didResolveOperation({ operationName }) {
+                  // Bloquear introspection en producción
+                  if (process.env.NODE_ENV === 'production' && 
+                      operationName === 'IntrospectionQuery') {
+                    throw new Error('Introspection deshabilitada en producción');
+                  }
+                }
+              };
+            }
+          }
+        ],
         subscriptions: {
           "graphql-ws": {
             path: "/graphql"
@@ -36,7 +56,9 @@ import { createGraphQLContext } from '@modules/curso/graphql/common/context.fact
         CURSO_SERVICES_MAP.cursoService,
         CURSO_SERVICES_MAP.leccionService,
         CURSO_SERVICES_MAP.usuarioService,
-        CURSO_SERVICES_MAP.progresoService
+        CURSO_SERVICES_MAP.progresoService,
+        CURSO_SERVICES_MAP.graphqlAuthService,
+        CURSO_SERVICES_MAP.graphqlSecurityMiddleware
       ],
       imports: [CursoModule]
     }),

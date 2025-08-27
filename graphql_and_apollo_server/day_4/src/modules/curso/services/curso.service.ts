@@ -9,6 +9,7 @@ import { Curso as CursoEntity } from "@modules/curso/entities/curso.entitiy";
 import { Leccion as LeccionEntity } from '@modules/curso/entities/leccion.entity';
 import { CrearCursoInput } from '@modules/curso/graphql/inputs/crear-curso.input';
 import { HistorialEstudiante } from '@modules/curso/entities/historial-estudiante.entity';
+import { ActualizarCursoInput } from '@modules/curso/graphql/inputs/actualizar-curso.input';
 import { GenericResponseMessage } from '@modules/curso/graphql/types/generic/response-message.model';
 import { ESTUDIANTE_INSCRITO_EN_CURSO_SUB } from '@modules/curso/graphql/common/subscription.constants';
 import { InscripcionNotificacion } from '@modules/curso/graphql/types/notifications/inscription-notification.model';
@@ -196,5 +197,30 @@ export class CursoService {
         return cursosDisponibles
             .sort(() => Math.random() - 0.5)
             .slice(0, 5);
+    }
+
+    async verificarAccesoUsuario(usuarioId: string, cursoId: string): Promise<boolean> {
+        const cursosUsuario = dataSource.usuariosConCursos.get(usuarioId) || [];
+        return cursosUsuario.includes(cursoId);
+    }
+
+    async actualizar(id: string, datos: ActualizarCursoInput): Promise<Curso> {
+        const curso = await this.obtenerRecord(id);
+        
+        if (datos.nombre) {
+            curso.titulo = datos.nombre;
+        }
+        if (datos.descripcion !== undefined) {
+            curso.descripcion = datos.descripcion;
+        }
+        
+        return this.obtenerCompleto(id);
+    }
+
+    async obtenerDisponiblesParaUsuario(usuarioId: string): Promise<Curso[]> {
+        const cursosUsuario = dataSource.usuariosConCursos.get(usuarioId) || [];
+        const todosCursos = await this.obtenerTodosLosCursos();
+        
+        return todosCursos.filter(curso => cursosUsuario.includes(curso.id));
     }
 }
