@@ -1,0 +1,120 @@
+POST BASE_URL/cursos/etiquetas 
+BODY
+    {
+        "nombre":"typeorm"
+    }   
+RESPONSE:
+    {
+        ...,
+        "id": "982504ff-db33-49b7-a975-2367113d4ff3"
+    }
+
+
+POST BASE_URL/cursos/instructores
+    {
+        "nombre": "Juan Pérez",
+        "email": "juan.perez@example.com"
+    }
+RESPONSE:
+    {
+        ...,
+        "id": "6b3040b2-3dfc-4d57-b25c-c399c11caddf"
+    }
+
+
+POST BASE_URL/cursos 
+ { 
+    "titulo":"Curso Node + TypeORM",
+    "descripcion":"Aprende a construir APIs robustas",
+    "detalle":{
+      "objetivos":"Dominar TypeORM",
+      "requisitos":"Node y SQL básicos",
+      "publicoObjetivo":"Desarrolladores backend"
+    },
+    "lecciones":[
+      {"titulo":"Intro","contenido":"Bienvenida y setup"},
+      {"titulo":"Entidades","contenido":"Modelado y relaciones"},
+      {"titulo":"Consultas","contenido":"QueryBuilder y repos"}
+    ],
+    "etiquetaIds":["$ETQ1-uuid","$ETQ2-uuid"],
+    "instructorId":"$INSTR-uuid"
+}
+
+RESPONSE:
+{
+   "titulo":"Curso Node + TypeORM",
+   "descripcion":"Aprende a construir APIs robustas",
+   "detalle":{
+      "objetivos":"Dominar TypeORM",
+      "requisitos":"Node y SQL básicos",
+      "publicoObjetivo":"Desarrolladores backend",
+      "id":"1d91cb7a-c03b-43e2-bfb5-cfcfeb917af0"
+   },
+   "lecciones":[
+      {
+         "titulo":"Intro",
+         "contenido":"Bienvenida y setup",
+         "id":"c04e9ec9-193d-4bfa-a1ef-b7491febb16a"
+      },
+      {
+         "titulo":"Entidades",
+         "contenido":"Modelado y relaciones",
+         "id":"9b51cf5c-fe84-4c8c-882c-dece62d99fa7"
+      },
+      {
+         "titulo":"Consultas",
+         "contenido":"QueryBuilder y repos",
+         "id":"01470cde-da45-4fd8-acca-fd5b73f5d408"
+      }
+   ],
+   "etiquetas":[
+      {
+         "id":"982504ff-db33-49b7-a975-2367113d4ff3",
+         "nombre":"typeorm"
+      },
+      {
+         "id":"7eb111fa-81ee-4845-b2fd-68fccbff4f8a",
+         "nombre":"nodejs"
+      }
+   ],
+   "instructor":{
+      "id":"6b3040b2-3dfc-4d57-b25c-c399c11caddf",
+      "nombre":"Juan Pérez",
+      "email":"juan.perez@example.com"
+   },
+   "fechaCreacion":"2025-08-08T00:59:56.388Z",
+   "fechaActualizacion":"2025-08-08T00:59:56.388Z",
+   "id":"5f522f5a-1921-4593-816b-2013d756d1e2"
+}
+
+
+GET BASE_URL/cursos/estadisticas/promedios
+RESPONSE:
+[
+   {
+      "curso":{
+         "fechaCreacion":"2025-08-08T00:28:16.370Z",
+         "fechaActualizacion":"2025-08-08T00:28:16.370Z",
+         "id":"28ddbdd5-6363-430e-ae55-3e3b438832f8",
+         "titulo":"Curso Node + TypeORM",
+         "descripcion":"Aprende a construir APIs robustas",
+         "instructor":{
+            "id":"6b3040b2-3dfc-4d57-b25c-c399c11caddf",
+            "nombre":"Juan Pérez",
+            "email":"juan.perez@example.com"
+         },
+         "etiquetas":[
+            {
+               "id":"7eb111fa-81ee-4845-b2fd-68fccbff4f8a",
+               "nombre":"nodejs"
+            },
+            {
+               "id":"982504ff-db33-49b7-a975-2367113d4ff3",
+               "nombre":"typeorm"
+            }
+         ]
+      },
+      "promedio":3,
+      "totalEvaluaciones":2
+   }
+]
