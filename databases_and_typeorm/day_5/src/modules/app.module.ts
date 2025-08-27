@@ -4,6 +4,7 @@ import { NestTypeOrmConfig } from '@config/database';
 import { HealthModule } from "@health/health.module";
 import { PerformanceModule } from "@performance/performance.module";
 import { CursoCompletoModule } from '@curso-completo/curso-completo.module';
+import { ServiceDiscoveryModule } from './service-discovery/service-discovery.module';
 
 @Module({
     imports: [
@@ -11,6 +12,7 @@ import { CursoCompletoModule } from '@curso-completo/curso-completo.module';
         HealthModule,
         CursoCompletoModule,
         PerformanceModule,
+        ServiceDiscoveryModule,
     ]
 })
 export class AppModule { }

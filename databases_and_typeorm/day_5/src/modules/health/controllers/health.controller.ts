@@ -15,4 +15,14 @@ export class HealthController {
             async () => this.db.pingCheck('database'),
         ]);
     }
+
+    @Get('database')
+    checkDb() { 
+        return { status: 'ok', service: 'database', timestamp: new Date().toISOString() }; 
+    }
+
+    @Get('content')
+    checkContent() { 
+        return { status: 'ok', service: 'content', timestamp: new Date().toISOString() }; 
+    }
 }
