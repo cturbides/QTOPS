@@ -1,45 +1,22 @@
 import { Injectable, Logger } from '@nestjs/common';
+import consul from 'consul';
+import { DEFAULT_CONSUL_HOST, DEFAULT_CONSUL_PORT } from '../constants/common';
 
 @Injectable()
 export class ConsulService {
-  private client: any;
-  private readonly logger = new Logger(ConsulService.name);
+  private client: consul.Consul;
 
-  constructor() {
+  constructor(private readonly logger: Logger) {
     try {
-      const consul = require('consul');
       this.client = consul({
-        host: process.env.CONSUL_HOST || 'localhost',
-        port: Number(process.env.CONSUL_PORT || 8500),
+        host: process.env.CONSUL_HOST || DEFAULT_CONSUL_HOST,
+        port: String(process.env.CONSUL_PORT || DEFAULT_CONSUL_PORT),
         promisify: true
       });
     } catch (error) {
-      this.logger.warn('Consul client initialization failed, using mock implementation');
-      this.client = this.createMockClient();
+      this.logger.error('Consul client initialization failed', error);
+      throw new Error(`Failed to initialize Consul client: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
-  }
-
-  private createMockClient() {
-    return {
-      agent: {
-        service: {
-          register: () => Promise.resolve(),
-          deregister: () => Promise.resolve()
-        },
-        check: {
-          register: () => Promise.resolve()
-        }
-      },
-      health: {
-        service: (serviceName: string, options: any, callback?: Function) => {
-          const mockResult: any[] = [];
-          if (callback) {
-            callback(null, mockResult);
-          }
-          return Promise.resolve(mockResult);
-        }
-      }
-    };
   }
 
   get agent() { return this.client.agent; }
@@ -54,6 +31,7 @@ export class ConsulService {
       return await this.client.agent.service.register(cfg);
     } catch (error) {
       this.logger.warn(`Failed to register service ${cfg.name}:`, error);
+      throw error;
     }
   }
 
@@ -62,6 +40,7 @@ export class ConsulService {
       return await this.client.agent.service.deregister(id);
     } catch (error) {
       this.logger.warn(`Failed to deregister service ${id}:`, error);
+      throw error;
     }
   }
 }

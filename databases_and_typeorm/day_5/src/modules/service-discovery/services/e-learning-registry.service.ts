@@ -5,8 +5,12 @@ import { v4 as uuid } from 'uuid';
 import { ConsulService } from './consul.service';
 import { IntelligentLoadBalancer } from './intelligent-load-balancer.service';
 import { EducationalService, ServiceConfig } from '../interfaces/service-discovery.interfaces';
-
-class ServiceCommunicationException extends Error {}
+import { ServiceCommunicationException } from '../exceptions/service-communication.exception';
+import { 
+  DATABASE_CONNECTION_CHECK_NAME, 
+  COURSE_CONTENT_ACCESSIBILITY_CHECK_NAME,
+  ServiceType 
+} from '../constants/common';
 
 @Injectable()
 export class ELearningServiceRegistry {
@@ -96,14 +100,14 @@ export class ELearningServiceRegistry {
         interval: '10s'
       },
       {
-        name: `${servicio.tipo}-database-connection`,
+        name: `${servicio.tipo}-${DATABASE_CONNECTION_CHECK_NAME}`,
         http: `http://${servicio.host}:${servicio.port}/health/database`,
         interval: '30s'
       }
     ];
-    if (servicio.tipo === 'course-service') {
+    if (servicio.tipo === ServiceType.COURSE_SERVICE) {
       checks.push({
-        name: 'course-content-accessibility',
+        name: COURSE_CONTENT_ACCESSIBILITY_CHECK_NAME,
         http: `http://${servicio.host}:${servicio.port}/health/content`,
         interval: '60s'
       });

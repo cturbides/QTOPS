@@ -1,20 +1,15 @@
 import { Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { ServiceInstance } from '../interfaces/service-discovery.interfaces';
 import { ConsulService } from './consul.service';
-
-type InstanceMetrics = {
-  success: number;
-  failures: number;
-  responseTimeAvg: number; // ms
-  inFlight: number;
-};
+import { InstanceMetrics } from '../types/load-balancer.types';
+import { DEFAULT_TTL_PER_MSG } from '../constants/common';
 
 @Injectable()
 export class IntelligentLoadBalancer {
   private readonly metrics = new Map<string, InstanceMetrics>();
   private readonly caches = new Map<string, ServiceInstance[]>(); // nombre -> instancias (último fetch)
   private lastFetch = new Map<string, number>();
-  private readonly ttlMs = 5000;
+  private readonly ttlMs = DEFAULT_TTL_PER_MSG;
 
   constructor(private readonly consul: ConsulService) {}
 
@@ -26,7 +21,10 @@ export class IntelligentLoadBalancer {
     
     try {
       const res = await new Promise((resolve, reject) => {
-        this.consul.health.service(serviceName, { passing: true }, (err: any, result: any) => {
+        this.consul.health.service({
+          service: serviceName,
+          passing: true
+        }, (err: any, result: any) => {
           if (err) reject(err);
           else resolve(result);
         });

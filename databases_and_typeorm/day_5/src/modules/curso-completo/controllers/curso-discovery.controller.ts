@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ELearningServiceRegistry } from '../../service-discovery/services/e-learning-registry.service';
+import { CATALOG_SERVICE_SUCCESS_RESPONSE, CATALOG_SERVICE_ERROR_RESPONSE } from '../constants/responses';
 
 @Controller('curso-completo')
 export class CursoDiscoveryController {
@@ -15,14 +16,12 @@ export class CursoDiscoveryController {
                 'api/ping'
             );
             return {
-                success: true,
-                message: 'Successfully communicated with catalog service',
+                ...CATALOG_SERVICE_SUCCESS_RESPONSE,
                 response
             };
         } catch (error: any) {
             return {
-                success: false,
-                message: 'Failed to communicate with catalog service',
+                ...CATALOG_SERVICE_ERROR_RESPONSE,
                 error: error.message
             };
         }

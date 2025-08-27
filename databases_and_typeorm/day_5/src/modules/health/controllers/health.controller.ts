@@ -17,12 +17,19 @@ export class HealthController {
     }
 
     @Get('database')
+    @HealthCheck()
     checkDb() { 
-        return { status: 'ok', service: 'database', timestamp: new Date().toISOString() }; 
+        return this.health.check([
+            async () => this.db.pingCheck('database'),
+        ]);
     }
 
     @Get('content')
+    @HealthCheck()
     checkContent() { 
-        return { status: 'ok', service: 'content', timestamp: new Date().toISOString() }; 
+        return this.health.check([
+            async () => this.db.pingCheck('database'),
+            async () => ({ 'content-service': { status: 'up', message: 'Content is accessible' } })
+        ]);
     }
 }
