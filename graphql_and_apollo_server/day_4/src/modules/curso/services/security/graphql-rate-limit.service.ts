@@ -1,6 +1,7 @@
 import { GraphQLError } from 'graphql';
-import { Injectable } from '@nestjs/common';
 import { dataSource } from '@modules/curso/data-source';
+import { AuditLoggingService } from './audit-logging.service';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { RolUsuario } from '@modules/curso/entities/auth/rol-usuario.enum';
 import { RateLimitResult } from '@modules/curso/entities/auth/rate-limit-result.interface';
 import { UsuarioAutenticado } from '@modules/curso/entities/auth/usuario-autenticado.interface';
@@ -8,6 +9,11 @@ import { DEFAULT_WINDOW_TIME, defaultLimits, LimitesBasePorRol, MILLISECONDS_PER
 
 @Injectable()
 export class GraphQLRateLimitService {
+  constructor(
+    @Inject(forwardRef(() => AuditLoggingService))
+    private readonly auditService: AuditLoggingService
+  ) { }
+
   async verificarLimites(
     usuario: UsuarioAutenticado | null,
     complejidadConsulta: number,
@@ -41,6 +47,16 @@ export class GraphQLRateLimitService {
 
     if (excedePeticiones || excedeComplejidad) {
       const tiempoReset = (ventanaActual + 1) * DEFAULT_WINDOW_TIME;
+
+      // Log del rate limit si el audit service está disponible
+      await this.auditService.logRateLimit({
+        usuario,
+        ip,
+        currentRequests: peticionesActuales + 1,
+        maxRequests: limites.peticionesPorMinuto,
+        currentComplexity: complejidadActual + complejidadConsulta,
+        maxComplexity: limites.complejidadPorMinuto
+      });
 
       throw new GraphQLError('Límite de velocidad excedido', {
         extensions: {

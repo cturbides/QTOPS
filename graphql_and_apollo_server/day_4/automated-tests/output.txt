@@ -5,11 +5,12 @@
   🎤 Mensajes de Voz
   🔄 Sincronización de Estado
   💬 Chat Tradicional
+  🔒 Seguridad Mejorada
 
 [0;34m🔍 Verificando que el servidor GraphQL esté corriendo...[0m
 [0;32m✅ Servidor GraphQL respondiendo correctamente[0m
 
-[0;34m🏃 Iniciando ejecución de 4 suites de tests...[0m
+[0;34m🏃 Iniciando ejecución de 6 suites de tests...[0m
 
 [1;37m💬 ===============================================[0m
 [1;37m💬 Ejecutando: Tests de Mutations Básicas[0m
@@ -19,12 +20,12 @@
 
 [0;34m🔍 Obteniendo usuarios del sistema...[0m
 [0;32m✅ Usuarios obtenidos:[0m
-   USER1: 1d6055e0-edd1-4a62-8c4a-e0495b17268d
-   USER2: 65fc7fab-1a07-4a00-912a-c845f911be60
-   USER3: f031eca2-9b35-4e4f-ae2b-28d383575c9a
+   USER1: 5671e265-dc98-40fa-b375-e0ab84ab79cd
+   USER2: 27245e7e-068e-4a8c-a443-269815441920
+   USER3: ec89bb30-47a6-4a13-89a2-26653af78c07
 
 [0;34m🔍 Obteniendo cursos del sistema...[0m
-[0;32m✅ Curso seleccionado: 8f259dd2-d58c-463e-a595-bd178ef24b44[0m
+[0;32m✅ Curso seleccionado: 41b2d079-66b9-4255-b25b-a74fc2f5326f[0m
 
 [0;34m=== TEST 1: Enviar Mensaje Simple ===[0m
 
@@ -33,13 +34,13 @@
 {
   "data": {
     "enviarMensaje": {
-      "id": "msg_1756160172369_py3ce1j99",
+      "id": "msg_1756314192146_vxxeynlao",
       "contenido": "¡Hola! Este es un mensaje de prueba automática",
       "autor": {
-        "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+        "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
         "nombreCompleto": "Ada Lovelace"
       },
-      "fechaEnvio": "2025-08-25T22:16:12.369Z",
+      "fechaEnvio": "2025-08-27T17:03:12.146Z",
       "editado": false
     }
   }
@@ -52,13 +53,13 @@
 {
   "data": {
     "enviarMensaje": {
-      "id": "msg_1756160174408_mqm599esl",
-      "contenido": "Hola @65fc7fab-1a07-4a00-912a-c845f911be60, ¿cómo van los ejercicios del curso?",
+      "id": "msg_1756314194172_42k6mj2ja",
+      "contenido": "Hola @27245e7e-068e-4a8c-a443-269815441920, ¿cómo van los ejercicios del curso?",
       "autor": {
-        "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+        "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
         "nombreCompleto": "Ada Lovelace"
       },
-      "fechaEnvio": "2025-08-25T22:16:14.408Z",
+      "fechaEnvio": "2025-08-27T17:03:14.172Z",
       "editado": false
     }
   }
@@ -72,79 +73,24 @@
   "data": {
     "obtenerMensajesCurso": [
       {
-        "id": "msg_1756160029736_hf1pi2meq",
+        "id": "msg_1756314192146_vxxeynlao",
         "contenido": "¡Hola! Este es un mensaje de prueba automática",
         "autor": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:13:49.736Z",
+        "fechaEnvio": "2025-08-27T17:03:12.146Z",
         "tipo": "TEXTO",
         "editado": false
       },
       {
-        "id": "msg_1756160031767_grf2nwunc",
-        "contenido": "Hola @65fc7fab-1a07-4a00-912a-c845f911be60, ¿cómo van los ejercicios del curso?",
+        "id": "msg_1756314194172_42k6mj2ja",
+        "contenido": "Hola @27245e7e-068e-4a8c-a443-269815441920, ¿cómo van los ejercicios del curso?",
         "autor": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:13:51.767Z",
-        "tipo": "TEXTO",
-        "editado": false
-      },
-      {
-        "id": "msg_1756160046957_iv0l22mdk",
-        "contenido": "¡Hola a todos!",
-        "autor": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "fechaEnvio": "2025-08-25T22:14:06.957Z",
-        "tipo": "TEXTO",
-        "editado": false
-      },
-      {
-        "id": "msg_1756160048986_f77lkqq7a",
-        "contenido": "¿Alguien puede ayudarme con el ejercicio 3?",
-        "autor": {
-          "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
-          "nombreCompleto": "Grace Hopper"
-        },
-        "fechaEnvio": "2025-08-25T22:14:08.986Z",
-        "tipo": "TEXTO",
-        "editado": false
-      },
-      {
-        "id": "msg_1756160054039_98kbupu7w",
-        "contenido": "Yo puedo ayudarte @65fc7fab-1a07-4a00-912a-c845f911be60",
-        "autor": {
-          "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
-          "nombreCompleto": "Alan Turing"
-        },
-        "fechaEnvio": "2025-08-25T22:14:14.039Z",
-        "tipo": "TEXTO",
-        "editado": false
-      },
-      {
-        "id": "msg_1756160172369_py3ce1j99",
-        "contenido": "¡Hola! Este es un mensaje de prueba automática",
-        "autor": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "fechaEnvio": "2025-08-25T22:16:12.369Z",
-        "tipo": "TEXTO",
-        "editado": false
-      },
-      {
-        "id": "msg_1756160174408_mqm599esl",
-        "contenido": "Hola @65fc7fab-1a07-4a00-912a-c845f911be60, ¿cómo van los ejercicios del curso?",
-        "autor": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "fechaEnvio": "2025-08-25T22:16:14.408Z",
+        "fechaEnvio": "2025-08-27T17:03:14.172Z",
         "tipo": "TEXTO",
         "editado": false
       }
@@ -200,32 +146,32 @@
 
 [0;34m=== TEST 7: Simulación Multi-Usuario ===[0m
 
-[1;33m📝 Ejecutando: Mensaje de 1d6055e0-edd1-4a62-8c4a-e0495b17268d[0m
+[1;33m📝 Ejecutando: Mensaje de 5671e265-dc98-40fa-b375-e0ab84ab79cd[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "enviarMensaje": {
-      "id": "msg_1756160189586_yvnhtvigg",
+      "id": "msg_1756314209366_s8g1g7gkx",
       "contenido": "¡Hola a todos!",
       "autor": {
         "nombreCompleto": "Ada Lovelace"
       },
-      "fechaEnvio": "2025-08-25T22:16:29.586Z"
+      "fechaEnvio": "2025-08-27T17:03:29.366Z"
     }
   }
 }
 
-[1;33m📝 Ejecutando: Mensaje de 65fc7fab-1a07-4a00-912a-c845f911be60[0m
+[1;33m📝 Ejecutando: Mensaje de 27245e7e-068e-4a8c-a443-269815441920[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "enviarMensaje": {
-      "id": "msg_1756160191609_hzkbqc2b3",
+      "id": "msg_1756314211396_l57c8yhst",
       "contenido": "¿Alguien puede ayudarme con el ejercicio 3?",
       "autor": {
         "nombreCompleto": "Grace Hopper"
       },
-      "fechaEnvio": "2025-08-25T22:16:31.609Z"
+      "fechaEnvio": "2025-08-27T17:03:31.396Z"
     }
   }
 }
@@ -237,23 +183,23 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "inscribirEnCurso": {
-      "message": "Estudiante f031eca2-9b35-4e4f-ae2b-28d383575c9a inscrito en curso 8f259dd2-d58c-463e-a595-bd178ef24b44 exitosamente.",
+      "message": "Estudiante ec89bb30-47a6-4a13-89a2-26653af78c07 inscrito en curso 41b2d079-66b9-4255-b25b-a74fc2f5326f exitosamente.",
       "success": true
     }
   }
 }
 
-[1;33m📝 Ejecutando: Mensaje de f031eca2-9b35-4e4f-ae2b-28d383575c9a (después de inscripción)[0m
+[1;33m📝 Ejecutando: Mensaje de ec89bb30-47a6-4a13-89a2-26653af78c07 (después de inscripción)[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "enviarMensaje": {
-      "id": "msg_1756160196674_dsrjbc40w",
-      "contenido": "Yo puedo ayudarte @65fc7fab-1a07-4a00-912a-c845f911be60",
+      "id": "msg_1756314216517_dylvq2vdv",
+      "contenido": "Yo puedo ayudarte @27245e7e-068e-4a8c-a443-269815441920",
       "autor": {
         "nombreCompleto": "Alan Turing"
       },
-      "fechaEnvio": "2025-08-25T22:16:36.674Z"
+      "fechaEnvio": "2025-08-27T17:03:36.517Z"
     }
   }
 }
@@ -265,10 +211,10 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "editarMensaje": {
-      "id": "msg_1756160198695_qig7n0xxq",
+      "id": "msg_1756314218568_sxnkiitou",
       "contenido": "Mensaje editado automáticamente por el test",
       "editado": true,
-      "fechaEdicion": "2025-08-25T22:16:38.715Z"
+      "fechaEdicion": "2025-08-27T17:03:38.588Z"
     }
   }
 }
@@ -299,29 +245,29 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;34m🔍 Obteniendo usuarios del sistema...[0m
 [0;32m✅ Usuarios obtenidos:[0m
-   USER1: 1d6055e0-edd1-4a62-8c4a-e0495b17268d
-   USER2: 65fc7fab-1a07-4a00-912a-c845f911be60
-   USER3: f031eca2-9b35-4e4f-ae2b-28d383575c9a
+   USER1: 5671e265-dc98-40fa-b375-e0ab84ab79cd
+   USER2: 27245e7e-068e-4a8c-a443-269815441920
+   USER3: ec89bb30-47a6-4a13-89a2-26653af78c07
 
 [0;34m=== TEST 1: Crear Sala Privada ===[0m
 [0;32m✅ Sala privada creada exitosamente:[0m
 {
   "data": {
     "crearSalaPrivada": {
-      "id": "sala_1756160205788_55ijlzp4k",
+      "id": "sala_1756314225662_h96r336d3",
       "nombre": "Proyecto Secreto",
       "tipo": "PRIVADA",
       "creador": {
-        "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+        "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
         "nombreCompleto": "Ada Lovelace"
       },
       "participantes": [
         {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
         {
-          "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
           "nombreCompleto": "Grace Hopper"
         }
       ],
@@ -339,24 +285,24 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "crearSalaPrivada": {
-      "id": "sala_1756160207806_77kq5vga5",
+      "id": "sala_1756314227683_4qcebcaxv",
       "nombre": "Equipo Frontend",
       "tipo": "GRUPO",
       "creador": {
-        "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+        "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
         "nombreCompleto": "Ada Lovelace"
       },
       "participantes": [
         {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
         {
-          "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
           "nombreCompleto": "Grace Hopper"
         },
         {
-          "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
+          "id": "ec89bb30-47a6-4a13-89a2-26653af78c07",
           "nombreCompleto": "Alan Turing"
         }
       ],
@@ -371,7 +317,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;34m=== TEST 3: Obtener Salas del Usuario ===[0m
 
-[1;33m📝 Ejecutando: Obtener Salas de 1d6055e0-edd1-4a62-8c4a-e0495b17268d[0m
+[1;33m📝 Ejecutando: Obtener Salas de 5671e265-dc98-40fa-b375-e0ab84ab79cd[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
@@ -382,21 +328,21 @@ Intentando inscribir al tercer usuario en el curso...[0m
         "descripcion": "Discusión del proyecto de desarrollo frontend",
         "tipo": "GRUPO",
         "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
         "participantes": [
           {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+            "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
             "nombreCompleto": "Ada Lovelace"
           },
           {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
+            "id": "27245e7e-068e-4a8c-a443-269815441920",
             "nombreCompleto": "Grace Hopper"
           }
         ],
         "fechaCreacion": "2024-01-15T10:00:00.000Z",
-        "ultimaActividad": "2025-08-25T22:13:42.578Z",
+        "ultimaActividad": "2025-08-27T17:03:09.678Z",
         "configuracion": {
           "mensajesVozPermitidos": true,
           "notificacionesSonido": true,
@@ -405,26 +351,26 @@ Intentando inscribir al tercer usuario en el curso...[0m
         }
       },
       {
-        "id": "sala_1756160063155_n91d5215i",
+        "id": "sala_1756314225662_h96r336d3",
         "nombre": "Proyecto Secreto",
         "descripcion": "Sala privada para discutir el proyecto secreto",
         "tipo": "PRIVADA",
         "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
         "participantes": [
           {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+            "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
             "nombreCompleto": "Ada Lovelace"
           },
           {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
+            "id": "27245e7e-068e-4a8c-a443-269815441920",
             "nombreCompleto": "Grace Hopper"
           }
         ],
-        "fechaCreacion": "2025-08-25T22:14:23.155Z",
-        "ultimaActividad": "2025-08-25T22:14:23.155Z",
+        "fechaCreacion": "2025-08-27T17:03:45.662Z",
+        "ultimaActividad": "2025-08-27T17:03:45.662Z",
         "configuracion": {
           "mensajesVozPermitidos": true,
           "notificacionesSonido": true,
@@ -433,178 +379,30 @@ Intentando inscribir al tercer usuario en el curso...[0m
         }
       },
       {
-        "id": "sala_1756160065179_wnqr6tpye",
+        "id": "sala_1756314227683_4qcebcaxv",
         "nombre": "Equipo Frontend",
         "descripcion": "Sala del equipo de desarrollo frontend",
         "tipo": "GRUPO",
         "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
         "participantes": [
           {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+            "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
             "nombreCompleto": "Ada Lovelace"
           },
           {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
-            "nombreCompleto": "Grace Hopper"
-          }
-        ],
-        "fechaCreacion": "2025-08-25T22:14:25.179Z",
-        "ultimaActividad": "2025-08-25T22:14:28.403Z",
-        "configuracion": {
-          "mensajesVozPermitidos": true,
-          "notificacionesSonido": false,
-          "limiteMensajes": 500,
-          "archivoCompartido": true
-        }
-      },
-      {
-        "id": "sala_1756160071476_9lirta3f6",
-        "nombre": "Sala de Audio",
-        "descripcion": "Sala para probar mensajes de voz",
-        "tipo": "GRUPO",
-        "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "participantes": [
-          {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-            "nombreCompleto": "Ada Lovelace"
-          },
-          {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
+            "id": "27245e7e-068e-4a8c-a443-269815441920",
             "nombreCompleto": "Grace Hopper"
           },
           {
-            "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
+            "id": "ec89bb30-47a6-4a13-89a2-26653af78c07",
             "nombreCompleto": "Alan Turing"
           }
         ],
-        "fechaCreacion": "2025-08-25T22:14:31.476Z",
-        "ultimaActividad": "2025-08-25T22:14:31.476Z",
-        "configuracion": {
-          "mensajesVozPermitidos": true,
-          "notificacionesSonido": true,
-          "limiteMensajes": null,
-          "archivoCompartido": true
-        }
-      },
-      {
-        "id": "sala_1756160073571_yt67xiso5",
-        "nombre": "Sala Solo Texto",
-        "descripcion": "Sala donde no se permiten mensajes de voz",
-        "tipo": "PRIVADA",
-        "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "participantes": [
-          {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-            "nombreCompleto": "Ada Lovelace"
-          },
-          {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
-            "nombreCompleto": "Grace Hopper"
-          }
-        ],
-        "fechaCreacion": "2025-08-25T22:14:33.571Z",
-        "ultimaActividad": "2025-08-25T22:14:33.571Z",
-        "configuracion": {
-          "mensajesVozPermitidos": false,
-          "notificacionesSonido": true,
-          "limiteMensajes": null,
-          "archivoCompartido": true
-        }
-      },
-      {
-        "id": "sala_1756160080854_0uk7ayt11",
-        "nombre": "Sala de Sincronización",
-        "descripcion": "Sala para probar la sincronización de estado",
-        "tipo": "GRUPO",
-        "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "participantes": [
-          {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-            "nombreCompleto": "Ada Lovelace"
-          },
-          {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
-            "nombreCompleto": "Grace Hopper"
-          },
-          {
-            "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
-            "nombreCompleto": "Alan Turing"
-          }
-        ],
-        "fechaCreacion": "2025-08-25T22:14:40.854Z",
-        "ultimaActividad": "2025-08-25T22:14:40.854Z",
-        "configuracion": {
-          "mensajesVozPermitidos": true,
-          "notificacionesSonido": true,
-          "limiteMensajes": null,
-          "archivoCompartido": true
-        }
-      },
-      {
-        "id": "sala_1756160205788_55ijlzp4k",
-        "nombre": "Proyecto Secreto",
-        "descripcion": "Sala privada para discutir el proyecto secreto",
-        "tipo": "PRIVADA",
-        "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "participantes": [
-          {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-            "nombreCompleto": "Ada Lovelace"
-          },
-          {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
-            "nombreCompleto": "Grace Hopper"
-          }
-        ],
-        "fechaCreacion": "2025-08-25T22:16:45.788Z",
-        "ultimaActividad": "2025-08-25T22:16:45.788Z",
-        "configuracion": {
-          "mensajesVozPermitidos": true,
-          "notificacionesSonido": true,
-          "limiteMensajes": null,
-          "archivoCompartido": true
-        }
-      },
-      {
-        "id": "sala_1756160207806_77kq5vga5",
-        "nombre": "Equipo Frontend",
-        "descripcion": "Sala del equipo de desarrollo frontend",
-        "tipo": "GRUPO",
-        "creador": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-          "nombreCompleto": "Ada Lovelace"
-        },
-        "participantes": [
-          {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-            "nombreCompleto": "Ada Lovelace"
-          },
-          {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
-            "nombreCompleto": "Grace Hopper"
-          },
-          {
-            "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
-            "nombreCompleto": "Alan Turing"
-          }
-        ],
-        "fechaCreacion": "2025-08-25T22:16:47.806Z",
-        "ultimaActividad": "2025-08-25T22:16:47.806Z",
+        "fechaCreacion": "2025-08-27T17:03:47.683Z",
+        "ultimaActividad": "2025-08-27T17:03:47.683Z",
         "configuracion": {
           "mensajesVozPermitidos": true,
           "notificacionesSonido": false,
@@ -623,21 +421,21 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160209856_3q0iwj0eg",
+      "id": "msg_1756314229742_angoj5wo5",
       "contenido": "¡Hola! Este es nuestro primer mensaje en la sala privada.",
       "autor": {
-        "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+        "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
         "nombreCompleto": "Ada Lovelace"
       },
-      "salaId": "sala_1756160205788_55ijlzp4k",
-      "fechaEnvio": "2025-08-25T22:16:49.856Z",
+      "salaId": "sala_1756314225662_h96r336d3",
+      "fechaEnvio": "2025-08-27T17:03:49.742Z",
       "tipo": "TEXTO"
     }
   }
 }
 
 [0;34m=== TEST 5: Enviar Mensaje Original en Sala de Grupo ===[0m
-[0;32m✅ Mensaje original enviado (ID: msg_1756160209872_nvva46plm)[0m
+[0;32m✅ Mensaje original enviado (ID: msg_1756314229757_izl5chezw)[0m
 
 [0;34m=== TEST 6: Enviar Respuesta (Threading) ===[0m
 
@@ -646,13 +444,13 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160210893_32z41ssau",
+      "id": "msg_1756314230784_vz2dj2sal",
       "contenido": "¡Claro! Puedo ayudarte con la revisión.",
       "autor": {
         "nombreCompleto": "Alan Turing"
       },
-      "respondePor": "msg_1756160209872_nvva46plm",
-      "fechaEnvio": "2025-08-25T22:16:50.893Z"
+      "respondePor": "msg_1756314229757_izl5chezw",
+      "fechaEnvio": "2025-08-27T17:03:50.784Z"
     }
   }
 }
@@ -665,16 +463,16 @@ Intentando inscribir al tercer usuario en el curso...[0m
   "data": {
     "obtenerMensajesSala": [
       {
-        "id": "msg_1756160209856_3q0iwj0eg",
+        "id": "msg_1756314229742_angoj5wo5",
         "contenido": "¡Hola! Este es nuestro primer mensaje en la sala privada.",
         "autor": {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
         "tipo": "TEXTO",
-        "fechaEnvio": "2025-08-25T22:16:49.856Z",
+        "fechaEnvio": "2025-08-27T17:03:49.742Z",
         "respondePor": null,
-        "salaId": "sala_1756160205788_55ijlzp4k"
+        "salaId": "sala_1756314225662_h96r336d3"
       }
     ]
   }
@@ -687,17 +485,17 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "65fc7fab-1a07-4a00-912a-c845f911be60_sala_1756160207806_77kq5vga5",
-      "usuarioId": "65fc7fab-1a07-4a00-912a-c845f911be60",
-      "salaId": "sala_1756160207806_77kq5vga5",
-      "ultimaConexion": "2025-08-25T22:16:50.950Z",
+      "id": "27245e7e-068e-4a8c-a443-269815441920_sala_1756314227683_4qcebcaxv",
+      "usuarioId": "27245e7e-068e-4a8c-a443-269815441920",
+      "salaId": "sala_1756314227683_4qcebcaxv",
+      "ultimaConexion": "2025-08-27T17:03:50.833Z",
       "estadoConexion": "CONECTADO",
       "mensajesSincronizados": [],
       "eventosPendientes": [
         {
-          "id": "evento_1756160210893_sgbar24iu",
+          "id": "evento_1756314230784_3712o1yeh",
           "tipo": "MENSAJE_NUEVO",
-          "fechaEvento": "2025-08-25T22:16:50.893Z",
+          "fechaEvento": "2025-08-27T17:03:50.784Z",
           "procesado": false
         }
       ]
@@ -707,27 +505,27 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;34m=== TEST 9: Obtener Mensajes desde Timestamp ===[0m
 
-[1;33m📝 Ejecutando: Obtener Mensajes desde 2025-08-25T21:16:50Z[0m
+[1;33m📝 Ejecutando: Obtener Mensajes desde 2025-08-27T16:03:50Z[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "obtenerMensajesSala": [
       {
-        "id": "msg_1756160209872_nvva46plm",
+        "id": "msg_1756314229757_izl5chezw",
         "contenido": "¿Alguien puede revisar mi código?",
         "autor": {
           "nombreCompleto": "Grace Hopper"
         },
-        "fechaEnvio": "2025-08-25T22:16:49.872Z",
+        "fechaEnvio": "2025-08-27T17:03:49.757Z",
         "tipo": "TEXTO"
       },
       {
-        "id": "msg_1756160210893_32z41ssau",
+        "id": "msg_1756314230784_vz2dj2sal",
         "contenido": "¡Claro! Puedo ayudarte con la revisión.",
         "autor": {
           "nombreCompleto": "Alan Turing"
         },
-        "fechaEnvio": "2025-08-25T22:16:50.893Z",
+        "fechaEnvio": "2025-08-27T17:03:50.784Z",
         "tipo": "TEXTO"
       }
     ]
@@ -754,7 +552,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
       "code": "INTERNAL_SERVER_ERROR",
       "stacktrace": [
         "Error: No tienes acceso a esta sala",
-        "    at SalaPrivadaResolver.enviarMensajeSala (/workspaces/QTOPS/graphql_and_apollo_server/day_3/src/modules/curso/graphql/resolvers/chat/sala-privada.resolver.ts:72:19)",
+        "    at SalaPrivadaResolver.enviarMensajeSala (/workspaces/QTOPS/graphql_and_apollo_server/day_4/src/modules/curso/graphql/resolvers/chat/sala-privada.resolver.ts:72:19)",
         "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
       ]
     }
@@ -784,40 +582,10 @@ Intentando inscribir al tercer usuario en el curso...[0m
         "nombre": "Chat Privado",
         "participantes": [
           {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60"
+            "id": "27245e7e-068e-4a8c-a443-269815441920"
           },
           {
-            "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a"
-          }
-        ]
-      },
-      {
-        "id": "sala_1756160071476_9lirta3f6",
-        "nombre": "Sala de Audio",
-        "participantes": [
-          {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d"
-          },
-          {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60"
-          },
-          {
-            "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a"
-          }
-        ]
-      },
-      {
-        "id": "sala_1756160080854_0uk7ayt11",
-        "nombre": "Sala de Sincronización",
-        "participantes": [
-          {
-            "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d"
-          },
-          {
-            "id": "65fc7fab-1a07-4a00-912a-c845f911be60"
-          },
-          {
-            "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a"
+            "id": "ec89bb30-47a6-4a13-89a2-26653af78c07"
           }
         ]
       }
@@ -828,12 +596,12 @@ Intentando inscribir al tercer usuario en el curso...[0m
 [0;32m🎉 Tests de Salas Privadas Completados![0m
 ==================================================
 [0;36mSalas creadas durante los tests:[0m
-  📁 Sala Privada: sala_1756160205788_55ijlzp4k
-  👥 Sala de Grupo: sala_1756160207806_77kq5vga5
+  📁 Sala Privada: sala_1756314225662_h96r336d3
+  👥 Sala de Grupo: sala_1756314227683_4qcebcaxv
 
 [0;34m💡 Próximo paso: Ejecuta ./test_mensajes_voz.sh para probar mensajes de voz[0m
 
-[0;32m✅ Tests de Salas Privadas completado exitosamente en 6s[0m
+[0;32m✅ Tests de Salas Privadas completado exitosamente en 5s[0m
 
 [0;36m⏸️  Pausa de 3 segundos antes del siguiente test...[0m
 
@@ -845,16 +613,16 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;34m🔍 Obteniendo usuarios del sistema...[0m
 [0;32m✅ Usuarios obtenidos:[0m
-   USER1: 1d6055e0-edd1-4a62-8c4a-e0495b17268d
-   USER2: 65fc7fab-1a07-4a00-912a-c845f911be60
-   USER3: f031eca2-9b35-4e4f-ae2b-28d383575c9a
+   USER1: 5671e265-dc98-40fa-b375-e0ab84ab79cd
+   USER2: 27245e7e-068e-4a8c-a443-269815441920
+   USER3: ec89bb30-47a6-4a13-89a2-26653af78c07
 
 [0;34m=== TEST 1: Crear Sala con Mensajes de Voz Habilitados ===[0m
 [0;32m✅ Sala de audio creada exitosamente:[0m
 {
   "data": {
     "crearSalaPrivada": {
-      "id": "sala_1756160214103_8ujmf8j8u",
+      "id": "sala_1756314233995_1903l6fbi",
       "nombre": "Sala de Audio",
       "configuracion": {
         "mensajesVozPermitidos": true
@@ -870,14 +638,14 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160216134_843biszu2",
+      "id": "msg_1756314236025_no0nc745x",
       "contenido": "[Mensaje de voz - 5.2s]",
       "tipo": "AUDIO",
       "autor": {
         "nombreCompleto": "Ada Lovelace"
       },
       "mensajeVoz": {
-        "id": "voz_1756160216134_u95x57580",
+        "id": "voz_1756314236025_84r6qv9kg",
         "duracion": 5.2,
         "urlAudio": "https://example.com/audio/mensaje_corto_001.mp3",
         "transcripcion": "Hola equipo, ¿cómo están?",
@@ -886,10 +654,10 @@ Intentando inscribir al tercer usuario en el curso...[0m
           "calidad": "ALTA",
           "formatoCompresion": "MP3",
           "tamanoBytes": 67584,
-          "fechaCreacion": "2025-08-25T22:16:56.134Z"
+          "fechaCreacion": "2025-08-27T17:03:56.025Z"
         }
       },
-      "fechaEnvio": "2025-08-25T22:16:56.134Z"
+      "fechaEnvio": "2025-08-27T17:03:56.025Z"
     }
   }
 }
@@ -901,7 +669,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160216156_wokjpr3eo",
+      "id": "msg_1756314236050_gtcm6wsky",
       "contenido": "[Mensaje de voz - 45.8s]",
       "tipo": "AUDIO",
       "mensajeVoz": {
@@ -926,11 +694,11 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160216179_5kv4vd8zc",
+      "id": "msg_1756314236072_qwjspyhuo",
       "contenido": "[Mensaje de voz - 12.1s]",
       "tipo": "AUDIO",
       "mensajeVoz": {
-        "id": "voz_1756160216179_shahcg3ne",
+        "id": "voz_1756314236072_spset8j7c",
         "duracion": 12.1,
         "urlAudio": "https://example.com/audio/mensaje_sin_transcripcion_003.webm",
         "transcripcion": null,
@@ -945,7 +713,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 }
 
 [0;34m=== TEST 5: Crear Sala con Mensajes de Voz Deshabilitados ===[0m
-[0;32m✅ Sala sin voz creada: sala_1756160216194_yf4di46cw[0m
+[0;32m✅ Sala sin voz creada: sala_1756314236089_md6d8la4r[0m
 
 [0;34m=== TEST 6: Intentar Mensaje de Voz en Sala Prohibida ===[0m
 
@@ -967,10 +735,10 @@ Intentando inscribir al tercer usuario en el curso...[0m
       "code": "INTERNAL_SERVER_ERROR",
       "stacktrace": [
         "Error: Los mensajes de voz no están permitidos en esta sala",
-        "    at SalaPrivadaResolver.enviarMensajeVozSala (/workspaces/QTOPS/graphql_and_apollo_server/day_3/src/modules/curso/graphql/resolvers/chat/sala-privada.resolver.ts:120:19)",
+        "    at SalaPrivadaResolver.enviarMensajeVozSala (/workspaces/QTOPS/graphql_and_apollo_server/day_4/src/modules/curso/graphql/resolvers/chat/sala-privada.resolver.ts:120:19)",
         "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
-        "    at async target (/workspaces/QTOPS/graphql_and_apollo_server/day_3/node_modules/@nestjs/core/helpers/external-context-creator.js:74:28)",
-        "    at async Object.enviarMensajeVozSala (/workspaces/QTOPS/graphql_and_apollo_server/day_3/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+        "    at async target (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-context-creator.js:74:28)",
+        "    at async Object.enviarMensajeVozSala (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
       ]
     }
   }
@@ -978,7 +746,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 [0;36m💡 Este error es esperado - valida que la configuración funciona[0m
 
 [0;34m=== TEST 7: Enviar Mensaje de Texto Original ===[0m
-[0;32m✅ Mensaje de texto enviado (ID: msg_1756160216236_n0ftoo5z8)[0m
+[0;32m✅ Mensaje de texto enviado (ID: msg_1756314236126_8hyqamx9x)[0m
 
 [0;34m=== TEST 8: Responder con Mensaje de Voz ===[0m
 
@@ -987,10 +755,10 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160217258_d8ohsztda",
+      "id": "msg_1756314237149_juhccps3t",
       "contenido": "[Mensaje de voz - 8.3s]",
       "tipo": "AUDIO",
-      "respondePor": "msg_1756160216236_n0ftoo5z8",
+      "respondePor": "msg_1756314236126_8hyqamx9x",
       "mensajeVoz": {
         "duracion": 8.3,
         "transcripcion": "Sí, recibí tu mensaje perfectamente. Todo se escucha muy claro.",
@@ -1008,15 +776,15 @@ Intentando inscribir al tercer usuario en el curso...[0m
   "data": {
     "obtenerMensajesSala": [
       {
-        "id": "msg_1756160216134_843biszu2",
+        "id": "msg_1756314236025_no0nc745x",
         "contenido": "[Mensaje de voz - 5.2s]",
         "tipo": "AUDIO",
         "autor": {
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:16:56.134Z",
+        "fechaEnvio": "2025-08-27T17:03:56.025Z",
         "mensajeVoz": {
-          "id": "voz_1756160216134_u95x57580",
+          "id": "voz_1756314236025_84r6qv9kg",
           "duracion": 5.2,
           "urlAudio": "https://example.com/audio/mensaje_corto_001.mp3",
           "transcripcion": "Hola equipo, ¿cómo están?",
@@ -1030,15 +798,15 @@ Intentando inscribir al tercer usuario en el curso...[0m
         "respondePor": null
       },
       {
-        "id": "msg_1756160216156_wokjpr3eo",
+        "id": "msg_1756314236050_gtcm6wsky",
         "contenido": "[Mensaje de voz - 45.8s]",
         "tipo": "AUDIO",
         "autor": {
           "nombreCompleto": "Grace Hopper"
         },
-        "fechaEnvio": "2025-08-25T22:16:56.156Z",
+        "fechaEnvio": "2025-08-27T17:03:56.050Z",
         "mensajeVoz": {
-          "id": "voz_1756160216156_v3oejx6ye",
+          "id": "voz_1756314236050_a1e6e28c6",
           "duracion": 45.8,
           "urlAudio": "https://example.com/audio/mensaje_largo_002.ogg",
           "transcripcion": "Quería contarles sobre el avance del proyecto. Hemos terminado la primera fase de desarrollo y estamos listos para comenzar con las pruebas. Necesitamos revisar los casos de uso principales y asegurarnos de que todo funcione correctamente antes del lanzamiento.",
@@ -1052,15 +820,15 @@ Intentando inscribir al tercer usuario en el curso...[0m
         "respondePor": null
       },
       {
-        "id": "msg_1756160216179_5kv4vd8zc",
+        "id": "msg_1756314236072_qwjspyhuo",
         "contenido": "[Mensaje de voz - 12.1s]",
         "tipo": "AUDIO",
         "autor": {
           "nombreCompleto": "Alan Turing"
         },
-        "fechaEnvio": "2025-08-25T22:16:56.179Z",
+        "fechaEnvio": "2025-08-27T17:03:56.072Z",
         "mensajeVoz": {
-          "id": "voz_1756160216179_shahcg3ne",
+          "id": "voz_1756314236072_spset8j7c",
           "duracion": 12.1,
           "urlAudio": "https://example.com/audio/mensaje_sin_transcripcion_003.webm",
           "transcripcion": null,
@@ -1074,26 +842,26 @@ Intentando inscribir al tercer usuario en el curso...[0m
         "respondePor": null
       },
       {
-        "id": "msg_1756160216236_n0ftoo5z8",
+        "id": "msg_1756314236126_8hyqamx9x",
         "contenido": "¿Pueden confirmar si recibieron mi mensaje de voz anterior?",
         "tipo": "TEXTO",
         "autor": {
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:16:56.236Z",
+        "fechaEnvio": "2025-08-27T17:03:56.126Z",
         "mensajeVoz": null,
         "respondePor": null
       },
       {
-        "id": "msg_1756160217258_d8ohsztda",
+        "id": "msg_1756314237149_juhccps3t",
         "contenido": "[Mensaje de voz - 8.3s]",
         "tipo": "AUDIO",
         "autor": {
           "nombreCompleto": "Grace Hopper"
         },
-        "fechaEnvio": "2025-08-25T22:16:57.258Z",
+        "fechaEnvio": "2025-08-27T17:03:57.149Z",
         "mensajeVoz": {
-          "id": "voz_1756160217258_e1zcx57da",
+          "id": "voz_1756314237149_20svkruxr",
           "duracion": 8.3,
           "urlAudio": "https://example.com/audio/respuesta_004.mp3",
           "transcripcion": "Sí, recibí tu mensaje perfectamente. Todo se escucha muy claro.",
@@ -1104,7 +872,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
             "tamanoBytes": 108000
           }
         },
-        "respondePor": "msg_1756160216236_n0ftoo5z8"
+        "respondePor": "msg_1756314236126_8hyqamx9x"
       }
     ]
   }
@@ -1119,7 +887,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160217305_f39xq897p",
+      "id": "msg_1756314237195_nj51h0s59",
       "tipo": "AUDIO",
       "mensajeVoz": {
         "duracion": 3.2,
@@ -1140,7 +908,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160218329_olw6ony15",
+      "id": "msg_1756314238235_1jd8nz758",
       "tipo": "AUDIO",
       "mensajeVoz": {
         "duracion": 15.7,
@@ -1161,7 +929,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160219353_u3d4ueou8",
+      "id": "msg_1756314239267_25qgnobrq",
       "tipo": "AUDIO",
       "mensajeVoz": {
         "duracion": 28.9,
@@ -1182,7 +950,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160220377_l6ehsc9yo",
+      "id": "msg_1756314240293_9z3ihxlk4",
       "contenido": "[Mensaje de voz - 120.5s]",
       "mensajeVoz": {
         "duracion": 120.5,
@@ -1206,12 +974,12 @@ Intentando inscribir al tercer usuario en el curso...[0m
 [0;32m🎉 Tests de Mensajes de Voz Completados![0m
 ==================================================
 [0;36mSalas utilizadas:[0m
-  🎤 Sala de Audio: sala_1756160214103_8ujmf8j8u
-  📝 Sala Solo Texto: sala_1756160216194_yf4di46cw
+  🎤 Sala de Audio: sala_1756314233995_1903l6fbi
+  📝 Sala Solo Texto: sala_1756314236089_md6d8la4r
 
 [0;34m💡 Próximo paso: Ejecuta ./test_sincronizacion.sh para probar sincronización[0m
 
-[0;32m✅ Tests de Mensajes de Voz completado exitosamente en 6s[0m
+[0;32m✅ Tests de Mensajes de Voz completado exitosamente en 7s[0m
 
 [0;36m⏸️  Pausa de 3 segundos antes del siguiente test...[0m
 
@@ -1223,28 +991,28 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;34m🔍 Obteniendo usuarios del sistema...[0m
 [0;32m✅ Usuarios obtenidos:[0m
-   USER1: 1d6055e0-edd1-4a62-8c4a-e0495b17268d
-   USER2: 65fc7fab-1a07-4a00-912a-c845f911be60
-   USER3: f031eca2-9b35-4e4f-ae2b-28d383575c9a
+   USER1: 5671e265-dc98-40fa-b375-e0ab84ab79cd
+   USER2: 27245e7e-068e-4a8c-a443-269815441920
+   USER3: ec89bb30-47a6-4a13-89a2-26653af78c07
 
 [0;34m=== TEST 1: Crear Sala para Sincronización ===[0m
 [0;32m✅ Sala de sincronización creada exitosamente:[0m
 {
   "data": {
     "crearSalaPrivada": {
-      "id": "sala_1756160223465_v8r2xaa5f",
+      "id": "sala_1756314243369_pfbb4f87i",
       "nombre": "Sala de Sincronización",
       "participantes": [
         {
-          "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
           "nombreCompleto": "Ada Lovelace"
         },
         {
-          "id": "65fc7fab-1a07-4a00-912a-c845f911be60",
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
           "nombreCompleto": "Grace Hopper"
         },
         {
-          "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
+          "id": "ec89bb30-47a6-4a13-89a2-26653af78c07",
           "nombreCompleto": "Alan Turing"
         }
       ]
@@ -1259,10 +1027,10 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d_sala_1756160223465_v8r2xaa5f",
-      "usuarioId": "1d6055e0-edd1-4a62-8c4a-e0495b17268d",
-      "salaId": "sala_1756160223465_v8r2xaa5f",
-      "ultimaConexion": "2025-08-25T22:17:05.491Z",
+      "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd_sala_1756314243369_pfbb4f87i",
+      "usuarioId": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
+      "salaId": "sala_1756314243369_pfbb4f87i",
+      "ultimaConexion": "2025-08-27T17:04:05.401Z",
       "estadoConexion": "CONECTADO",
       "mensajesSincronizados": [],
       "eventosPendientes": []
@@ -1277,10 +1045,10 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "65fc7fab-1a07-4a00-912a-c845f911be60_sala_1756160223465_v8r2xaa5f",
-      "usuarioId": "65fc7fab-1a07-4a00-912a-c845f911be60",
-      "salaId": "sala_1756160223465_v8r2xaa5f",
-      "ultimaConexion": "2025-08-25T22:17:05.513Z",
+      "id": "27245e7e-068e-4a8c-a443-269815441920_sala_1756314243369_pfbb4f87i",
+      "usuarioId": "27245e7e-068e-4a8c-a443-269815441920",
+      "salaId": "sala_1756314243369_pfbb4f87i",
+      "ultimaConexion": "2025-08-27T17:04:05.423Z",
       "estadoConexion": "CONECTADO",
       "mensajesSincronizados": [],
       "eventosPendientes": []
@@ -1297,12 +1065,12 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160225535_0mpfm4f58",
+      "id": "msg_1756314245444_bpwaujlp5",
       "contenido": "Primer mensaje para el historial",
       "autor": {
         "nombreCompleto": "Ada Lovelace"
       },
-      "fechaEnvio": "2025-08-25T22:17:05.535Z"
+      "fechaEnvio": "2025-08-27T17:04:05.444Z"
     }
   }
 }
@@ -1314,12 +1082,12 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160226558_a8rtffadn",
+      "id": "msg_1756314246468_eyfqno697",
       "contenido": "Segundo mensaje con información importante",
       "autor": {
         "nombreCompleto": "Grace Hopper"
       },
-      "fechaEnvio": "2025-08-25T22:17:06.559Z"
+      "fechaEnvio": "2025-08-27T17:04:06.468Z"
     }
   }
 }
@@ -1331,12 +1099,12 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160227583_mrgvh1qav",
+      "id": "msg_1756314247492_uego9kpxt",
       "contenido": "Tercer mensaje para completar el historial",
       "autor": {
         "nombreCompleto": "Ada Lovelace"
       },
-      "fechaEnvio": "2025-08-25T22:17:07.583Z"
+      "fechaEnvio": "2025-08-27T17:04:07.492Z"
     }
   }
 }
@@ -1348,32 +1116,32 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a_sala_1756160223465_v8r2xaa5f",
-      "usuarioId": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
-      "salaId": "sala_1756160223465_v8r2xaa5f",
-      "ultimaConexion": "2025-08-25T22:17:08.608Z",
+      "id": "ec89bb30-47a6-4a13-89a2-26653af78c07_sala_1756314243369_pfbb4f87i",
+      "usuarioId": "ec89bb30-47a6-4a13-89a2-26653af78c07",
+      "salaId": "sala_1756314243369_pfbb4f87i",
+      "ultimaConexion": "2025-08-27T17:04:08.517Z",
       "estadoConexion": "CONECTADO",
       "mensajesSincronizados": [],
       "eventosPendientes": [
         {
-          "id": "evento_1756160225535_6v79vekkw",
+          "id": "evento_1756314245444_lhvb87jis",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160225535_0mpfm4f58\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:05.535Z\",\"contenido\":\"Primer mensaje para el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"1d6055e0-edd1-4a62-8c4a-e0495b17268d\",\"nombreCompleto\":\"Ada Lovelace\"}}}",
-          "fechaEvento": "2025-08-25T22:17:05.535Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314245444_bpwaujlp5\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:05.444Z\",\"contenido\":\"Primer mensaje para el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"5671e265-dc98-40fa-b375-e0ab84ab79cd\",\"nombreCompleto\":\"Ada Lovelace\",\"email\":\"ada@example.com\",\"roles\":[\"ESTUDIANTE\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:05.444Z",
           "procesado": false
         },
         {
-          "id": "evento_1756160226559_5rrtuyqmq",
+          "id": "evento_1756314246468_rswakt1jk",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160226558_a8rtffadn\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:06.559Z\",\"contenido\":\"Segundo mensaje con información importante\",\"adjuntos\":[],\"autor\":{\"id\":\"65fc7fab-1a07-4a00-912a-c845f911be60\",\"nombreCompleto\":\"Grace Hopper\"}}}",
-          "fechaEvento": "2025-08-25T22:17:06.559Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314246468_eyfqno697\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:06.468Z\",\"contenido\":\"Segundo mensaje con información importante\",\"adjuntos\":[],\"autor\":{\"id\":\"27245e7e-068e-4a8c-a443-269815441920\",\"nombreCompleto\":\"Grace Hopper\",\"email\":\"grace@example.com\",\"roles\":[\"INSTRUCTOR\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:06.468Z",
           "procesado": false
         },
         {
-          "id": "evento_1756160227583_2voi0tncy",
+          "id": "evento_1756314247492_gwrl66ria",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160227583_mrgvh1qav\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:07.583Z\",\"contenido\":\"Tercer mensaje para completar el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"1d6055e0-edd1-4a62-8c4a-e0495b17268d\",\"nombreCompleto\":\"Ada Lovelace\"}}}",
-          "fechaEvento": "2025-08-25T22:17:07.583Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314247492_uego9kpxt\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:07.492Z\",\"contenido\":\"Tercer mensaje para completar el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"5671e265-dc98-40fa-b375-e0ab84ab79cd\",\"nombreCompleto\":\"Ada Lovelace\",\"email\":\"ada@example.com\",\"roles\":[\"ESTUDIANTE\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:07.492Z",
           "procesado": false
         }
       ]
@@ -1390,9 +1158,9 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160228630_y749rpus2",
+      "id": "msg_1756314248545_znkbddqk3",
       "contenido": "Mensaje mientras User3 estaba desconectado - 1",
-      "fechaEnvio": "2025-08-25T22:17:08.630Z"
+      "fechaEnvio": "2025-08-27T17:04:08.545Z"
     }
   }
 }
@@ -1404,9 +1172,9 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160229654_zn0tglsuz",
+      "id": "msg_1756314249569_1toatxjk7",
       "contenido": "Mensaje mientras User3 estaba desconectado - 2",
-      "fechaEnvio": "2025-08-25T22:17:09.654Z"
+      "fechaEnvio": "2025-08-27T17:04:09.569Z"
     }
   }
 }
@@ -1418,13 +1186,13 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeVozSala": {
-      "id": "msg_1756160230678_p2nb2h9h0",
+      "id": "msg_1756314250595_nrltai5sf",
       "tipo": "AUDIO",
       "mensajeVoz": {
         "duracion": 8.5,
         "transcripcion": "Este es un mensaje de voz enviado mientras el usuario 3 estaba desconectado"
       },
-      "fechaEnvio": "2025-08-25T22:17:10.679Z"
+      "fechaEnvio": "2025-08-27T17:04:10.595Z"
     }
   }
 }
@@ -1436,53 +1204,53 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a_sala_1756160223465_v8r2xaa5f",
-      "usuarioId": "f031eca2-9b35-4e4f-ae2b-28d383575c9a",
-      "salaId": "sala_1756160223465_v8r2xaa5f",
-      "ultimaConexion": "2025-08-25T22:17:10.700Z",
+      "id": "ec89bb30-47a6-4a13-89a2-26653af78c07_sala_1756314243369_pfbb4f87i",
+      "usuarioId": "ec89bb30-47a6-4a13-89a2-26653af78c07",
+      "salaId": "sala_1756314243369_pfbb4f87i",
+      "ultimaConexion": "2025-08-27T17:04:10.616Z",
       "estadoConexion": "CONECTADO",
       "mensajesSincronizados": [],
       "eventosPendientes": [
         {
-          "id": "evento_1756160225535_6v79vekkw",
+          "id": "evento_1756314245444_lhvb87jis",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160225535_0mpfm4f58\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:05.535Z\",\"contenido\":\"Primer mensaje para el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"1d6055e0-edd1-4a62-8c4a-e0495b17268d\",\"nombreCompleto\":\"Ada Lovelace\"}}}",
-          "fechaEvento": "2025-08-25T22:17:05.535Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314245444_bpwaujlp5\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:05.444Z\",\"contenido\":\"Primer mensaje para el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"5671e265-dc98-40fa-b375-e0ab84ab79cd\",\"nombreCompleto\":\"Ada Lovelace\",\"email\":\"ada@example.com\",\"roles\":[\"ESTUDIANTE\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:05.444Z",
           "procesado": false
         },
         {
-          "id": "evento_1756160226559_5rrtuyqmq",
+          "id": "evento_1756314246468_rswakt1jk",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160226558_a8rtffadn\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:06.559Z\",\"contenido\":\"Segundo mensaje con información importante\",\"adjuntos\":[],\"autor\":{\"id\":\"65fc7fab-1a07-4a00-912a-c845f911be60\",\"nombreCompleto\":\"Grace Hopper\"}}}",
-          "fechaEvento": "2025-08-25T22:17:06.559Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314246468_eyfqno697\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:06.468Z\",\"contenido\":\"Segundo mensaje con información importante\",\"adjuntos\":[],\"autor\":{\"id\":\"27245e7e-068e-4a8c-a443-269815441920\",\"nombreCompleto\":\"Grace Hopper\",\"email\":\"grace@example.com\",\"roles\":[\"INSTRUCTOR\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:06.468Z",
           "procesado": false
         },
         {
-          "id": "evento_1756160227583_2voi0tncy",
+          "id": "evento_1756314247492_gwrl66ria",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160227583_mrgvh1qav\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:07.583Z\",\"contenido\":\"Tercer mensaje para completar el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"1d6055e0-edd1-4a62-8c4a-e0495b17268d\",\"nombreCompleto\":\"Ada Lovelace\"}}}",
-          "fechaEvento": "2025-08-25T22:17:07.583Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314247492_uego9kpxt\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:07.492Z\",\"contenido\":\"Tercer mensaje para completar el historial\",\"adjuntos\":[],\"autor\":{\"id\":\"5671e265-dc98-40fa-b375-e0ab84ab79cd\",\"nombreCompleto\":\"Ada Lovelace\",\"email\":\"ada@example.com\",\"roles\":[\"ESTUDIANTE\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:07.492Z",
           "procesado": false
         },
         {
-          "id": "evento_1756160228630_xmtgx4lad",
+          "id": "evento_1756314248545_afo83mb07",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160228630_y749rpus2\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:08.630Z\",\"contenido\":\"Mensaje mientras User3 estaba desconectado - 1\",\"adjuntos\":[],\"autor\":{\"id\":\"1d6055e0-edd1-4a62-8c4a-e0495b17268d\",\"nombreCompleto\":\"Ada Lovelace\"}}}",
-          "fechaEvento": "2025-08-25T22:17:08.630Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314248545_znkbddqk3\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:08.545Z\",\"contenido\":\"Mensaje mientras User3 estaba desconectado - 1\",\"adjuntos\":[],\"autor\":{\"id\":\"5671e265-dc98-40fa-b375-e0ab84ab79cd\",\"nombreCompleto\":\"Ada Lovelace\",\"email\":\"ada@example.com\",\"roles\":[\"ESTUDIANTE\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:08.545Z",
           "procesado": false
         },
         {
-          "id": "evento_1756160229654_1llkgp79v",
+          "id": "evento_1756314249570_i5rz7nh3w",
           "tipo": "MENSAJE_NUEVO",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160229654_zn0tglsuz\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:09.654Z\",\"contenido\":\"Mensaje mientras User3 estaba desconectado - 2\",\"adjuntos\":[],\"autor\":{\"id\":\"1d6055e0-edd1-4a62-8c4a-e0495b17268d\",\"nombreCompleto\":\"Ada Lovelace\"}}}",
-          "fechaEvento": "2025-08-25T22:17:09.654Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314249569_1toatxjk7\",\"tipo\":\"TEXTO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:09.569Z\",\"contenido\":\"Mensaje mientras User3 estaba desconectado - 2\",\"adjuntos\":[],\"autor\":{\"id\":\"5671e265-dc98-40fa-b375-e0ab84ab79cd\",\"nombreCompleto\":\"Ada Lovelace\",\"email\":\"ada@example.com\",\"roles\":[\"ESTUDIANTE\"],\"activo\":true}}}",
+          "fechaEvento": "2025-08-27T17:04:09.570Z",
           "procesado": false
         },
         {
-          "id": "evento_1756160230679_2kuitkpfm",
+          "id": "evento_1756314250595_55zfx6bik",
           "tipo": "MENSAJE_VOZ",
-          "datos": "{\"mensaje\":{\"id\":\"msg_1756160230678_p2nb2h9h0\",\"tipo\":\"AUDIO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756160223465_v8r2xaa5f\",\"fechaEnvio\":\"2025-08-25T22:17:10.679Z\",\"contenido\":\"[Mensaje de voz - 8.5s]\",\"autor\":{\"id\":\"65fc7fab-1a07-4a00-912a-c845f911be60\",\"nombreCompleto\":\"Grace Hopper\"},\"mensajeVoz\":{\"id\":\"voz_1756160230678_k1fh61x9r\",\"duracion\":8.5,\"urlAudio\":\"https://example.com/audio/mensaje_offline.mp3\",\"transcripcion\":\"Este es un mensaje de voz enviado mientras el usuario 3 estaba desconectado\",\"estadoReproduccion\":\"NO_REPRODUCIDO\",\"metadatos\":{\"fechaCreacion\":\"2025-08-25T22:17:10.678Z\",\"tamanoBytes\":110000,\"calidad\":\"MEDIA\",\"formatoCompresion\":\"MP3\"}}}}",
-          "fechaEvento": "2025-08-25T22:17:10.679Z",
+          "datos": "{\"mensaje\":{\"id\":\"msg_1756314250595_nrltai5sf\",\"tipo\":\"AUDIO\",\"editado\":false,\"cursoId\":\"\",\"salaId\":\"sala_1756314243369_pfbb4f87i\",\"fechaEnvio\":\"2025-08-27T17:04:10.595Z\",\"contenido\":\"[Mensaje de voz - 8.5s]\",\"autor\":{\"id\":\"27245e7e-068e-4a8c-a443-269815441920\",\"nombreCompleto\":\"Grace Hopper\",\"email\":\"grace@example.com\",\"roles\":[\"INSTRUCTOR\"],\"activo\":true},\"mensajeVoz\":{\"id\":\"voz_1756314250595_1pdnhj57r\",\"duracion\":8.5,\"urlAudio\":\"https://example.com/audio/mensaje_offline.mp3\",\"transcripcion\":\"Este es un mensaje de voz enviado mientras el usuario 3 estaba desconectado\",\"estadoReproduccion\":\"NO_REPRODUCIDO\",\"metadatos\":{\"fechaCreacion\":\"2025-08-27T17:04:10.595Z\",\"tamanoBytes\":110000,\"calidad\":\"MEDIA\",\"formatoCompresion\":\"MP3\"}}}}",
+          "fechaEvento": "2025-08-27T17:04:10.595Z",
           "procesado": false
         }
       ]
@@ -1492,69 +1260,69 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;34m=== TEST 9: Obtener Mensajes desde Última Conexión ===[0m
 
-[1;33m📝 Ejecutando: Mensajes desde 2025-08-25T22:07:10Z[0m
+[1;33m📝 Ejecutando: Mensajes desde 2025-08-27T16:54:10Z[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "obtenerMensajesSala": [
       {
-        "id": "msg_1756160225535_0mpfm4f58",
+        "id": "msg_1756314245444_bpwaujlp5",
         "contenido": "Primer mensaje para el historial",
         "tipo": "TEXTO",
         "autor": {
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:17:05.535Z",
+        "fechaEnvio": "2025-08-27T17:04:05.444Z",
         "mensajeVoz": null
       },
       {
-        "id": "msg_1756160226558_a8rtffadn",
+        "id": "msg_1756314246468_eyfqno697",
         "contenido": "Segundo mensaje con información importante",
         "tipo": "TEXTO",
         "autor": {
           "nombreCompleto": "Grace Hopper"
         },
-        "fechaEnvio": "2025-08-25T22:17:06.559Z",
+        "fechaEnvio": "2025-08-27T17:04:06.468Z",
         "mensajeVoz": null
       },
       {
-        "id": "msg_1756160227583_mrgvh1qav",
+        "id": "msg_1756314247492_uego9kpxt",
         "contenido": "Tercer mensaje para completar el historial",
         "tipo": "TEXTO",
         "autor": {
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:17:07.583Z",
+        "fechaEnvio": "2025-08-27T17:04:07.492Z",
         "mensajeVoz": null
       },
       {
-        "id": "msg_1756160228630_y749rpus2",
+        "id": "msg_1756314248545_znkbddqk3",
         "contenido": "Mensaje mientras User3 estaba desconectado - 1",
         "tipo": "TEXTO",
         "autor": {
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:17:08.630Z",
+        "fechaEnvio": "2025-08-27T17:04:08.545Z",
         "mensajeVoz": null
       },
       {
-        "id": "msg_1756160229654_zn0tglsuz",
+        "id": "msg_1756314249569_1toatxjk7",
         "contenido": "Mensaje mientras User3 estaba desconectado - 2",
         "tipo": "TEXTO",
         "autor": {
           "nombreCompleto": "Ada Lovelace"
         },
-        "fechaEnvio": "2025-08-25T22:17:09.654Z",
+        "fechaEnvio": "2025-08-27T17:04:09.569Z",
         "mensajeVoz": null
       },
       {
-        "id": "msg_1756160230678_p2nb2h9h0",
+        "id": "msg_1756314250595_nrltai5sf",
         "contenido": "[Mensaje de voz - 8.5s]",
         "tipo": "AUDIO",
         "autor": {
           "nombreCompleto": "Grace Hopper"
         },
-        "fechaEnvio": "2025-08-25T22:17:10.679Z",
+        "fechaEnvio": "2025-08-27T17:04:10.595Z",
         "mensajeVoz": {
           "duracion": 8.5,
           "transcripcion": "Este es un mensaje de voz enviado mientras el usuario 3 estaba desconectado"
@@ -1601,7 +1369,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160230770_izri7rr59",
+      "id": "msg_1756314250686_l2nbtlkav",
       "contenido": "Mensaje durante ciclo de conexión 1"
     }
   }
@@ -1642,7 +1410,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160231816_2y2ageze0",
+      "id": "msg_1756314251785_wf9nworbc",
       "contenido": "Mensaje durante ciclo de conexión 2"
     }
   }
@@ -1683,7 +1451,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 {
   "data": {
     "enviarMensajeSala": {
-      "id": "msg_1756160232862_4wdleukld",
+      "id": "msg_1756314252835_rrjjtebs6",
       "contenido": "Mensaje durante ciclo de conexión 3"
     }
   }
@@ -1691,40 +1459,40 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;34m=== TEST 11: Estado Final de Sincronización ===[0m
 
-[0;36m👤 Estado de sincronización para Usuario: 1d6055e0-edd1-4a62-8c4a-e0495b17268d[0m
+[0;36m👤 Estado de sincronización para Usuario: 5671e265-dc98-40fa-b375-e0ab84ab79cd[0m
 
-[1;33m📝 Ejecutando: Estado Final - 1d6055e0-edd1-4a62-8c4a-e0495b17268d[0m
+[1;33m📝 Ejecutando: Estado Final - 5671e265-dc98-40fa-b375-e0ab84ab79cd[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "1d6055e0-edd1-4a62-8c4a-e0495b17268d_sala_1756160223465_v8r2xaa5f",
+      "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd_sala_1756314243369_pfbb4f87i",
       "estadoConexion": "CONECTADO",
-      "ultimaConexion": "2025-08-25T22:17:13.886Z",
+      "ultimaConexion": "2025-08-27T17:04:13.860Z",
       "mensajesSincronizados": [],
       "eventosPendientes": [
         {
-          "id": "evento_1756160226559_mwj9f0qxy",
+          "id": "evento_1756314246468_4cbgh9hqe",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160230679_52ergbitd",
+          "id": "evento_1756314250595_v7rucgdf9",
           "tipo": "MENSAJE_VOZ",
           "procesado": false
         },
         {
-          "id": "evento_1756160230771_9f7p07glk",
+          "id": "evento_1756314250686_t9jc27cvk",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160231816_3js9ftvlm",
+          "id": "evento_1756314251785_nqyyradsz",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160232862_q0i96ud62",
+          "id": "evento_1756314252835_7cfm796k7",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         }
@@ -1733,35 +1501,35 @@ Intentando inscribir al tercer usuario en el curso...[0m
   }
 }
 
-[0;36m👤 Estado de sincronización para Usuario: 65fc7fab-1a07-4a00-912a-c845f911be60[0m
+[0;36m👤 Estado de sincronización para Usuario: 27245e7e-068e-4a8c-a443-269815441920[0m
 
-[1;33m📝 Ejecutando: Estado Final - 65fc7fab-1a07-4a00-912a-c845f911be60[0m
+[1;33m📝 Ejecutando: Estado Final - 27245e7e-068e-4a8c-a443-269815441920[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "65fc7fab-1a07-4a00-912a-c845f911be60_sala_1756160223465_v8r2xaa5f",
+      "id": "27245e7e-068e-4a8c-a443-269815441920_sala_1756314243369_pfbb4f87i",
       "estadoConexion": "CONECTADO",
-      "ultimaConexion": "2025-08-25T22:17:13.908Z",
+      "ultimaConexion": "2025-08-27T17:04:13.882Z",
       "mensajesSincronizados": [],
       "eventosPendientes": [
         {
-          "id": "evento_1756160225535_kjxoub0v7",
+          "id": "evento_1756314245444_yxuzvjfk3",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160227583_x6soy3zib",
+          "id": "evento_1756314247492_8a0lz7wtd",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160228630_7hw0vapkt",
+          "id": "evento_1756314248545_fpl1wx8tm",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160229654_omcgcf2h0",
+          "id": "evento_1756314249570_ctsj8lhv0",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         }
@@ -1770,60 +1538,60 @@ Intentando inscribir al tercer usuario en el curso...[0m
   }
 }
 
-[0;36m👤 Estado de sincronización para Usuario: f031eca2-9b35-4e4f-ae2b-28d383575c9a[0m
+[0;36m👤 Estado de sincronización para Usuario: ec89bb30-47a6-4a13-89a2-26653af78c07[0m
 
-[1;33m📝 Ejecutando: Estado Final - f031eca2-9b35-4e4f-ae2b-28d383575c9a[0m
+[1;33m📝 Ejecutando: Estado Final - ec89bb30-47a6-4a13-89a2-26653af78c07[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
     "sincronizarEstado": {
-      "id": "f031eca2-9b35-4e4f-ae2b-28d383575c9a_sala_1756160223465_v8r2xaa5f",
+      "id": "ec89bb30-47a6-4a13-89a2-26653af78c07_sala_1756314243369_pfbb4f87i",
       "estadoConexion": "CONECTADO",
-      "ultimaConexion": "2025-08-25T22:17:13.931Z",
+      "ultimaConexion": "2025-08-27T17:04:13.905Z",
       "mensajesSincronizados": [],
       "eventosPendientes": [
         {
-          "id": "evento_1756160225535_6v79vekkw",
+          "id": "evento_1756314245444_lhvb87jis",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160226559_5rrtuyqmq",
+          "id": "evento_1756314246468_rswakt1jk",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160227583_2voi0tncy",
+          "id": "evento_1756314247492_gwrl66ria",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160228630_xmtgx4lad",
+          "id": "evento_1756314248545_afo83mb07",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160229654_1llkgp79v",
+          "id": "evento_1756314249570_i5rz7nh3w",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160230679_2kuitkpfm",
+          "id": "evento_1756314250595_55zfx6bik",
           "tipo": "MENSAJE_VOZ",
           "procesado": false
         },
         {
-          "id": "evento_1756160230771_b24rgwol7",
+          "id": "evento_1756314250686_bj9m85d36",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160231816_r47milqh1",
+          "id": "evento_1756314251785_ny0c027dt",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         },
         {
-          "id": "evento_1756160232862_dvzn1l309",
+          "id": "evento_1756314252836_zoz3w7fgm",
           "tipo": "MENSAJE_NUEVO",
           "procesado": false
         }
@@ -1839,25 +1607,25 @@ Intentando inscribir al tercer usuario en el curso...[0m
   Mensajes de voz: 1
 
 [0;32m👥 Mensajes por Usuario:[0m
-  Usuario 1d6055e0-edd1-4a62-8c4a-e0495b17268d: 0 mensajes
-  Usuario 65fc7fab-1a07-4a00-912a-c845f911be60: 0 mensajes
-  Usuario f031eca2-9b35-4e4f-ae2b-28d383575c9a: 0 mensajes
+  Usuario 5671e265-dc98-40fa-b375-e0ab84ab79cd: 0 mensajes
+  Usuario 27245e7e-068e-4a8c-a443-269815441920: 0 mensajes
+  Usuario ec89bb30-47a6-4a13-89a2-26653af78c07: 0 mensajes
 
 [0;32m⏰ Timeline de Mensajes:[0m
-  22:17:05 - Ada Lovelace: Primer mensaje para el historial
-  22:17:06 - Grace Hopper: Segundo mensaje con información importante
-  22:17:07 - Ada Lovelace: Tercer mensaje para completar el historial
-  22:17:08 - Ada Lovelace: Mensaje mientras User3 estaba desconectado - 1
-  22:17:09 - Ada Lovelace: Mensaje mientras User3 estaba desconectado - 2
-  22:17:10 - Grace Hopper: [Mensaje de voz - 8.5s]
-  22:17:10 - Grace Hopper: Mensaje durante ciclo de conexión 1
-  22:17:11 - Grace Hopper: Mensaje durante ciclo de conexión 2
-  22:17:12 - Grace Hopper: Mensaje durante ciclo de conexión 3
+  17:04:05 - Ada Lovelace: Primer mensaje para el historial
+  17:04:06 - Grace Hopper: Segundo mensaje con información importante
+  17:04:07 - Ada Lovelace: Tercer mensaje para completar el historial
+  17:04:08 - Ada Lovelace: Mensaje mientras User3 estaba desconectado - 1
+  17:04:09 - Ada Lovelace: Mensaje mientras User3 estaba desconectado - 2
+  17:04:10 - Grace Hopper: [Mensaje de voz - 8.5s]
+  17:04:10 - Grace Hopper: Mensaje durante ciclo de conexión 1
+  17:04:11 - Grace Hopper: Mensaje durante ciclo de conexión 2
+  17:04:12 - Grace Hopper: Mensaje durante ciclo de conexión 3
 
 [0;34m=== TEST 13: Verificación de Persistencia ===[0m
 [0;36m🔍 Verificando que los estados de sincronización persisten...[0m
 
-[1;33m📝 Ejecutando: Verificar Persistencia - 1d6055e0-edd1-4a62-8c4a-e0495b17268d[0m
+[1;33m📝 Ejecutando: Verificar Persistencia - 5671e265-dc98-40fa-b375-e0ab84ab79cd[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
@@ -1884,7 +1652,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
   }
 }
 
-[1;33m📝 Ejecutando: Verificar Persistencia - 65fc7fab-1a07-4a00-912a-c845f911be60[0m
+[1;33m📝 Ejecutando: Verificar Persistencia - 27245e7e-068e-4a8c-a443-269815441920[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
@@ -1908,7 +1676,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
   }
 }
 
-[1;33m📝 Ejecutando: Verificar Persistencia - f031eca2-9b35-4e4f-ae2b-28d383575c9a[0m
+[1;33m📝 Ejecutando: Verificar Persistencia - ec89bb30-47a6-4a13-89a2-26653af78c07[0m
 [0;32m✅ Éxito:[0m
 {
   "data": {
@@ -1950,7 +1718,7 @@ Intentando inscribir al tercer usuario en el curso...[0m
 [0;32m🎉 Tests de Sincronización de Estado Completados![0m
 ==================================================
 [0;36mSala utilizada:[0m
-  🔄 Sala de Sincronización: sala_1756160223465_v8r2xaa5f
+  🔄 Sala de Sincronización: sala_1756314243369_pfbb4f87i
 
 [0;32m✅ Funcionalidades Probadas:[0m
   🔹 Inicialización de sincronización
@@ -1968,11 +1736,1433 @@ Intentando inscribir al tercer usuario en el curso...[0m
 
 [0;36m⏸️  Pausa de 3 segundos antes del siguiente test...[0m
 
+[1;37m🔒 ===============================================[0m
+[1;37m🔒 Ejecutando: Tests de Seguridad[0m
+[1;37m🔒 ===============================================[0m
+🔐 Pruebas de Seguridad GraphQL - Sistema E-Learning
+==================================================
+
+[1;33m1. Prueba sin autenticación (debería fallar para operaciones protegidas)[0m
+{
+  "errors": [
+    {
+      "message": "Forbidden resource",
+      "locations": [
+        {
+          "line": 1,
+          "column": 9
+        }
+      ],
+      "path": [
+        "cursosDisponibles"
+      ],
+      "extensions": {
+        "code": "FORBIDDEN",
+        "stacktrace": [
+          "ForbiddenException: Forbidden resource",
+          "    at canActivateFn (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-context-creator.js:157:23)",
+          "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
+          "    at async target (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-context-creator.js:73:31)",
+          "    at async Object.cursosDisponibles (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+        ],
+        "originalError": {
+          "message": "Forbidden resource",
+          "error": "Forbidden",
+          "statusCode": 403
+        }
+      }
+    }
+  ],
+  "data": null
+}
+
+[1;33m2. Prueba con token de estudiante[0m
+{
+  "data": {
+    "cursosDisponibles": [
+      {
+        "id": "41b2d079-66b9-4255-b25b-a74fc2f5326f",
+        "titulo": "Introducción a GraphQL",
+        "instructor": {
+          "nombreCompleto": "Ada Lovelace"
+        }
+      }
+    ]
+  }
+}
+
+[1;33m3. Prueba de creación de curso (solo instructores)[0m
+{
+  "data": {
+    "crearCurso": {
+      "id": "065f6aec-4458-4df0-889f-910bf225cefe",
+      "titulo": "Curso de Seguridad"
+    }
+  }
+}
+
+[1;33m4. Prueba de consulta compleja (análisis de complejidad)[0m
+{
+  "data": {
+    "cursos": [
+      {
+        "id": "41b2d079-66b9-4255-b25b-a74fc2f5326f",
+        "titulo": "Introducción a GraphQL",
+        "instructor": {
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
+          "nombreCompleto": "Ada Lovelace"
+        },
+        "lecciones": [
+          {
+            "id": "5f6c0f40-0637-48a9-8275-ce0750635f6a",
+            "titulo": "¿Qué es GraphQL?"
+          },
+          {
+            "id": "1cbc80c5-6799-4aa5-8dbf-1329df10d997",
+            "titulo": "Schemas y tipos"
+          },
+          {
+            "id": "c075694d-9d5f-4572-b1df-d5201bca1b58",
+            "titulo": "Resolvers y contexto"
+          },
+          {
+            "id": "97da6711-12d4-4aa1-9856-c70f579cc910",
+            "titulo": "Mutations"
+          }
+        ],
+        "estadisticas": {
+          "totalEstudiantes": 2,
+          "calificacionPromedio": 4.6
+        }
+      },
+      {
+        "id": "fa9f2e4e-2134-46c2-b592-a8cafa46e59f",
+        "titulo": "Introducción a React",
+        "instructor": {
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
+          "nombreCompleto": "Grace Hopper"
+        },
+        "lecciones": [
+          {
+            "id": "f15cd030-1f3e-4a55-aac5-5c26ed68b3d4",
+            "titulo": "Introducción a React"
+          },
+          {
+            "id": "aa2a4932-b05c-4daf-bc77-facc045a12f3",
+            "titulo": "Componentes"
+          },
+          {
+            "id": "d0366814-0ea6-4928-b7e2-cd5f6e95a4b5",
+            "titulo": "Hooks"
+          },
+          {
+            "id": "69e82614-eca8-4e37-a33b-738eac2f889f",
+            "titulo": "Estado"
+          }
+        ],
+        "estadisticas": {
+          "totalEstudiantes": 1,
+          "calificacionPromedio": 4.8
+        }
+      },
+      {
+        "id": "065f6aec-4458-4df0-889f-910bf225cefe",
+        "titulo": "Curso de Seguridad",
+        "instructor": {
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
+          "nombreCompleto": "Grace Hopper"
+        },
+        "lecciones": [],
+        "estadisticas": {
+          "totalEstudiantes": 0,
+          "calificacionPromedio": 0
+        }
+      }
+    ]
+  }
+}
+
+[1;33m5. Prueba de consulta muy profunda (debería fallar)[0m
+{
+  "data": {
+    "cursos": [
+      {
+        "instructor": {
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd"
+        },
+        "lecciones": [
+          {
+            "id": "5f6c0f40-0637-48a9-8275-ce0750635f6a"
+          },
+          {
+            "id": "1cbc80c5-6799-4aa5-8dbf-1329df10d997"
+          },
+          {
+            "id": "c075694d-9d5f-4572-b1df-d5201bca1b58"
+          },
+          {
+            "id": "97da6711-12d4-4aa1-9856-c70f579cc910"
+          }
+        ],
+        "estadisticas": {
+          "totalEstudiantes": 2
+        }
+      },
+      {
+        "instructor": {
+          "id": "27245e7e-068e-4a8c-a443-269815441920"
+        },
+        "lecciones": [
+          {
+            "id": "f15cd030-1f3e-4a55-aac5-5c26ed68b3d4"
+          },
+          {
+            "id": "aa2a4932-b05c-4daf-bc77-facc045a12f3"
+          },
+          {
+            "id": "d0366814-0ea6-4928-b7e2-cd5f6e95a4b5"
+          },
+          {
+            "id": "69e82614-eca8-4e37-a33b-738eac2f889f"
+          }
+        ],
+        "estadisticas": {
+          "totalEstudiantes": 1
+        }
+      },
+      {
+        "instructor": {
+          "id": "27245e7e-068e-4a8c-a443-269815441920"
+        },
+        "lecciones": [],
+        "estadisticas": {
+          "totalEstudiantes": 0
+        }
+      }
+    ]
+  }
+}
+
+[1;33m6. Prueba de introspection (debería funcionar en desarrollo)[0m
+[
+  {
+    "name": "Usuario"
+  },
+  {
+    "name": "ID"
+  },
+  {
+    "name": "String"
+  }
+]
+
+[0;32m✅ Pruebas completadas[0m
+
+[1;33m📊 Características implementadas:[0m
+• ✅ Autenticación JWT --dummy-- integrada
+• ✅ Autorización basada en roles (Estudiante, Instructor, Administrador)
+• ✅ Guards personalizados para GraphQL
+• ✅ Análisis de complejidad de consultas
+• ✅ Rate limiting inteligente
+• ✅ Protección contra consultas profundas
+• ✅ Logs de seguridad
+• ✅ Headers de rate limiting
+• ✅ Contexto seguro con validación de token
+• ✅ Permisos granulares por operación
+
+[0;32m✅ Tests de Seguridad completado exitosamente en 0s[0m
+
+[0;36m⏸️  Pausa de 3 segundos antes del siguiente test...[0m
+
+[1;37m📝 ===============================================[0m
+[1;37m📝 Ejecutando: Tests de Auditoria (logs)[0m
+[1;37m📝 ===============================================[0m
+🔐 Pruebas de Audit Logging - Sistema GraphQL E-Learning
+=======================================================
+
+[1;33m🔍 SISTEMA DE AUDIT LOGGING IMPLEMENTADO[0m
+===============================================
+✅ Registro de autenticación/autorización
+✅ Logging de acceso a datos sensibles
+✅ Audit de modificaciones (mutations)
+✅ Registro de violaciones de seguridad
+✅ Rate limiting con audit
+✅ Logs estructurados para compliance
+✅ Niveles de severidad (LOW, MEDIUM, HIGH, CRITICAL)
+✅ Filtrado y consulta de logs por administradores
+
+[0;34m🧪 INICIANDO PRUEBAS DE AUDIT LOGGING[0m
+=====================================
+
+[1;33m1. Prueba sin autenticación (generará audit log de fallo de auth)[0m
+{
+  "errors": [
+    {
+      "message": "Forbidden resource",
+      "locations": [
+        {
+          "line": 1,
+          "column": 9
+        }
+      ],
+      "path": [
+        "cursosDisponibles"
+      ],
+      "extensions": {
+        "code": "FORBIDDEN",
+        "stacktrace": [
+          "ForbiddenException: Forbidden resource",
+          "    at canActivateFn (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-context-creator.js:157:23)",
+          "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
+          "    at async target (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-context-creator.js:73:31)",
+          "    at async Object.cursosDisponibles (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+        ],
+        "originalError": {
+          "message": "Forbidden resource",
+          "error": "Forbidden",
+          "statusCode": 403
+        }
+      }
+    }
+  ],
+  "data": null
+}
+
+[1;33m2. Prueba con token de estudiante (access log)[0m
+{
+  "data": {
+    "cursos": [
+      {
+        "id": "41b2d079-66b9-4255-b25b-a74fc2f5326f",
+        "titulo": "Introducción a GraphQL",
+        "instructor": {
+          "nombreCompleto": "Ada Lovelace"
+        }
+      },
+      {
+        "id": "fa9f2e4e-2134-46c2-b592-a8cafa46e59f",
+        "titulo": "Introducción a React",
+        "instructor": {
+          "nombreCompleto": "Grace Hopper"
+        }
+      },
+      {
+        "id": "065f6aec-4458-4df0-889f-910bf225cefe",
+        "titulo": "Curso de Seguridad",
+        "instructor": {
+          "nombreCompleto": "Grace Hopper"
+        }
+      }
+    ]
+  }
+}
+
+[1;33m3. Prueba de operación sensible - creación de curso (audit detallado)[0m
+{
+  "data": {
+    "crearCurso": {
+      "id": "2db3a916-17cc-4041-85cc-d2b99ac42fce",
+      "titulo": "Curso de Seguridad GraphQL"
+    }
+  }
+}
+
+[1;33m4. Prueba de autorización fallida (audit de authorization failure)[0m
+{
+  "errors": [
+    {
+      "message": "Forbidden resource",
+      "locations": [
+        {
+          "line": 1,
+          "column": 12
+        }
+      ],
+      "path": [
+        "crearCurso"
+      ],
+      "extensions": {
+        "code": "FORBIDDEN",
+        "stacktrace": [
+          "ForbiddenException: Forbidden resource",
+          "    at canActivateFn (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-context-creator.js:157:23)",
+          "    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
+          "    at async target (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-context-creator.js:73:31)",
+          "    at async Object.crearCurso (/workspaces/QTOPS/graphql_and_apollo_server/day_4/node_modules/@nestjs/core/helpers/external-proxy.js:9:24)"
+        ],
+        "originalError": {
+          "message": "Forbidden resource",
+          "error": "Forbidden",
+          "statusCode": 403
+        }
+      }
+    }
+  ],
+  "data": null
+}
+
+[1;33m5. Prueba de query compleja (análisis de complejidad en audit)[0m
+{
+  "data": {
+    "cursos": [
+      {
+        "id": "41b2d079-66b9-4255-b25b-a74fc2f5326f",
+        "titulo": "Introducción a GraphQL",
+        "instructor": {
+          "id": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
+          "nombreCompleto": "Ada Lovelace"
+        },
+        "lecciones": [
+          {
+            "id": "5f6c0f40-0637-48a9-8275-ce0750635f6a",
+            "titulo": "¿Qué es GraphQL?"
+          },
+          {
+            "id": "1cbc80c5-6799-4aa5-8dbf-1329df10d997",
+            "titulo": "Schemas y tipos"
+          },
+          {
+            "id": "c075694d-9d5f-4572-b1df-d5201bca1b58",
+            "titulo": "Resolvers y contexto"
+          },
+          {
+            "id": "97da6711-12d4-4aa1-9856-c70f579cc910",
+            "titulo": "Mutations"
+          }
+        ],
+        "estadisticas": {
+          "totalEstudiantes": 2,
+          "calificacionPromedio": 4.6
+        }
+      },
+      {
+        "id": "fa9f2e4e-2134-46c2-b592-a8cafa46e59f",
+        "titulo": "Introducción a React",
+        "instructor": {
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
+          "nombreCompleto": "Grace Hopper"
+        },
+        "lecciones": [
+          {
+            "id": "f15cd030-1f3e-4a55-aac5-5c26ed68b3d4",
+            "titulo": "Introducción a React"
+          },
+          {
+            "id": "aa2a4932-b05c-4daf-bc77-facc045a12f3",
+            "titulo": "Componentes"
+          },
+          {
+            "id": "d0366814-0ea6-4928-b7e2-cd5f6e95a4b5",
+            "titulo": "Hooks"
+          },
+          {
+            "id": "69e82614-eca8-4e37-a33b-738eac2f889f",
+            "titulo": "Estado"
+          }
+        ],
+        "estadisticas": {
+          "totalEstudiantes": 1,
+          "calificacionPromedio": 4.8
+        }
+      },
+      {
+        "id": "065f6aec-4458-4df0-889f-910bf225cefe",
+        "titulo": "Curso de Seguridad",
+        "instructor": {
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
+          "nombreCompleto": "Grace Hopper"
+        },
+        "lecciones": [],
+        "estadisticas": {
+          "totalEstudiantes": 0,
+          "calificacionPromedio": 0
+        }
+      },
+      {
+        "id": "2db3a916-17cc-4041-85cc-d2b99ac42fce",
+        "titulo": "Curso de Seguridad GraphQL",
+        "instructor": {
+          "id": "27245e7e-068e-4a8c-a443-269815441920",
+          "nombreCompleto": "Grace Hopper"
+        },
+        "lecciones": [],
+        "estadisticas": {
+          "totalEstudiantes": 0,
+          "calificacionPromedio": 0
+        }
+      }
+    ]
+  }
+}
+
+[1;33m6. Prueba de consulta de audit logs (solo admin)[0m
+{
+  "data": {
+    "auditLogsRecientes": [
+      {
+        "id": "34db8c8a-02c3-470f-8026-770f5de81fbd",
+        "timestamp": "2025-08-27T17:04:20.176Z",
+        "eventType": "AUTHORIZATION",
+        "severity": "LOW",
+        "userId": "38fbd60d-1009-45ce-bec3-3c7799a5e482",
+        "operationName": "auditLogsRecientes",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "bcf1bb80-0465-44c0-b20c-bc66e2c7e6ba",
+        "timestamp": "2025-08-27T17:04:20.176Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": "38fbd60d-1009-45ce-bec3-3c7799a5e482",
+        "operationName": "auditLogsRecientes",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "700d64b0-6fc1-4efb-86ad-a691407d694e",
+        "timestamp": "2025-08-27T17:04:20.175Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "9f9d340d-baa4-422c-9f22-a2c7facb20fc",
+        "timestamp": "2025-08-27T17:04:20.165Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "8c6cd2df-2c86-43ba-be90-dca5dc10624d",
+        "timestamp": "2025-08-27T17:04:20.155Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "58ed3bfd-0113-477d-b41a-29e474720b0d",
+        "timestamp": "2025-08-27T17:04:20.155Z",
+        "eventType": "AUTHORIZATION",
+        "severity": "MEDIUM",
+        "userId": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
+        "operationName": "crearCurso",
+        "success": false,
+        "errorMessage": "Roles insuficientes. Requeridos: ADMINISTRADOR, INSTRUCTOR. Usuario tiene: ESTUDIANTE"
+      },
+      {
+        "id": "b60edb4b-2fe4-41ca-95f6-587fad015376",
+        "timestamp": "2025-08-27T17:04:20.145Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "ef1ca583-79e0-48a3-b070-cff46b5cced6",
+        "timestamp": "2025-08-27T17:04:20.145Z",
+        "eventType": "AUTHORIZATION",
+        "severity": "LOW",
+        "userId": "27245e7e-068e-4a8c-a443-269815441920",
+        "operationName": "crearCurso",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "9efcf5ed-420f-456b-af6f-8bcbb10a90cc",
+        "timestamp": "2025-08-27T17:04:20.134Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "6e11bd0b-81cb-4756-9b4e-40547947450b",
+        "timestamp": "2025-08-27T17:04:20.124Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "2deff80a-11ef-49a2-885d-c37577d7e5d0",
+        "timestamp": "2025-08-27T17:04:20.124Z",
+        "eventType": "AUTHORIZATION",
+        "severity": "MEDIUM",
+        "userId": null,
+        "operationName": "cursosDisponibles",
+        "success": false,
+        "errorMessage": "Usuario no autenticado"
+      },
+      {
+        "id": "779060c5-fc43-43be-a097-fdefb95e543f",
+        "timestamp": "2025-08-27T17:04:17.106Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "IntrospectionQuery",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "273502ee-4f61-47f1-8932-6666f57f145b",
+        "timestamp": "2025-08-27T17:04:17.096Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "fbcf8605-c4ef-4702-8d31-c5fcd89285bf",
+        "timestamp": "2025-08-27T17:04:17.085Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "020e8cd7-ad80-43a5-a5b4-fdcf36782307",
+        "timestamp": "2025-08-27T17:04:17.075Z",
+        "eventType": "AUTHORIZATION",
+        "severity": "LOW",
+        "userId": "27245e7e-068e-4a8c-a443-269815441920",
+        "operationName": "crearCurso",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "f4bfbb1b-7d2e-4a66-afc5-5230d0cd67b8",
+        "timestamp": "2025-08-27T17:04:17.074Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "baaa6ebf-ff7f-49a1-bdab-26243f4e6122",
+        "timestamp": "2025-08-27T17:04:17.064Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "93252271-1526-4b20-93ef-dee03f6e69bf",
+        "timestamp": "2025-08-27T17:04:17.064Z",
+        "eventType": "AUTHORIZATION",
+        "severity": "LOW",
+        "userId": "5671e265-dc98-40fa-b375-e0ab84ab79cd",
+        "operationName": "cursosDisponibles",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "19933e01-1ec0-48d1-8d6e-4feb7609246b",
+        "timestamp": "2025-08-27T17:04:17.054Z",
+        "eventType": "AUTHORIZATION",
+        "severity": "MEDIUM",
+        "userId": null,
+        "operationName": "cursosDisponibles",
+        "success": false,
+        "errorMessage": "Usuario no autenticado"
+      },
+      {
+        "id": "ccffcdb3-c22a-46e6-b44a-3423a7d56913",
+        "timestamp": "2025-08-27T17:04:17.053Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "7caeedb3-8503-48a9-b575-e543cbf79c48",
+        "timestamp": "2025-08-27T17:04:14.028Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "9b002c17-7009-4abd-bc15-97de8ce79824",
+        "timestamp": "2025-08-27T17:04:14.006Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "81dafdd7-c090-4a49-a555-c1bea526c693",
+        "timestamp": "2025-08-27T17:04:13.966Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "bb75a07d-7600-4fbd-b281-a9a22399866f",
+        "timestamp": "2025-08-27T17:04:13.920Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "62a360d3-94e9-4bf0-9fde-fc1a97e7bee3",
+        "timestamp": "2025-08-27T17:04:13.904Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "9ac8b780-e415-47f9-9038-0290bd08e7cc",
+        "timestamp": "2025-08-27T17:04:13.882Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "d8d0889b-2dc4-4d81-933c-55e91e7866f0",
+        "timestamp": "2025-08-27T17:04:13.860Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "244fea8c-db01-4d2f-9809-296d4bf18549",
+        "timestamp": "2025-08-27T17:04:12.835Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "78912194-09bc-4a66-ad69-57ff0ac11ce9",
+        "timestamp": "2025-08-27T17:04:12.813Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "334c93f2-8b12-4a43-b35e-2599bac06567",
+        "timestamp": "2025-08-27T17:04:11.785Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "df4100a3-a23e-4af2-b34d-4503e58d5c46",
+        "timestamp": "2025-08-27T17:04:11.733Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "88afedc7-5885-4455-aaba-e5b7ab04c949",
+        "timestamp": "2025-08-27T17:04:10.686Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "846e7631-28d6-46c4-94d2-efc9b2034c19",
+        "timestamp": "2025-08-27T17:04:10.663Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "5881f2bc-23db-49f3-959c-3a36a27c625d",
+        "timestamp": "2025-08-27T17:04:10.639Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "f76560d3-c994-4ab5-bfb2-cdc09febf94b",
+        "timestamp": "2025-08-27T17:04:10.616Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "b3a6fad1-9d40-4311-869c-215d6074f658",
+        "timestamp": "2025-08-27T17:04:10.594Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "7bea8b44-3a30-44e1-8f33-ffe7e1743e8b",
+        "timestamp": "2025-08-27T17:04:09.569Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "17f16bdb-d1a4-45ab-b288-caaa42ce9219",
+        "timestamp": "2025-08-27T17:04:08.545Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "e462e8d5-2867-4bdc-86df-c00170f2faae",
+        "timestamp": "2025-08-27T17:04:08.517Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "a0f77f9e-ac6f-4373-8d45-09f19a269dc1",
+        "timestamp": "2025-08-27T17:04:07.492Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "b1707793-b4a8-48d0-861c-596dcacaf4ac",
+        "timestamp": "2025-08-27T17:04:06.468Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "d04317ab-a07f-4254-8a13-0ca40a62fb06",
+        "timestamp": "2025-08-27T17:04:05.444Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "a522e938-4a6d-46df-9d4c-6f23ec04bd6e",
+        "timestamp": "2025-08-27T17:04:05.423Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "11dce19d-e8e0-4859-8cba-d2783ec9f156",
+        "timestamp": "2025-08-27T17:04:05.401Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "afd2ac0c-2893-49b2-a5fd-68ef0b96991f",
+        "timestamp": "2025-08-27T17:04:03.369Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "d051aac5-5940-4405-9064-759e77e3d96d",
+        "timestamp": "2025-08-27T17:04:03.345Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "0dae7e82-4fe6-4394-9ef0-a3313822b8f3",
+        "timestamp": "2025-08-27T17:04:00.309Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "8e931ced-2463-47f4-a686-aa0f206d7678",
+        "timestamp": "2025-08-27T17:04:00.292Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "7914293a-556f-495e-adba-b9eb57f3f746",
+        "timestamp": "2025-08-27T17:03:59.266Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "558e7196-3db1-4189-bd7d-e46c539ddd69",
+        "timestamp": "2025-08-27T17:03:58.234Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "a2406310-ee23-4352-b0fe-169ad20096c3",
+        "timestamp": "2025-08-27T17:03:57.194Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "8bc2c2f8-f79c-4345-b022-3dac2db985b4",
+        "timestamp": "2025-08-27T17:03:57.171Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "00c2825d-3229-4f9c-af90-f7d8027addd8",
+        "timestamp": "2025-08-27T17:03:57.149Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "7b3caac6-5fcf-4d1f-944e-30ba29f43723",
+        "timestamp": "2025-08-27T17:03:56.125Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "733587a2-0bd6-4f8b-a185-36fcab66c2a8",
+        "timestamp": "2025-08-27T17:03:56.109Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "470cb6f5-8514-4d5d-83cd-3ca298efc073",
+        "timestamp": "2025-08-27T17:03:56.089Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "e7acb905-feaa-412a-9692-44c79059f45b",
+        "timestamp": "2025-08-27T17:03:56.072Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "2512a857-4ab0-4475-b324-7c2c402c1412",
+        "timestamp": "2025-08-27T17:03:56.050Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "6c13eb76-3545-473e-828a-1668cb0e25eb",
+        "timestamp": "2025-08-27T17:03:56.025Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "4269d6e1-ec4b-4f2f-9a22-20eeae9e7068",
+        "timestamp": "2025-08-27T17:03:53.995Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "5e4d14ac-58fe-46b0-a749-b73a714074f3",
+        "timestamp": "2025-08-27T17:03:53.974Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "a991d970-5ba7-4ff0-be1c-13968c368575",
+        "timestamp": "2025-08-27T17:03:50.946Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "7a5778ff-c886-49d3-b3cf-77d533959286",
+        "timestamp": "2025-08-27T17:03:50.921Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "cc83510c-1cb7-4c57-98d7-6c9f1797f588",
+        "timestamp": "2025-08-27T17:03:50.884Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "6d041077-3406-48e9-b96a-85c4d4852020",
+        "timestamp": "2025-08-27T17:03:50.857Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "872a8adb-b839-4e96-8322-80faa565641e",
+        "timestamp": "2025-08-27T17:03:50.833Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "89c0af0b-6255-4b5c-9053-ba08c3266ea1",
+        "timestamp": "2025-08-27T17:03:50.810Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "5e8cf6a4-ba49-4581-8f60-890da905775c",
+        "timestamp": "2025-08-27T17:03:50.783Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "11dd8f44-31dd-4e16-829d-a3b40736dd87",
+        "timestamp": "2025-08-27T17:03:49.757Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "6a7c5acf-05c3-4256-9768-25a1a0367d09",
+        "timestamp": "2025-08-27T17:03:49.741Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "f63b780e-59a6-4144-af2e-7a7f948a2abb",
+        "timestamp": "2025-08-27T17:03:49.717Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "22a1b9b5-6710-4ba0-809c-169db2894a4f",
+        "timestamp": "2025-08-27T17:03:47.682Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "cd012f5a-a715-42da-a910-33054f1dbe9a",
+        "timestamp": "2025-08-27T17:03:45.661Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "ca3d5e78-3a94-4915-a654-3ade0fc7fcf0",
+        "timestamp": "2025-08-27T17:03:45.639Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "ea0bc204-429d-496d-a52b-d5a001b48cb7",
+        "timestamp": "2025-08-27T17:03:40.612Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "9a360fd3-b11e-44d7-9676-3017d4aa117e",
+        "timestamp": "2025-08-27T17:03:38.588Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "66f3052c-d0df-4877-b2fe-5b6066ea471d",
+        "timestamp": "2025-08-27T17:03:38.568Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "e3408aba-d6a1-4d70-99c2-970973d8aecb",
+        "timestamp": "2025-08-27T17:03:36.516Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "8a2d5e81-7179-4855-89f5-4f37c2be5049",
+        "timestamp": "2025-08-27T17:03:33.421Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "d023b12e-1ad1-42e9-a80b-3d63c05124dc",
+        "timestamp": "2025-08-27T17:03:31.396Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "2f0aaa2f-253d-471b-a5bf-6ffbd6a5246c",
+        "timestamp": "2025-08-27T17:03:29.365Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "21c728a2-268a-459d-b6b9-bfcf25188313",
+        "timestamp": "2025-08-27T17:03:27.339Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "2614cecd-f36a-4f65-a750-96a3eb8c1a61",
+        "timestamp": "2025-08-27T17:03:25.302Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "0b74959c-b334-48dd-a123-02e7a6827254",
+        "timestamp": "2025-08-27T17:03:23.277Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "27103845-494e-40c3-819f-393b1a55115a",
+        "timestamp": "2025-08-27T17:03:21.251Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "78579f2f-418f-4d84-9ccf-2069c3f3f52e",
+        "timestamp": "2025-08-27T17:03:18.223Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "7be1cac9-355f-48de-a380-78bd61421e54",
+        "timestamp": "2025-08-27T17:03:16.198Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "e80fdce8-78e9-4625-9e18-b09fc6d28d53",
+        "timestamp": "2025-08-27T17:03:14.172Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "70fdfb87-bd74-4566-99b4-6b6e483dfbf0",
+        "timestamp": "2025-08-27T17:03:12.145Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "7ce9d33d-421b-4505-ac43-b3e47f3aa016",
+        "timestamp": "2025-08-27T17:03:12.123Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      },
+      {
+        "id": "e3aafd50-5bd7-4a77-873e-9d6addce5953",
+        "timestamp": "2025-08-27T17:03:12.088Z",
+        "eventType": "DATA_ACCESS",
+        "severity": "LOW",
+        "userId": null,
+        "operationName": "Unknown",
+        "success": true,
+        "errorMessage": null
+      }
+    ]
+  }
+}
+
+[1;33m7. Múltiples requests para trigger rate limiting (audit de rate limit)[0m
+Request 1/5...
+Request 2/5...
+Request 3/5...
+Request 4/5...
+Request 5/5...
+
+[0;32m✅ Pruebas completadas[0m
+
+[0;34m📊 CARACTERÍSTICAS DEL SISTEMA DE AUDIT LOGGING:[0m
+================================================
+🔹 Tipos de eventos auditados:
+  • AUTHENTICATION - Intentos de login/validación de tokens
+  • AUTHORIZATION - Verificación de permisos y roles
+  • DATA_ACCESS - Acceso a datos (queries)
+  • DATA_MODIFICATION - Modificación de datos (mutations)
+  • SECURITY_VIOLATION - Violaciones de políticas de seguridad
+  • RATE_LIMIT - Exceso de límites de velocidad
+
+🔹 Información registrada:
+  • Usuario (ID, email, roles, sesión)
+  • Request (IP, User-Agent, operación GraphQL)
+  • Contexto (complejidad, profundidad de query)
+  • Resultados (éxito/fallo, códigos de error)
+  • Metadata específica por tipo de evento
+
+🔹 Niveles de severidad:
+  • LOW: Operaciones normales de lectura
+  • MEDIUM: Modificaciones, fallos de autorización
+  • HIGH: Violaciones de seguridad
+  • CRITICAL: Operaciones críticas del sistema
+
+🔹 Compliance y monitoreo:
+  • Logs estructurados en JSON
+  • Timestamps precisos
+  • Trazabilidad completa de operaciones
+  • Consulta de logs por administradores
+  • Alertas automáticas para eventos críticos
+
+[0;32m🎯 SISTEMA DE AUDIT LOGGING COMPLETAMENTE IMPLEMENTADO[0m
+
+[0;32m✅ Tests de Auditoria (logs) completado exitosamente en 0s[0m
+
+[0;36m⏸️  Pausa de 3 segundos antes del siguiente test...[0m
+
 [1;37m📊 RESUMEN DE TESTS[0m
 [1;37m===================[0m
-[0;32m✅ Tests Exitosos: 4[0m
+[0;32m✅ Tests Exitosos: 6[0m
 [0;31m❌ Tests Fallidos: 0[0m
-[0;34m📈 Total Ejecutados: 4[0m
+[0;34m📈 Total Ejecutados: 6[0m
 
 [0;32m🎉 ¡TODOS LOS TESTS PASARON EXITOSAMENTE![0m
 [0;32m🚀 El sistema de chat extendido está funcionando perfectamente[0m
@@ -2002,6 +3192,20 @@ Intentando inscribir al tercer usuario en el curso...[0m
   🏠 nuevoMensajeSala, usuarioUnidoSala, usuarioAbandonoSala
   🎤 mensajeVozReproduccion
   🔄 sincronizacionEstado, eventosPendientes
+
+[0;36mNuevos guardrails:[0m
+  🔒 Validación de permisos en resolvers
+  📊 Análisis de complejidad de consultas
+  ⏱️ Rate limiting por usuario
+
+[0;36mLogs de auditoria:[0m
+  📝 Registro de autenticación/autorización
+  📝 Logging de acceso a datos sensibles
+  📝 Audit de modificaciones (mutations)
+  📝 Rate limiting con audit
+  📝 Logs estructurados para compliance
+  📝 Niveles de severidad (LOW, MEDIUM, HIGH, CRITICAL)
+  📝 Filtrado y consulta de logs por administradores
 
 [1;37m🏁 Test Suite Completado[0m
 [1;37m========================[0m

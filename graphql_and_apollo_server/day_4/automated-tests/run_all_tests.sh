@@ -111,6 +111,7 @@ tests=(
     "Tests de Mensajes de Voz|$SCRIPT_DIR/test_mensajes_voz.sh|🎤"
     "Tests de Sincronización|$SCRIPT_DIR/test_sincronizacion.sh|🔄"
     "Tests de Seguridad|$SCRIPT_DIR/test_security.sh|🔒"
+    "Tests de Auditoria (logs)|$SCRIPT_DIR/test_audit_logging.sh|📝"
 )
 
 echo -e "\n${BLUE}🏃 Iniciando ejecución de ${#tests[@]} suites de tests...${NC}"
@@ -178,6 +179,15 @@ echo -e "\n${CYAN}Nuevos guardrails:${NC}"
 echo -e "  🔒 Validación de permisos en resolvers"
 echo -e "  📊 Análisis de complejidad de consultas"
 echo -e "  ⏱️ Rate limiting por usuario"
+
+echo -e "\n${CYAN}Logs de auditoria:${NC}"
+echo -e "  📝 Registro de autenticación/autorización"
+echo -e "  📝 Logging de acceso a datos sensibles"
+echo -e "  📝 Audit de modificaciones (mutations)"
+echo -e "  📝 Rate limiting con audit"
+echo -e "  📝 Logs estructurados para compliance"
+echo -e "  📝 Niveles de severidad (LOW, MEDIUM, HIGH, CRITICAL)"
+echo -e "  📝 Filtrado y consulta de logs por administradores"
 
 echo -e "\n${WHITE}🏁 Test Suite Completado${NC}"
 echo -e "${WHITE}========================${NC}"

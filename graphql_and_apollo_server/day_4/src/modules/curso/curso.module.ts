@@ -24,8 +24,10 @@ import { CursoNotificationResolver } from "./graphql/resolvers/notifications/cur
 import { SalaPrivadaNotificacionResolver } from "./graphql/resolvers/chat/sala-privada-notificacion.resolver";
 
 import { JwtModule } from '@nestjs/jwt';
+import { AuditResolver } from "./graphql/resolvers/audit.resolver";
 import { GraphQLRoleGuard } from "./graphql/guards/graphql-role.guard";
 import { GraphQLAuthService } from "./services/security/graphql-auth.service";
+import { AuditLoggingService } from "./services/security/audit-logging.service";
 import { GraphQLSecurityService } from "./services/security/graphql-security.service";
 import { GraphQLRateLimitService } from "./services/security/graphql-rate-limit.service";
 import { GraphQLSecurityMiddleware } from "./services/security/graphql-security-middleware.service";
@@ -68,6 +70,8 @@ import { GraphQLSecurityMiddleware } from "./services/security/graphql-security-
         GraphQLSecurityService,
         GraphQLRateLimitService,
         GraphQLSecurityMiddleware,
+        AuditLoggingService,
+        AuditResolver,
     ],
     exports: [
         ChatService,
@@ -85,6 +89,7 @@ import { GraphQLSecurityMiddleware } from "./services/security/graphql-security-
 
         // Servicios de seguridad
         GraphQLAuthService,
+        AuditLoggingService,
         GraphQLSecurityService,
         GraphQLRateLimitService,
         GraphQLSecurityMiddleware,

@@ -216,6 +216,40 @@ type InscripcionNotificacion {
   timestamp: String!
 }
 
+type AuditLog {
+  id: String!
+  timestamp: DateTime!
+  eventType: AuditEventType!
+  severity: AuditSeverity!
+  userId: String
+  userEmail: String
+  userRoles: [String!]
+  ip: String!
+  operationName: String
+  operationType: String
+  success: Boolean!
+  errorMessage: String
+  resourceType: String
+  resourceId: String
+}
+
+enum AuditEventType {
+  RATE_LIMIT
+  DATA_ACCESS
+  ADMIN_ACTION
+  AUTHORIZATION
+  AUTHENTICATION
+  DATA_MODIFICATION
+  SECURITY_VIOLATION
+}
+
+enum AuditSeverity {
+  LOW
+  HIGH
+  MEDIUM
+  CRITICAL
+}
+
 type Query {
   obtenerMensajesCurso(obtenerMensajesInput: ObtenerMensajesInput!): [MensajeChat!]!
   obtenerEstadoCurso(cursoId: String!, usuarioId: String!): [EstadoUsuario!]!
@@ -232,6 +266,8 @@ type Query {
   progresoMultiple(consultas: [ProgresoInput!]!): [ProgresoEstudiante!]!
   obtenerSalasUsuario(usuarioId: String!): [SalaPrivada!]!
   obtenerMensajesSala(obtenerMensajesInput: ObtenerMensajesSalaInput!): [MensajeChat!]!
+  auditLogs(filter: AuditLogFilter): [AuditLog!]!
+  auditLogsRecientes: [AuditLog!]!
 }
 
 input ObtenerMensajesInput {
@@ -252,6 +288,15 @@ input ObtenerMensajesSalaInput {
   limite: Float! = 50
   offset: Float! = 0
   desdeTimestamp: DateTime
+}
+
+input AuditLogFilter {
+  userId: String
+  eventType: AuditEventType
+  severity: AuditSeverity
+  startDate: DateTime
+  endDate: DateTime
+  success: Boolean
 }
 
 type Mutation {

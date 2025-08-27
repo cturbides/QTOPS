@@ -10,6 +10,7 @@ import { EstadoUsuario } from "@modules/curso/entities/chat/estado-usuario.type"
 import { mockHistorialEstudiante } from "./mock/historial-estudiante.entity.mock";
 import { SincronizacionEstado } from "@modules/curso/entities/chat/sincronizacion-estado.entity";
 import { IConnectionInfo } from "@modules/curso/services/interfaces/websocket/connection-info.interface";
+import { AuditLogEntry } from "@modules/curso/entities/audit/audit-log.entity";
 
 // Dummy data source
 export const dataSource = {
@@ -57,4 +58,7 @@ export const dataSource = {
 
     // Security
     rateLimitStorage: new Map<string, any>(),
+    
+    // Audit Logging
+    auditLogs: [] as AuditLogEntry[],
 }
