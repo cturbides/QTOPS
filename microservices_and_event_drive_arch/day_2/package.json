@@ -5,16 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nest start --watch",
     "dev:consul": "docker compose up consul -d",
-    "start:dev": "nest start --watch",
-    "health:curl": "curl -s localhost:${PORT:-3000}/health | jq .",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "start:dev:api-gateway": "nest start --watch api-gateway",
     "migration:create": "npm run typeorm -- migration:create",
-    "migration:run": "npm run typeorm -- migration:run -d src/config/database.ts",
-    "seed:run": "ts-node -r tsconfig-paths/register src/database/seeders/index.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d src/config/database.ts",
-    "migration:generate": "npm run typeorm -- migration:generate -d src/config/database.ts"
+    "health:curl": "curl -s localhost:${PORT:-3000}/health | jq .",
+    "start:dev:curso-completo": "nest start --watch curso-completo-ms",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "migration:run": "npm run typeorm -- migration:run -d apps/curso-completo-ms/src/database/config/database.ts",
+    "seed:run": "ts-node -r tsconfig-paths/register apps/curso-completo-ms/src/database/seeders/index.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d apps/curso-completo-ms/src/database/config/database.ts",
+    "migration:generate": "npm run typeorm -- migration:generate -d apps/curso-completo-ms/src/database/config/database.ts"
   },
   "keywords": [],
   "author": "",
@@ -61,6 +61,7 @@
     "@types/uuid": "^9.0.7",
     "jest": "^30.0.5",
     "testcontainers": "^11.5.1",
-    "ts-jest": "^29.4.0"
+    "ts-jest": "^29.4.0",
+    "ts-loader": "^9.5.4"
   }
 }

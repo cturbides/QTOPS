@@ -1,34 +1,39 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
     "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "outDir": "./dist",
+    "declaration": true,
+    "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
     "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@tests/*": ["tests/*"],
-      "@config/*": ["src/config/*"],
-      "@modules/*": ["src/modules/*"],
-      "@cache/*": ["src/modules/cache/*"],
-      "@health/*": ["src/modules/health/*"],
-      "@performance/*": ["src/modules/performance/*"],
-      "@curso-completo/*": ["src/modules/curso-completo/*"]
+      "@api-gateway/*": ["apps/api-gateway/src/*"],
+      "@curso-completo/*": ["apps/curso-completo-ms/src/*"],
+      "@shared-modules/*": ["apps/shared-modules/*"],
+      "@cache/*": ["apps/shared-modules/cache/*"],
+      "@health/*": ["apps/shared-modules/health/*"],
+      "@performance/*": ["apps/shared-modules/performance/*"],
+      "@service-discovery/*": ["apps/shared-modules/service-discovery/*"]
     }
   },
   "include": [
-    "src/**/*",
-    "tests/**/*"
+    "apps/**/*"
   ],
   "exclude": [
     "node_modules",
-    "dist"
-  ],
-  "ts-node": {
-    "files": true
-  }
+    "dist",
+    "test",
+    "**/*spec.ts"
+  ]
 }

@@ -1,11 +1,16 @@
 services:
   consul:
-    image: consul:1.15.0
+    image: hashicorp/consul:1.18
     container_name: consul
     restart: always
     ports:
       - "8500:8500"
-    command: consul agent -dev -client=0.0.0.0 -ui
+    command: ["agent", "-dev", "-client=0.0.0.0"]
+    healthcheck:
+      test: ["CMD", "wget", "-q", "http://localhost:8500/v1/status/leader", "-O", "-"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
 
   postgres:
     image: postgres:15
