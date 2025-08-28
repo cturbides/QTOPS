@@ -10,15 +10,18 @@ import { DetalleCurso } from '@curso-completo/entities/detalle-curso.entity';
 import { CursoCompleto } from '@curso-completo/entities/curso-completo.entity';
 import { LeccionCompleta } from '@curso-completo/entities/leccion-completa.entity';
 import { CursoCompletoService } from '@curso-completo/services/curso-completo.service';
+import { ServiceDiscoveryModule } from '@modules/service-discovery/service-discovery.module';
 import { CursoCompletoController } from '@curso-completo/controllers/curso-completo.controller';
+import { CursoDiscoveryController } from '@curso-completo/controllers/curso-discovery.controller';
 import { DatabasePerformanceInterceptor } from '@performance/interceptors/database.interceptor';
 
 @Module({
     exports: [CursoCompletoService],
-    controllers: [CursoCompletoController],
+    controllers: [CursoCompletoController, CursoDiscoveryController],
     imports: [
         CacheModule.register(cacheModuleOptions),
-        TypeOrmModule.forFeature([CursoCompleto, DetalleCurso, LeccionCompleta, Etiqueta, Instructor, Evaluacion])
+        TypeOrmModule.forFeature([CursoCompleto, DetalleCurso, LeccionCompleta, Etiqueta, Instructor, Evaluacion]),
+        ServiceDiscoveryModule
     ],
     providers: [
         {

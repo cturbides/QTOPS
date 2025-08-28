@@ -1,5 +1,5 @@
-import { ELearningServiceRegistry } from '../services/e-learning-registry.service';
-import { EducationalService } from '../interfaces/service-discovery.interfaces';
+import { EducationalService } from '@modules/service-discovery/interfaces/service-discovery.interfaces';
+import { ELearningServiceRegistry } from '@modules/service-discovery/services/e-learning-registry.service';
 
 export async function registerServiceWithConsul(
   registry: ELearningServiceRegistry,
@@ -16,6 +16,7 @@ export async function registerServiceWithConsul(
     rateLimitPerMinute: Number(process.env.SERVICE_RATE_LIMIT_PER_MINUTE || 600)
   };
   
+  console.log(`Registering service with config:`, JSON.stringify(self, null, 2));
   await registry.registrarServicioEducativo(self);
   console.log(`Service ${self.tipo} registered with Consul successfully`);
 }

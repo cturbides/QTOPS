@@ -1,6 +1,6 @@
-import { Injectable, Logger } from '@nestjs/common';
 import consul from 'consul';
-import { DEFAULT_CONSUL_HOST, DEFAULT_CONSUL_PORT } from '../constants/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { DEFAULT_CONSUL_HOST, DEFAULT_CONSUL_PORT } from '@modules/service-discovery/constants/common';
 
 @Injectable()
 export class ConsulService {

@@ -1,11 +1,10 @@
 // Service Discovery Constants
-
 export const DEFAULT_TTL_PER_MSG: number = 5000; // 5 seconds
 export const DEFAULT_CONSUL_HOST: string = 'localhost';
 export const DEFAULT_CONSUL_PORT: number = 8500;
 
 // Health Check Constants
-export const DATABASE_CONNECTION_CHECK_NAME: string = 'data-base-connection';
+export const DATABASE_CONNECTION_CHECK_NAME: string = 'database-connection';
 export const COURSE_CONTENT_ACCESSIBILITY_CHECK_NAME: string = 'course-content-accessibility';
 
 // Service Types
