@@ -3,8 +3,11 @@
   "compilerOptions": {
     "declaration": false,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["../../shared/*"]
+    }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "../../shared/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
 }

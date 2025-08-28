@@ -5,12 +5,12 @@ import { IntelligentLoadBalancer } from '@shared/modules/service-discovery/servi
 import { CircuitBreakerWrapper } from '@shared/modules/service-discovery/services/circuit-breaker-wrapper.service';
 import axios from 'axios';
 
-@Controller('cursos')
-export class CursoCompletoProxyController {
+@Controller('curso-completo')
+export class CursoDiscoveryProxyController {
   constructor(
     private readonly consul: ConsulService,
     private readonly lb: IntelligentLoadBalancer,
-    private readonly cb: CircuitBreakerWrapper, // usa el circuit breaker actual
+    private readonly cb: CircuitBreakerWrapper,
   ) {}
 
   @All('*')
@@ -27,10 +27,9 @@ export class CursoCompletoProxyController {
         });
       }
 
-      const target = this.lb.pick(instances); // { address, port }
-      const targetUrl = `http://${target.address}:${target.port}/cursos${req.path}`;
+      const target = this.lb.pick(instances);
+      const targetUrl = `http://${target.address}:${target.port}/curso-completo${req.path}`;
 
-      // Ejecuta la llamada HTTP a través del Circuit Breaker
       const response = await this.cb.execute(
         process.env.CURSO_COMPLETO_SERVICE_NAME || 'curso-completo',
         async () =>
@@ -39,7 +38,7 @@ export class CursoCompletoProxyController {
             method: req.method as any,
             headers: { ...req.headers, host: undefined },
             data: ['GET', 'HEAD'].includes(req.method) ? undefined : req.body,
-            validateStatus: () => true, // permitir cualquier status
+            validateStatus: () => true,
           }),
       );
 
@@ -56,4 +55,3 @@ export class CursoCompletoProxyController {
     }
   }
 }
-
