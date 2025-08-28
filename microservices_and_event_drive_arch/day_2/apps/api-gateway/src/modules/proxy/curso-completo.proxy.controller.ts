@@ -28,7 +28,9 @@ export class CursoCompletoProxyController {
       }
 
       const target = this.lb.pick(instances); // { address, port }
-      const targetUrl = `http://${target.address}:${target.port}/cursos${req.path}`;
+      const targetUrl = `http://${target.address}:${target.port}${req.originalUrl}`;
+
+      console.log(`Proxying ${req.method} ${req.originalUrl} -> ${targetUrl}`);
 
       // Ejecuta la llamada HTTP a través del Circuit Breaker
       const response = await this.cb.execute(

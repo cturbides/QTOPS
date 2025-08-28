@@ -15,6 +15,9 @@ async function bootstrap() {
 
     const port = Number(process.env.CURSO_COMPLETO_PORT || 3002);
 
+    process.env.SERVICE_NAME = process.env.CURSO_COMPLETO_SERVICE_NAME || 'course-service';
+    process.env.SERVICE_PORT = port.toString();
+
     const registry = app.get(ELearningServiceRegistry);
     registerServiceWithConsul(registry, port);
 

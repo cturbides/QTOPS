@@ -28,7 +28,9 @@ export class CursoDiscoveryProxyController {
       }
 
       const target = this.lb.pick(instances);
-      const targetUrl = `http://${target.address}:${target.port}/curso-completo${req.path}`;
+      const targetUrl = `http://${target.address}:${target.port}${req.originalUrl}`;
+
+      console.log(`Proxying ${req.method} ${req.originalUrl} -> ${targetUrl}`);
 
       const response = await this.cb.execute(
         process.env.CURSO_COMPLETO_SERVICE_NAME || 'curso-completo',

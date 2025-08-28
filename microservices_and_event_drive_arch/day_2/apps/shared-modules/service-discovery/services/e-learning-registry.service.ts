@@ -60,12 +60,20 @@ export class ELearningServiceRegistry {
         `version:${servicio.version}`,
         `domain:${servicio.dominio}`,
         `capacity:${servicio.capacidadMaxima}`,
+        // Agregar versiones de API soportadas
+        'version:v1',
+        'version:v2',
+        'v:v1',
+        'v:v2',
         ...servicio.capacidades
       ],
       meta: {
         dominio: servicio.dominio,
         capacidadMaxima: servicio.capacidadMaxima.toString(),
-        rateLimitPerMinute: servicio.rateLimitPerMinute.toString()
+        rateLimitPerMinute: servicio.rateLimitPerMinute.toString(),
+        // Metadata adicional para versiones de API
+        supportedApiVersions: 'v1,v2',
+        defaultApiVersion: 'v1'
       }
     };
 

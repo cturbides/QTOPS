@@ -51,10 +51,16 @@ export class ConsulService {
         passing: true
       });
       
-      return (result as any[])[1]?.map((entry: any) => ({
+      const services = Array.isArray(result) ? result : [];
+      
+      return services.map((entry: any) => ({
         address: entry.Service.Address || entry.Node.Address,
-        port: entry.Service.Port
-      })) || [];
+        port: entry.Service.Port,
+        id: entry.Service.ID,
+        tags: entry.Service.Tags || [],
+        meta: entry.Service.Meta || {},
+        healthy: true
+      }));
     } catch (error) {
       this.logger.warn(`Failed to get healthy services for ${serviceName}:`, error);
       return [];

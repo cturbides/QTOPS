@@ -12,14 +12,25 @@ import { LeccionCompleta } from './entities/leccion-completa.entity';
 import { CursoCompletoService } from './services/curso-completo.service';
 import { CursoCompletoController } from './controllers/curso-completo.controller';
 import { CursoDiscoveryController } from './controllers/curso-discovery.controller';
+import { CursoCompletoV2Controller } from './controllers/curso-completo-v2.controller';
+import { CursoDiscoveryV2Controller } from './controllers/curso-discovery-v2.controller';
 import { DatabasePerformanceInterceptor } from '@performance/interceptors/database.interceptor';
+import { VersioningModule } from '@shared-modules/versioning/versioning.module';
 
 @Module({
     exports: [CursoCompletoService],
-    controllers: [CursoCompletoController, CursoDiscoveryController],
+    controllers: [
+        // V1 Controllers (original)
+        CursoCompletoController, 
+        CursoDiscoveryController,
+        // V2 Controllers (new)
+        CursoCompletoV2Controller,
+        CursoDiscoveryV2Controller,
+    ],
     imports: [
         CacheModule.register(cacheModuleOptions),
         TypeOrmModule.forFeature([CursoCompleto, DetalleCurso, LeccionCompleta, Etiqueta, Instructor, Evaluacion]),
+        VersioningModule,
     ],
     providers: [
         {
