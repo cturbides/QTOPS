@@ -1,24 +1,27 @@
+import { v4 as uuid } from 'uuid';
+import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
-import { v4 as uuid } from 'uuid';
 import { ConsulService } from './consul.service';
+import { CircuitBreakerWrapper } from './circuit-breaker-wrapper.service';
 import { IntelligentLoadBalancer } from './intelligent-load-balancer.service';
-import { EducationalService, ServiceConfig } from '../interfaces/service-discovery.interfaces';
-import { ServiceCommunicationException } from '../exceptions/service-communication.exception';
-import { 
-  DATABASE_CONNECTION_CHECK_NAME, 
+import { DEFAULT_CIRCUIT_BREAKER_CONFIG } from '@modules/service-discovery/constants/circuit-breaker.constants';
+import { ServiceCommunicationException } from '@modules/service-discovery/exceptions/service-communication.exception';
+import { EducationalService, ServiceConfig } from '@modules/service-discovery/interfaces/service-discovery.interfaces';
+import {
+  ServiceType,
+  DATABASE_CONNECTION_CHECK_NAME,
   COURSE_CONTENT_ACCESSIBILITY_CHECK_NAME,
-  ServiceType 
-} from '../constants/common';
+} from '@modules/service-discovery/constants/common';
 
 @Injectable()
 export class ELearningServiceRegistry {
   constructor(
+    private readonly http: HttpService,
     private readonly consul: ConsulService,
     private readonly loadBalancer: IntelligentLoadBalancer,
-    private readonly http: HttpService
-  ) {}
+    private readonly circuitBreakerWrapper: CircuitBreakerWrapper
+  ) { }
 
   private generateRequestId() { return uuid(); }
 
@@ -27,14 +30,14 @@ export class ELearningServiceRegistry {
     await this.consul.registerService({
       id,
       name: config.name,
-      address: config.host,
       port: config.port,
       tags: config.tags,
       meta: config.meta,
+      address: config.host,
       check: {
-        http: `http://${config.host}:${config.port}/health`,
-        interval: '10s',
         timeout: '5s',
+        interval: '10s',
+        http: `http://${config.host}:${config.port}/health`,
         deregistercriticalserviceafter: '30s'
       }
     });
@@ -67,29 +70,41 @@ export class ELearningServiceRegistry {
     operacion: string,
     payload?: any
   ): Promise<T> {
-    const instancia = await this.loadBalancer.seleccionarInstancia(tipoServicio);
-    try {
-      const startTime = Date.now();
-      const response = await firstValueFrom(this.http.post<T>(
-        `http://${instancia.address}:${instancia.port}/${operacion}`,
-        payload,
-        {
-          timeout: 5000,
-          headers: {
-            'X-Service-Request-ID': this.generateRequestId(),
-            'X-Source-Service': process.env.SERVICE_NAME || 'unknown'
-          }
+    return this.circuitBreakerWrapper.execute(
+      tipoServicio,
+      async () => {
+        const instancia = await this.loadBalancer.seleccionarInstancia(tipoServicio);
+
+        try {
+          const startTime = Date.now();
+
+          const response = await firstValueFrom(this.http.post<T>(
+            `http://${instancia.address}:${instancia.port}/${operacion}`,
+            payload,
+            {
+              timeout: 5000,
+              headers: {
+                'X-Service-Request-ID': this.generateRequestId(),
+                'X-Source-Service': process.env.SERVICE_NAME || 'unknown'
+              }
+            }
+          ));
+
+          const responseTime = Date.now() - startTime;
+
+          await this.registrarMetricasExito(instancia.id, responseTime);
+
+          return response.data;
+        } catch (error: any) {
+          await this.registrarMetricasError(instancia.id, error);
+
+          throw new ServiceCommunicationException(
+            `Error comunicándose con ${tipoServicio}: ${error.message}`
+          );
         }
-      ));
-      const responseTime = Date.now() - startTime;
-      await this.registrarMetricasExito(instancia.id, responseTime);
-      return response.data;
-    } catch (error: any) {
-      await this.registrarMetricasError(instancia.id, error);
-      throw new ServiceCommunicationException(
-        `Error comunicándose con ${tipoServicio}: ${error.message}`
-      );
-    }
+      },
+      DEFAULT_CIRCUIT_BREAKER_CONFIG,
+    );
   }
 
   private async configurarHealthChecksEducativos(servicio: EducationalService): Promise<void> {
@@ -123,5 +138,33 @@ export class ELearningServiceRegistry {
 
   private async registrarMetricasError(instanceId: string, error: any): Promise<void> {
     await this.loadBalancer.registrarError(instanceId);
+  }
+
+  /**
+   * Obtiene el estado del circuit breaker para un servicio
+   */
+  getCircuitBreakerState(serviceName: string) {
+    return this.circuitBreakerWrapper.getCircuitState(serviceName);
+  }
+
+  /**
+   * Obtiene las métricas del circuit breaker para un servicio
+   */
+  getCircuitBreakerMetrics(serviceName: string) {
+    return this.circuitBreakerWrapper.getMetrics(serviceName);
+  }
+
+  /**
+   * Obtiene todas las métricas de circuit breakers
+   */
+  getAllCircuitBreakerMetrics() {
+    return this.circuitBreakerWrapper.getAllMetrics();
+  }
+
+  /**
+   * Restablece el circuit breaker de un servicio
+   */
+  resetCircuitBreaker(serviceName: string) {
+    return this.circuitBreakerWrapper.reset(serviceName);
   }
 }
