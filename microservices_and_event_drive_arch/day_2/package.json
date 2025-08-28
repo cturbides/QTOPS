@@ -14,7 +14,10 @@
     "migration:run": "npm run typeorm -- migration:run -d src/config/database.ts",
     "seed:run": "ts-node -r tsconfig-paths/register src/database/seeders/index.ts",
     "migration:revert": "npm run typeorm -- migration:revert -d src/config/database.ts",
-    "migration:generate": "npm run typeorm -- migration:generate -d src/config/database.ts"
+    "migration:generate": "npm run typeorm -- migration:generate -d src/config/database.ts",
+    "build-ms": "npm run build --prefix apps/api-gateway && npm run build --prefix apps/curso-completo-ms",
+    "start-ms": "docker-compose up --build",
+    "test-ms": "npm run test --prefix apps/api-gateway && npm run test --prefix apps/curso-completo-ms"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,44 @@
+{
+  "name": "curso-completo-ms",
+  "version": "1.0.0",
+  "description": "Curso Completo Microservice",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "start:dev": "nest start --watch",
+    "build": "nest build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nestjs/cache-manager": "^3.0.1",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/mapped-types": "^2.1.0",
+    "@nestjs/platform-express": "^11.1.6",
+    "@nestjs/terminus": "^11.0.0",
+    "@nestjs/typeorm": "^11.0.0",
+    "cache-manager": "^7.1.1",
+    "cache-manager-ioredis": "^2.1.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "consul": "^0.40.0",
+    "dotenv": "^17.2.1",
+    "ioredis": "^5.7.0",
+    "pg": "^8.16.3",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "typeorm": "^0.3.26",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.10",
+    "@nestjs/testing": "^11.1.6",
+    "@types/consul": "^0.40.3",
+    "@types/node": "^24.1.0",
+    "@types/pg": "^8.15.5",
+    "@types/uuid": "^9.0.7",
+    "jest": "^30.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

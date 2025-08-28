@@ -1,0 +1,33 @@
+{
+  "name": "api-gateway",
+  "version": "1.0.0",
+  "description": "API Gateway for microservices architecture",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "node dist/main.js",
+    "start:dev": "nest start --watch",
+    "build": "nest build",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@nestjs/axios": "^3.1.2",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/platform-express": "^11.1.6",
+    "@nestjs/terminus": "^11.0.0",
+    "axios": "^1.6.2",
+    "consul": "^0.40.0",
+    "dotenv": "^17.2.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.10",
+    "@nestjs/testing": "^11.1.6",
+    "@types/consul": "^0.40.3",
+    "@types/node": "^24.1.0",
+    "jest": "^30.0.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
