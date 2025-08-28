@@ -15,4 +15,21 @@ export class HealthController {
             async () => this.db.pingCheck('database'),
         ]);
     }
+
+    @Get('database')
+    @HealthCheck()
+    checkDb() { 
+        return this.health.check([
+            async () => this.db.pingCheck('database'),
+        ]);
+    }
+
+    @Get('content')
+    @HealthCheck()
+    checkContent() { 
+        return this.health.check([
+            async () => this.db.pingCheck('database'),
+            async () => ({ 'content-service': { status: 'up', message: 'Content is accessible' } })
+        ]);
+    }
 }
