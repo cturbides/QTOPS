@@ -1,8 +1,8 @@
 import { Controller, All, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ConsulService } from '@shared/modules/service-discovery/services/consul.service';
-import { IntelligentLoadBalancer } from '@shared/modules/service-discovery/services/intelligent-load-balancer.service';
-import { CircuitBreakerWrapper } from '@shared/modules/service-discovery/services/circuit-breaker-wrapper.service';
+import { ConsulService } from '../service-discovery/services/consul.service';
+import { IntelligentLoadBalancer } from '../service-discovery/services/intelligent-load-balancer.service';
+import { CircuitBreakerWrapper } from '../service-discovery/services/circuit-breaker-wrapper.service';
 import axios from 'axios';
 
 @Controller('curso-completo')

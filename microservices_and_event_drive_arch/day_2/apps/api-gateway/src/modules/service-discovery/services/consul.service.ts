@@ -51,7 +51,7 @@ export class ConsulService {
         passing: true
       });
       
-      return result[1]?.map((entry: any) => ({
+      return (result as any[])[1]?.map((entry: any) => ({
         address: entry.Service.Address || entry.Node.Address,
         port: entry.Service.Port
       })) || [];
