@@ -3,23 +3,24 @@ import Consul from 'consul';
 
 @Injectable()
 export class ConsulClient {
-  private consul: Consul;
+  private consul: any;
   private readonly logger = new Logger(ConsulClient.name);
 
   constructor() {
     const consulUrl = process.env.CONSUL_HTTP_ADDR?.replace('http://', '') || 'consul:8500';
-    const [host, port] = consulUrl.split(':');
+    const [host, portStr] = consulUrl.split(':');
+    const port = parseInt(portStr) || 8500;
     
-    this.consul = new Consul({ 
+    this.consul = Consul({ 
       host: host || 'consul', 
-      port: parseInt(port) || 8500,
+      port: port.toString(),
       promisify: true 
     });
     
     this.logger.log(`Consul client initialized for ${host}:${port}`);
   }
 
-  getConsul(): Consul {
+  getConsul(): any {
     return this.consul;
   }
 }

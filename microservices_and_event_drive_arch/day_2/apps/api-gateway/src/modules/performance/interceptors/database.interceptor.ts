@@ -1,6 +1,6 @@
 import { Observable, tap } from "rxjs";
-import { IMetric } from "@performance/interfaces/metric.interface";
-import { DEFAULT_PERFORMANCE_SLOW_QUERY_DURATION } from "@performance/constants/common";
+import { IMetric } from "../performance/interfaces/metric.interface";
+import { DEFAULT_PERFORMANCE_SLOW_QUERY_DURATION } from "../performance/constants/common";
 import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor } from "@nestjs/common";
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
-import { Evaluacion } from '@curso-completo/entities/evaluacion.entity';
-import { CursoCompleto } from '@curso-completo/entities/curso-completo.entity';
+import { Evaluacion } from '../entities/evaluacion.entity';
+import { CursoCompleto } from '../entities/curso-completo.entity';
 
 export class EvaluacionSeed {
     public async run(dataSource: DataSource): Promise<void> {

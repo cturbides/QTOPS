@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Instructor } from '@curso-completo/entities/instructor.entity';
+import { Instructor } from '../entities/instructor.entity';
 
 export class InstructorSeed {
     public async run(dataSource: DataSource): Promise<void> {

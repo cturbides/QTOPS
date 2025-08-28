@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Etiqueta } from '@curso-completo/entities/etiqueta.entity';
+import { Etiqueta } from '../entities/etiqueta.entity';
 
 export class EtiquetaSeed {
     public async run(dataSource: DataSource): Promise<void> {

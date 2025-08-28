@@ -5,7 +5,7 @@ import { Instructor } from "./instructor.entity";
 import { DetalleCurso } from "./detalle-curso.entity";
 import { IsNotEmpty, IsOptional, MinLength } from 'class-validator';
 import { LeccionCompleta } from "./leccion-completa.entity";
-import { BaseEntity } from "@curso-completo/entities/templates/base-entity.template";
+import { BaseEntity } from "./templates/base-entity.template";
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, ManyToMany, JoinColumn, ManyToOne, JoinTable } from 'typeorm';
 
 @Entity('cursos_completos')

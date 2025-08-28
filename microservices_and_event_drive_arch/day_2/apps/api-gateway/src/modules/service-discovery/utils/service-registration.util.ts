@@ -1,5 +1,5 @@
 import { EducationalService } from '@modules/service-discovery/interfaces/service-discovery.interfaces';
-import { ELearningServiceRegistry } from '@modules/service-discovery/services/e-learning-registry.service';
+import { ELearningServiceRegistry } from '../service-discovery/services/e-learning-registry.service';
 
 export async function registerServiceWithConsul(
   registry: ELearningServiceRegistry,

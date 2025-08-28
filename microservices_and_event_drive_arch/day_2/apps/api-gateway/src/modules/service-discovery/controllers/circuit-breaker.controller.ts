@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Post, HttpCode } from '@nestjs/common';
-import { ELearningServiceRegistry } from '@modules/service-discovery/services/e-learning-registry.service';
+import { ELearningServiceRegistry } from '../service-discovery/services/e-learning-registry.service';
 
 @Controller('circuit-breaker')
 export class CircuitBreakerController {

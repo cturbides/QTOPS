@@ -2,19 +2,19 @@ import { Cache } from 'cache-manager';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { In, Repository, SelectQueryBuilder } from 'typeorm';
-import { Etiqueta } from '@curso-completo/entities/etiqueta.entity';
-import { Evaluacion } from '@curso-completo/entities/evaluacion.entity';
-import { Instructor } from '@curso-completo/entities/instructor.entity';
+import { Etiqueta } from '../entities/etiqueta.entity';
+import { Evaluacion } from '../entities/evaluacion.entity';
+import { Instructor } from '../entities/instructor.entity';
 import { Injectable, BadRequestException, Inject } from '@nestjs/common';
-import { DetalleCurso } from '@curso-completo/entities/detalle-curso.entity';
-import { CreateEtiquetaDto } from '@curso-completo/dtos/create-etiqueta.dto';
-import { CursoCompleto } from '@curso-completo/entities/curso-completo.entity';
-import { CreateEvaluacionDto } from '@curso-completo/dtos/create-evaluacion.dto';
-import { CreateInstructorDto } from '@curso-completo/dtos/create-instructor.dto';
-import { LeccionCompleta } from '@curso-completo/entities/leccion-completa.entity';
-import { CreateCursoCompletoDto } from '@curso-completo/dtos/create-curso-completo.dto';
-import { CursoCompletoAdvanceSearchDto } from '@curso-completo/dtos/curso-completo-advance-search.dto';
-import { DEFAULT_CURSO_COMPLETO_SEARCH_LIMIT, DEFAULT_CURSO_COMPLETO_SEARCH_OFFSET, DEFAULT_CURSOC_COMPLETO_SEARCH_CACHE_TTL } from '@curso-completo/constants/common';
+import { DetalleCurso } from '../entities/detalle-curso.entity';
+import { CreateEtiquetaDto } from '../dtos/create-etiqueta.dto';
+import { CursoCompleto } from '../entities/curso-completo.entity';
+import { CreateEvaluacionDto } from '../dtos/create-evaluacion.dto';
+import { CreateInstructorDto } from '../dtos/create-instructor.dto';
+import { LeccionCompleta } from '../entities/leccion-completa.entity';
+import { CreateCursoCompletoDto } from '../dtos/create-curso-completo.dto';
+import { CursoCompletoAdvanceSearchDto } from '../dtos/curso-completo-advance-search.dto';
+import { DEFAULT_CURSO_COMPLETO_SEARCH_LIMIT, DEFAULT_CURSO_COMPLETO_SEARCH_OFFSET, DEFAULT_CURSOC_COMPLETO_SEARCH_CACHE_TTL } from '../constants/common';
 
 @Injectable()
 export class CursoCompletoService {

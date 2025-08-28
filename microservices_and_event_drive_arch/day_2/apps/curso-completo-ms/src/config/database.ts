@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { DataSource, DataSourceOptions } from 'typeorm';
-import { TypeOrmQueryLogger } from '@performance/loggers/typeorm-query.logger';
+import { TypeOrmQueryLogger } from '../modules/performance/loggers/typeorm-query.logger';
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',

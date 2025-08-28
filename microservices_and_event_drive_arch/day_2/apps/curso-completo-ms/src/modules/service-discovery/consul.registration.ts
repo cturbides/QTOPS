@@ -24,13 +24,12 @@ export class ConsulRegistration implements OnModuleInit {
         check: {
           http: `http://${hostname}:${port}${process.env.CURSO_COMPLETO_HEALTH_PATH || '/health'}`,
           interval: process.env.CURSO_COMPLETO_HEALTH_INTERVAL || '10s',
-          timeout: '2s',
           deregistercriticalserviceafter: '1m',
         },
       });
 
       this.logger.log(`Service registered with Consul: ${serviceName} (${id}) at ${hostname}:${port}`);
-    } catch (error) {
+    } catch (error: any) {
       this.logger.error(`Failed to register service with Consul: ${error.message}`, error.stack);
     }
   }

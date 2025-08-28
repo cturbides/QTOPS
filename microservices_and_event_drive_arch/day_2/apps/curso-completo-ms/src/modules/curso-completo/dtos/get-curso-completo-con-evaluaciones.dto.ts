@@ -1,4 +1,4 @@
-import { CursoCompleto } from "@curso-completo/entities/curso-completo.entity";
+import { CursoCompleto } from "../entities/curso-completo.entity";
 
 export class GetCursoCompletoConEvaluacionesDto {
     promedio: number;

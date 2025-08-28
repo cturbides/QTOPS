@@ -1,14 +1,14 @@
-import { Etiqueta } from '@curso-completo/entities/etiqueta.entity';
-import { Instructor } from '@curso-completo/entities/instructor.entity';
+import { Etiqueta } from '../entities/etiqueta.entity';
+import { Instructor } from '../entities/instructor.entity';
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { CreateEtiquetaDto } from '@curso-completo/dtos/create-etiqueta.dto';
-import { CursoCompleto } from '@curso-completo/entities/curso-completo.entity';
-import { CreateInstructorDto } from '@curso-completo/dtos/create-instructor.dto';
-import { CreateEvaluacionDto } from '@curso-completo/dtos/create-evaluacion.dto';
-import { CursoCompletoService } from '@curso-completo/services/curso-completo.service';
-import { CreateCursoCompletoDto } from '@curso-completo/dtos/create-curso-completo.dto';
-import { CursoCompletoAdvanceSearchDto } from "@curso-completo/dtos/curso-completo-advance-search.dto";
-import { GetCursoCompletoConEvaluacionesDto } from "@curso-completo/dtos/get-curso-completo-con-evaluaciones.dto";
+import { CreateEtiquetaDto } from '../dtos/create-etiqueta.dto';
+import { CursoCompleto } from '../entities/curso-completo.entity';
+import { CreateInstructorDto } from '../dtos/create-instructor.dto';
+import { CreateEvaluacionDto } from '../dtos/create-evaluacion.dto';
+import { CursoCompletoService } from '../services/curso-completo.service';
+import { CreateCursoCompletoDto } from '../dtos/create-curso-completo.dto';
+import { CursoCompletoAdvanceSearchDto } from "../dtos/curso-completo-advance-search.dto";
+import { GetCursoCompletoConEvaluacionesDto } from "../dtos/get-curso-completo-con-evaluaciones.dto";
 
 @Controller('cursos')
 export class CursoCompletoController {
