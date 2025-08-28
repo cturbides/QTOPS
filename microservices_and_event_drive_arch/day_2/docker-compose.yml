@@ -25,44 +25,5 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  api-gateway:
-    build:
-      context: .
-      dockerfile: ./apps/api-gateway/Dockerfile
-    container_name: api-gateway
-    restart: always
-    env_file: .env
-    ports:
-      - "3000:3000"
-    depends_on:
-      consul:
-        condition: service_healthy
-      postgres:
-        condition: service_started
-    environment:
-      - NODE_ENV=production
-      - API_GATEWAY_PORT=3000
-      - CONSUL_HTTP_ADDR=http://consul:8500
-
-  curso-completo-ms:
-    build:
-      context: .
-      dockerfile: ./apps/curso-completo-ms/Dockerfile
-    container_name: curso-completo-ms
-    restart: always
-    env_file: .env
-    ports:
-      - "3002:3002"
-    depends_on:
-      consul:
-        condition: service_healthy
-      postgres:
-        condition: service_started
-    environment:
-      - NODE_ENV=production
-      - CURSO_COMPLETO_PORT=3002
-      - CONSUL_HTTP_ADDR=http://consul:8500
-      - HOSTNAME=curso-completo-ms
-
 volumes:
   pgdata:

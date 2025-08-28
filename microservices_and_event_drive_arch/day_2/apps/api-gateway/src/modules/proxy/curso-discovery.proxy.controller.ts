@@ -1,9 +1,9 @@
-import { Controller, All, Req, Res } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { ConsulService } from '../service-discovery/services/consul.service';
-import { IntelligentLoadBalancer } from '../service-discovery/services/intelligent-load-balancer.service';
-import { CircuitBreakerWrapper } from '../service-discovery/services/circuit-breaker-wrapper.service';
 import axios from 'axios';
+import { Request, Response } from 'express';
+import { Controller, All, Req, Res } from '@nestjs/common';
+import { ConsulService } from '@shared-modules/service-discovery/services/consul.service';
+import { CircuitBreakerWrapper } from '@shared-modules/service-discovery/services/circuit-breaker-wrapper.service';
+import { IntelligentLoadBalancer } from '@shared-modules/service-discovery/services/intelligent-load-balancer.service';
 
 @Controller('curso-completo')
 export class CursoDiscoveryProxyController {
@@ -11,7 +11,7 @@ export class CursoDiscoveryProxyController {
     private readonly consul: ConsulService,
     private readonly lb: IntelligentLoadBalancer,
     private readonly cb: CircuitBreakerWrapper,
-  ) {}
+  ) { }
 
   @All('*')
   async proxy(@Req() req: Request, @Res() res: Response) {
@@ -19,7 +19,7 @@ export class CursoDiscoveryProxyController {
       const instances = await this.consul.getHealthyService(
         process.env.CURSO_COMPLETO_SERVICE_NAME || 'curso-completo',
       );
-      
+
       if (!instances || instances.length === 0) {
         return res.status(503).json({
           error: 'Service unavailable - no healthy instances found',

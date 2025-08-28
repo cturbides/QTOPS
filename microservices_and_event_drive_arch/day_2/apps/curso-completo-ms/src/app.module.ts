@@ -1,22 +1,18 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { NestTypeOrmConfig } from './config/database';
-import { HealthModule } from './modules/health/health.module';
-import { PerformanceModule } from './modules/performance/performance.module';
+import { TypeOrmConfig } from './database/config';
+import { HealthModule } from '@health/health.module';
+import { PerformanceModule } from '@performance/performance.module';
 import { CursoCompletoModule } from './modules/curso-completo/curso-completo.module';
-import { ConsulClient } from './modules/service-discovery/consul.client';
-import { ConsulRegistration } from './modules/service-discovery/consul.registration';
+import { ServiceDiscoveryModule } from '@shared-modules/service-discovery/service-discovery.module';
 
 @Module({
     imports: [
-        TypeOrmModule.forRoot(NestTypeOrmConfig),
+        TypeOrmModule.forRoot(TypeOrmConfig),
         HealthModule,
-        CursoCompletoModule,
         PerformanceModule,
-    ],
-    providers: [
-        ConsulClient,
-        ConsulRegistration,
+        CursoCompletoModule,
+        ServiceDiscoveryModule,
     ]
 })
 export class AppModule { }
