@@ -1,0 +1,24 @@
+services:
+  consul:
+    image: consul:1.15.0
+    container_name: consul
+    restart: always
+    ports:
+      - "8500:8500"
+    command: consul agent -dev -client=0.0.0.0 -ui
+
+  postgres:
+    image: postgres:15
+    container_name: elearning_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: elearning_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
