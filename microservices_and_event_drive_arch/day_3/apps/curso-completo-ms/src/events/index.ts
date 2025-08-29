@@ -1,5 +1,8 @@
 // Module
-export { EventsModule, MESSAGE_BROKER_TOKEN } from './events.module';
+export { EventsModule } from './events.module';
+
+// Constants
+export { MESSAGE_BROKER_TOKEN } from './constants/common';
 
 // Base Classes
 export { DomainEvent } from './domain-event.base';
@@ -29,9 +32,13 @@ export { CourseService } from './services/course.service';
 export { UserService } from './services/user.service';
 export { EmailService } from './services/email.service';
 export { InscripcionProcessorService } from './services/inscripcion-processor.service';
+export { InscripcionProjectionService } from './services/inscripcion-projection.service';
+export { ProjectionEventHandler } from './services/projection-event-handler.service';
 
 // Entities
 export { EventStoreEntry } from './entities/event-store-entry.entity';
+export { InscripcionAnalyticsEntity } from './entities/inscripcion-analytics.entity';
+export { MetricasTiempoRealEntity } from './entities/metricas-tiempo-real.entity';
 
 // Interfaces
 export { MessageBrokerService } from './interfaces/message-broker.interface';

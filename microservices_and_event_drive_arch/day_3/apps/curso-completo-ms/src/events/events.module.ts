@@ -3,9 +3,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Entities
 import { EventStoreEntry } from './entities/event-store-entry.entity';
+import { InscripcionAnalyticsEntity } from './entities/inscripcion-analytics.entity';
+import { MetricasTiempoRealEntity } from './entities/metricas-tiempo-real.entity';
 
 // Controllers
 import { EventosController } from './controllers/eventos.controller';
+import { AnalyticsController } from './controllers/analytics.controller';
 
 // Services
 import { DomainEventPublisher } from './services/domain-event-publisher.service';
@@ -18,24 +21,31 @@ import { UserService } from './services/user.service';
 import { EmailService } from './services/email.service';
 import { InscripcionProcessorService } from './services/inscripcion-processor.service';
 import { EventSystemInitializer } from './services/event-system-initializer.service';
+import { InscripcionProjectionService } from './services/inscripcion-projection.service';
+import { ProjectionEventHandler } from './services/projection-event-handler.service';
 
 // Interfaces
 import { MessageBrokerService } from './interfaces/message-broker.interface';
 import { MESSAGE_BROKER_TOKEN } from './constants/common';
 
-// Token para inyección
-
 @Module({
   imports: [
-    TypeOrmModule.forFeature([EventStoreEntry])
+    TypeOrmModule.forFeature([
+      EventStoreEntry,
+      InscripcionAnalyticsEntity,
+      MetricasTiempoRealEntity
+    ])
   ],
   controllers: [
-    EventosController
+    EventosController,
+    AnalyticsController
   ],
   providers: [
     Logger,
     EventFactory,
     EventStoreService,
+    InscripcionProjectionService,
+    ProjectionEventHandler,
     RabbitMQEventBroker,
     {
       provide: MESSAGE_BROKER_TOKEN,
@@ -43,10 +53,19 @@ import { MESSAGE_BROKER_TOKEN } from './constants/common';
     },
     {
       provide: DomainEventPublisher,
-      useFactory: (messageBroker: MessageBrokerService, eventStore: EventStoreService) => {
-        return new DomainEventPublisher(eventStore, messageBroker);
+      useFactory: (
+        messageBroker: MessageBrokerService, 
+        eventStore: EventStoreService,
+        projectionHandler: ProjectionEventHandler
+      ) => {
+        const publisher = new DomainEventPublisher(eventStore, messageBroker);
+        // Configurar el manejador de proyecciones para que escuche todos los eventos
+        publisher.suscribirseATodosLosEventos(async (evento) => {
+          await projectionHandler.manejarEvento(evento);
+        });
+        return publisher;
       },
-      inject: [MESSAGE_BROKER_TOKEN, EventStoreService]
+      inject: [MESSAGE_BROKER_TOKEN, EventStoreService, ProjectionEventHandler]
     },
     UserService,
     EmailService,
@@ -98,6 +117,7 @@ import { MESSAGE_BROKER_TOKEN } from './constants/common';
     DomainEventPublisher,
     EventStoreService,
     EventFactory,
+    InscripcionProjectionService,
     MESSAGE_BROKER_TOKEN,
     PaymentService,
     CourseService,

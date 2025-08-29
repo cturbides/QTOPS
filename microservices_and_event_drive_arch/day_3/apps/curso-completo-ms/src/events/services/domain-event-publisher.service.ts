@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { DomainEvent } from '../domain-event.base';
 import { EventStoreService } from './event-store.service';
+import { EventHandler } from '../types/event-handler.type';
 import { MessageBrokerService } from '../interfaces/message-broker.interface';
 import { EventPublicationException } from '../exceptions/event-publication.exception';
 
 @Injectable()
 export class DomainEventPublisher {
+  private readonly eventHandlers: EventHandler[] = [];
+
   constructor(
     private readonly eventStore: EventStoreService,
     private readonly messageBroker: MessageBrokerService,
@@ -18,7 +21,10 @@ export class DomainEventPublisher {
         await this.eventStore.guardarEvento(evento, aggregateId);
       }
 
-      // 2. Publicar evento en message broker para procesamiento
+      // 2. Ejecutar manejadores locales (proyecciones, etc.)
+      await this.procesarManejadoresLocales(evento);
+
+      // 3. Publicar evento en message broker para procesamiento distribuido
       await this.messageBroker.publicarEvento({
         exchange: 'domain-events',
         routingKey: this.generarRoutingKey(evento),
@@ -41,6 +47,21 @@ export class DomainEventPublisher {
       throw new EventPublicationException(
         `Error publicando evento ${evento.constructor.name}: ${error.message}`
       );
+    }
+  }
+
+  suscribirseATodosLosEventos(handler: EventHandler): void {
+    this.eventHandlers.push(handler);
+  }
+
+  private async procesarManejadoresLocales(evento: DomainEvent): Promise<void> {
+    for (const handler of this.eventHandlers) {
+      try {
+        await handler(evento);
+      } catch (error) {
+        console.error(`Error en manejador local para evento ${evento.constructor.name}:`, error);
+        // No lanzamos el error para no afectar la publicación principal
+      }
     }
   }
 
