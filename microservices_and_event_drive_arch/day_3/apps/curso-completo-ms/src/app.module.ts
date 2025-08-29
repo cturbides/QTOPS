@@ -6,6 +6,7 @@ import { PerformanceModule } from '@performance/performance.module';
 import { CursoCompletoModule } from './modules/curso-completo/curso-completo.module';
 import { ServiceDiscoveryModule } from '@shared-modules/service-discovery/service-discovery.module';
 import { VersioningModule } from '@shared-modules/versioning/versioning.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { VersioningModule } from '@shared-modules/versioning/versioning.module';
         CursoCompletoModule,
         ServiceDiscoveryModule,
         VersioningModule,
+        EventsModule,
     ]
 })
 export class AppModule { }

@@ -9,3 +9,4 @@ export { ServiceDiscoveryModule } from './service-discovery/service-discovery.mo
 
 // Versioning Module
 export * from './versioning';
+
