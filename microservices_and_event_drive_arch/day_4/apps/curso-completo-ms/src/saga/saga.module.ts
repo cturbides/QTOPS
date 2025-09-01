@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
 import { EnrollmentSagaModule } from './enrollment/enrollment-saga.module';
+import { SagaMonitoringModule } from './monitoring/saga-monitoring.module';
 
 @Module({
   imports: [
-    EnrollmentSagaModule
+    EnrollmentSagaModule,
+    SagaMonitoringModule
   ],
   exports: [
-    EnrollmentSagaModule
+    EnrollmentSagaModule,
+    SagaMonitoringModule
   ]
 })
 export class SagaModule {}
