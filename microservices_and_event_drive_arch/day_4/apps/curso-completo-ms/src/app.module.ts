@@ -7,6 +7,7 @@ import { CursoCompletoModule } from './modules/curso-completo/curso-completo.mod
 import { ServiceDiscoveryModule } from '@shared-modules/service-discovery/service-discovery.module';
 import { VersioningModule } from '@shared-modules/versioning/versioning.module';
 import { EventsModule } from './events/events.module';
+import { SagaModule } from './saga/saga.module';
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { EventsModule } from './events/events.module';
         ServiceDiscoveryModule,
         VersioningModule,
         EventsModule,
+        SagaModule,
     ]
 })
 export class AppModule { }
