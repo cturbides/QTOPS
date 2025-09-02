@@ -1,0 +1,29 @@
+groups:
+  - name: elearning-alerts
+    rules:
+      - alert: HighEnrollmentFailureRate
+        expr: rate(enrollment_operations_total{status="error"}[5m]) / rate(enrollment_operations_total[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High enrollment failure rate detected"
+          description: "Enrollment failure rate is {{ $value | humanizePercentage }}"
+
+      - alert: SlowEnrollmentResponse
+        expr: histogram_quantile(0.95, rate(enrollment_duration_seconds_bucket[5m])) > 5
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Slow enrollment response time"
+          description: "95th percentile enrollment time is {{ $value }}s"
+
+      - alert: ServiceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.instance }} is down"
+          description: "Service {{ $labels.instance }} has been down for more than 1 minute"

@@ -1,0 +1,48 @@
+services:
+  consul:
+    image: hashicorp/consul:1.18
+    container_name: consul
+    restart: always
+    ports:
+      - "8500:8500"
+    command: ["agent", "-dev", "-client=0.0.0.0"]
+    healthcheck:
+      test: ["CMD", "wget", "-q", "http://localhost:8500/v1/status/leader", "-O", "-"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  postgres:
+    image: postgres:15
+    container_name: elearning_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: elearning_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbitmq
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
+  rabbitmq_data:
