@@ -19,6 +19,7 @@
     "test:with-containers": "jest tests/integration/curso-completo.testcontainers.spec.ts",
     "test:simple-containers": "jest tests/integration/simple-integration.testcontainers.spec.ts",
     "test:all-containers": "jest tests/integration/*.testcontainers.spec.ts",
+    "test:performance": "jest tests/integration/performance.testcontainers.spec.ts",
     "dev:consul": "docker compose up consul -d",
     "start:dev:api-gateway": "nest start --watch api-gateway",
     "migration:create": "npm run typeorm -- migration:create",
