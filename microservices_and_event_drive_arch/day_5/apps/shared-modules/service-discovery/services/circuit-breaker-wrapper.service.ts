@@ -1,11 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { CircuitBreakerService } from './circuit-breaker.service';
-import { CircuitBreakerConfig } from '../interfaces/circuit-breaker.interfaces';
+import { CircuitBreakerConfig, CircuitState } from '../interfaces/circuit-breaker.interfaces';
 import { CircuitTimeoutException } from '../exceptions/circuit-breaker.exception';
+import { ELearningObservabilityService } from '@shared-modules/observability';
 
 @Injectable()
 export class CircuitBreakerWrapper {
-    constructor(private readonly logger: Logger, private readonly circuitBreaker: CircuitBreakerService) { }
+    constructor(
+        private readonly logger: Logger, 
+        private readonly circuitBreaker: CircuitBreakerService,
+        private readonly observability?: ELearningObservabilityService
+    ) { }
 
     async execute<T>(
         serviceName: string,
@@ -15,6 +20,18 @@ export class CircuitBreakerWrapper {
         // Registrar el circuit breaker si no existe
         if (!this.circuitBreaker.getCircuitState(serviceName)) {
             this.circuitBreaker.registerCircuit(serviceName, config);
+        }
+
+        const currentState = this.circuitBreaker.getCircuitState(serviceName);
+        
+        // Monitor circuit breaker state if observability is available
+        if (this.observability && currentState) {
+            const stateString = currentState === CircuitState.CLOSED ? 'closed' : 
+                               currentState === CircuitState.OPEN ? 'open' : 'half-open';
+            this.observability.monitorCircuitBreakerState(
+                serviceName,
+                stateString as 'closed' | 'open' | 'half-open'
+            );
         }
 
         try {
@@ -36,6 +53,17 @@ export class CircuitBreakerWrapper {
             return result;
         } catch (error) {
             this.circuitBreaker.recordFailure(serviceName, error as Error);
+
+            // Monitor state change after failure
+            const newState = this.circuitBreaker.getCircuitState(serviceName);
+            if (this.observability && newState && newState !== currentState) {
+                const stateString = newState === CircuitState.CLOSED ? 'closed' : 
+                                   newState === CircuitState.OPEN ? 'open' : 'half-open';
+                this.observability.monitorCircuitBreakerState(
+                    serviceName,
+                    stateString as 'closed' | 'open' | 'half-open'
+                );
+            }
 
             if (error instanceof Error && error.name === 'TimeoutError') {
                 throw new CircuitTimeoutException(serviceName, config?.timeout || 10000);

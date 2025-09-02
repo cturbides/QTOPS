@@ -32,6 +32,7 @@ import {
 
 // Import shared modules
 import { EventsModule } from '../../events/events.module';
+import { ObservabilityModule } from '@shared-modules/observability';
 
 const CommandHandlers = [
   EnrollInCourseHandler,
@@ -57,7 +58,8 @@ const Services = [
   imports: [
     CqrsModule,
     TypeOrmModule.forFeature([EnrollmentSagaState]),
-    EventsModule
+    EventsModule,
+    ObservabilityModule
   ],
   controllers: [
     EnrollmentSagaController

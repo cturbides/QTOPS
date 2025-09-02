@@ -21,6 +21,7 @@ import {
 
 import { EventStoreService } from '@curso-completo/events';
 import { DomainEventPublisher } from '@curso-completo/events'; 
+import { ELearningObservabilityService, EnrollmentData } from '@shared-modules/observability';
 
 import {
   UserValidatedEvent,
@@ -49,79 +50,124 @@ export class CourseEnrollmentSaga {
     private readonly paymentService: PaymentServiceClient,
     private readonly emailService: EmailServiceClient,
     private readonly eventStore: EventStoreService,
-    private readonly eventPublisher: DomainEventPublisher
+    private readonly eventPublisher: DomainEventPublisher,
+    private readonly observability: ELearningObservabilityService
   ) { }
 
   async procesarInscripcion(comando: EnrollInCourseCommand): Promise<EnrollmentResult> {
     const sagaId = uuidv4();
     const context = new EnrollmentSagaContext(sagaId, comando);
+    const correlationId = uuidv4();
+
+    // Convert command to EnrollmentData for observability
+    const enrollmentData: EnrollmentData = {
+      userId: comando.userId,
+      courseId: comando.courseId,
+      enrollmentType: comando.enrollmentType.toString(),
+      requiresPayment: comando.requiresPayment,
+      paymentMethod: comando.paymentMethod,
+      metadata: comando.metadata
+    };
 
     this.logger.log(`[SAGA ${sagaId}] Starting enrollment saga for user ${comando.userId} in course ${comando.courseId}`);
 
-    try {
-      // Initialize saga state in database
-      await this.initializeSagaState(context);
+    return await this.observability.monitorearInscripcion(
+      enrollmentData,
+      correlationId,
+      async (data: EnrollmentData) => {
+        try {
+          // Initialize saga state in database
+          await this.initializeSagaState(context);
 
-      // Publish saga started event
-      await this.publishEvent(new EnrollmentSagaStartedEvent(
-        sagaId,
-        comando.userId,
-        comando.courseId,
-        comando.enrollmentType
-      ), sagaId);
+          // Publish saga started event
+          await this.publishEvent(new EnrollmentSagaStartedEvent(
+            sagaId,
+            comando.userId,
+            comando.courseId,
+            comando.enrollmentType
+          ), sagaId);
 
-      // Execute saga steps
-      await this.validarPrerequisitos(context);
-      await this.reservarCupo(context);
+          // Execute saga steps with monitoring
+          await this.monitorSagaStep(
+            'validar-prerequisitos',
+            async () => await this.validarPrerequisitos(context),
+            context,
+            correlationId
+          );
+          
+          await this.monitorSagaStep(
+            'reservar-cupo',
+            async () => await this.reservarCupo(context),
+            context,
+            correlationId
+          );
 
-      if (context.command.requiresPayment) {
-        await this.procesarPago(context);
+          if (context.command.requiresPayment) {
+            await this.monitorSagaStep(
+              'procesar-pago',
+              async () => await this.procesarPago(context),
+              context,
+              correlationId
+            );
+          }
+
+          await this.monitorSagaStep(
+            'confirmar-inscripcion',
+            async () => await this.confirmarInscripcion(context),
+            context,
+            correlationId
+          );
+          
+          await this.monitorSagaStep(
+            'enviar-notificaciones',
+            async () => await this.enviarNotificaciones(context),
+            context,
+            correlationId
+          );
+
+          // Mark saga as completed
+          context.markCompleted();
+          await this.updateSagaState(context);
+
+          // Publish completion event
+          await this.publishEvent(new EnrollmentSagaCompletedEvent(
+            sagaId,
+            context.enrollmentId!,
+            context.getTotalDuration(),
+            context.completedSteps
+          ), sagaId);
+
+          this.logger.log(`[SAGA ${sagaId}] Enrollment saga completed successfully`);
+
+          return {
+            success: true,
+            enrollmentId: context.enrollmentId,
+            courseId: comando.courseId,
+            startDate: context.courseStartDate,
+            paymentId: context.paymentDetails?.transactionId
+          };
+
+        } catch (error) {
+          this.logger.error(`[SAGA ${sagaId}] Enrollment saga failed: ${error.message}`, error.stack);
+
+          await this.ejecutarCompensaciones(context, error.message);
+
+          // Publish failure event
+          await this.publishEvent(new EnrollmentSagaFailedEvent(
+            sagaId,
+            error.message,
+            context.currentStep,
+            context.getExecutedCompensations()
+          ), sagaId);
+
+          return {
+            success: false,
+            error: error.message,
+            compensationsExecuted: context.getExecutedCompensations()
+          };
+        }
       }
-
-      await this.confirmarInscripcion(context);
-      await this.enviarNotificaciones(context);
-
-      // Mark saga as completed
-      context.markCompleted();
-      await this.updateSagaState(context);
-
-      // Publish completion event
-      await this.publishEvent(new EnrollmentSagaCompletedEvent(
-        sagaId,
-        context.enrollmentId!,
-        context.getTotalDuration(),
-        context.completedSteps
-      ), sagaId);
-
-      this.logger.log(`[SAGA ${sagaId}] Enrollment saga completed successfully`);
-
-      return {
-        success: true,
-        enrollmentId: context.enrollmentId,
-        courseId: comando.courseId,
-        startDate: context.courseStartDate,
-        paymentId: context.paymentDetails?.transactionId
-      };
-
-    } catch (error) {
-      this.logger.error(`[SAGA ${sagaId}] Enrollment saga failed: ${error.message}`, error.stack);
-
-      await this.ejecutarCompensaciones(context, error.message);
-
-      // Publish failure event
-      await this.publishEvent(new EnrollmentSagaFailedEvent(
-        sagaId,
-        error.message,
-        context.currentStep,
-        context.getExecutedCompensations()
-      ), sagaId);
-
-      return {
-        success: false,
-        error: error.message,
-        compensationsExecuted: context.getExecutedCompensations()
-      };
-    }
+    );
   }
 
   private async validarPrerequisitos(context: EnrollmentSagaContext): Promise<void> {
@@ -501,5 +547,42 @@ export class CourseEnrollmentSaga {
       },
       order: { createdAt: 'DESC' }
     });
+  }
+
+  // Monitor saga step execution
+  private async monitorSagaStep(
+    stepName: string,
+    operation: () => Promise<void>,
+    context: EnrollmentSagaContext,
+    correlationId: string
+  ): Promise<void> {
+    try {
+      await operation();
+      this.observability.monitorSagaStep(
+        context.sagaId,
+        stepName,
+        'success',
+        correlationId,
+        { 
+          userId: context.command.userId,
+          courseId: context.command.courseId,
+          currentStep: context.currentStep
+        }
+      );
+    } catch (error) {
+      this.observability.monitorSagaStep(
+        context.sagaId,
+        stepName,
+        'error',
+        correlationId,
+        { 
+          userId: context.command.userId,
+          courseId: context.command.courseId,
+          currentStep: context.currentStep,
+          error: error.message
+        }
+      );
+      throw error;
+    }
   }
 }
