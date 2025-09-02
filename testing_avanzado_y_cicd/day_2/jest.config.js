@@ -15,6 +15,13 @@ const config = {
   coverageDirectory: "coverage",
   coverageProvider: "v8",
   
+  // Usar tsconfig específico para tests
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.test.json'
+    }
+  },
+  
   // Path mapping para imports
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
   
@@ -76,7 +83,6 @@ const config = {
       moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
       setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
       // Sin coverage para tests de contrato
-      collectCoverage: false,
       testTimeout: 60000 // Mayor timeout para Pact
     }
   ],
