@@ -1,5 +1,5 @@
 {
-  "name": "day_1",
+  "name": "day_2",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -87,6 +87,7 @@
     "@stryker-mutator/jest-runner": "^9.1.1",
     "@stryker-mutator/typescript-checker": "^9.1.1",
     "@testcontainers/postgresql": "^11.5.1",
+    "@testcontainers/redis": "^11.5.1",
     "@types/cache-manager-ioredis": "^2.0.7",
     "@types/consul": "^0.40.3",
     "@types/jest": "^30.0.0",
