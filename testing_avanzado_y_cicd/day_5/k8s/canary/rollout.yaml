@@ -1,0 +1,118 @@
+# Canary Deployment - 5% Traffic
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: api-gateway-rollout
+  namespace: production
+spec:
+  replicas: 6
+  strategy:
+    canary:
+      steps:
+      - setWeight: 5
+      - pause: {duration: 5m}
+      - setWeight: 25
+      - pause: {duration: 10m}
+      - setWeight: 50
+      - pause: {duration: 5m}
+      - setWeight: 100
+      canaryService: api-gateway-canary
+      stableService: api-gateway-stable
+      trafficRouting:
+        nginx:
+          stableIngress: api-gateway-ingress
+          annotationPrefix: nginx.ingress.kubernetes.io
+          additionalIngressAnnotations:
+            canary-by-header: X-Canary
+      analysis:
+        templates:
+        - templateName: success-rate
+        - templateName: latency-p99
+        args:
+        - name: service-name
+          value: api-gateway
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - name: api-gateway
+        image: ghcr.io/qtops/api-gateway:latest
+        ports:
+        - containerPort: 3001
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+  namespace: production
+spec:
+  args:
+  - name: service-name
+  metrics:
+  - name: success-rate
+    interval: 1m
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://prometheus:9090
+        query: |
+          sum(rate(http_requests_total{service="{{args.service-name}}",status!~"5.."}[5m])) /
+          sum(rate(http_requests_total{service="{{args.service-name}}"}[5m])) * 100
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: latency-p99
+  namespace: production
+spec:
+  args:
+  - name: service-name
+  metrics:
+  - name: latency-p99
+    interval: 1m
+    failureLimit: 3
+    provider:
+      prometheus:
+        address: http://prometheus:9090
+        query: |
+          histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{service="{{args.service-name}}"}[5m])) by (le))
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-stable
+  namespace: production
+spec:
+  ports:
+  - port: 80
+    targetPort: 3001
+  selector:
+    app: api-gateway
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-canary
+  namespace: production
+spec:
+  ports:
+  - port: 80
+    targetPort: 3001
+  selector:
+    app: api-gateway

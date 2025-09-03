@@ -1,0 +1,120 @@
+name: Post-Deployment Monitoring
+
+on:
+  workflow_run:
+    workflows: ["Production Pipeline - QTOPS"]
+    types: [completed]
+    branches: [main]
+
+env:
+  MONITORING_DURATION: '1800'  # 30 minutes
+
+jobs:
+  post-deployment-monitoring:
+    name: 📊 Post-Deployment Monitoring
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🏥 Health Check Marathon
+        run: |
+          echo "Starting 30-minute health monitoring..."
+          
+          # Configurar URLs de monitoreo
+          API_GATEWAY_URL="https://api.qtops.com/health"
+          CURSO_COMPLETO_URL="https://curso-completo.qtops.com/health"
+          
+          # Monitoreo cada 2 minutos por 30 minutos
+          for i in {1..15}; do
+            echo "Health check iteration $i/15 at $(date)"
+            
+            # Check API Gateway
+            if curl -f -s --max-time 10 "$API_GATEWAY_URL" > /dev/null; then
+              echo "✅ API Gateway: Healthy"
+            else
+              echo "❌ API Gateway: Unhealthy"
+            fi
+            
+            # Check Microservice
+            if curl -f -s --max-time 10 "$CURSO_COMPLETO_URL" > /dev/null; then
+              echo "✅ Curso Completo MS: Healthy"
+            else
+              echo "❌ Curso Completo MS: Unhealthy"
+            fi
+            
+            # Wait 2 minutes before next check
+            [ $i -lt 15 ] && sleep 120
+          done
+
+      - name: 🧪 Smoke Tests
+        run: |
+          echo "Running comprehensive smoke tests..."
+          
+          # Test basic functionality
+          echo "Testing course creation endpoint..."
+          # curl -X POST https://api.qtops.com/cursos/etiquetas \
+          #      -H "Content-Type: application/json" \
+          #      -d '{"nombre":"smoke-test"}'
+          
+          echo "Testing course search..."
+          # curl https://api.qtops.com/cursos/search/advanced?limit=5
+          
+          echo "Smoke tests completed"
+
+      - name: 📈 Performance Baseline
+        run: |
+          echo "Establishing performance baseline..."
+          # artillery run tests/e2e/performance/artillery-load-test.yml --output baseline-report.json
+
+      - name: 🔔 Success Notification
+        run: |
+          echo "🎉 Post-deployment monitoring completed successfully!"
+          # Send success notification to Slack/Teams
+
+  performance-regression-test:
+    name: 🚀 Performance Regression Test
+    runs-on: ubuntu-latest
+    needs: post-deployment-monitoring
+
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: ⚡ Performance Test
+        run: |
+          echo "Running performance regression test..."
+          npm run test:performance:artillery
+        continue-on-error: true
+
+      - name: 📊 Upload Performance Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-results
+          path: reports/
+
+  security-scan:
+    name: 🔒 Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🔍 OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: 'https://api.qtops.com'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a'

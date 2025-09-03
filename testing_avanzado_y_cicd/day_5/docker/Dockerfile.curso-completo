@@ -1,0 +1,48 @@
+# Dockerfile para Curso Completo Microservice
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copiar archivos de dependencias
+COPY package*.json ./
+COPY tsconfig*.json ./
+COPY nest-cli.json ./
+
+# Instalar dependencias
+RUN npm ci --legacy-peer-deps && npm cache clean --force
+
+# Copiar código fuente
+COPY apps/curso-completo-ms ./apps/curso-completo-ms/
+COPY apps/shared-modules ./apps/shared-modules/
+
+# Build de la aplicación
+RUN npm run build:curso-completo
+
+# Imagen de producción
+FROM node:18-alpine AS production
+
+WORKDIR /app
+
+# Crear usuario no-root
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S qtops -u 1001
+
+# Copiar dependencias y build
+COPY --from=builder --chown=qtops:nodejs /app/apps/curso-completo-ms/migrations ./migrations
+
+# Variables de entorno
+ENV NODE_ENV=production
+ENV CURSO_COMPLETO_PORT=3002
+
+# Exponer puerto
+EXPOSE 3002
+
+# Cambiar a usuario no-root
+USER qtops
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3002/health || exit 1
+
+# Comando de inicio
+CMD ["node", "dist/apps/curso-completo-ms/main.js"]

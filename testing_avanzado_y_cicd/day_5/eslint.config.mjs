@@ -1,0 +1,30 @@
+import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
+
+export default [
+  {
+    files: ['apps/**/*.ts'],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        project: './tsconfig.json',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': typescriptEslint,
+    },
+    rules: {
+      '@typescript-eslint/interface-name-prefix': 'off',
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'prefer-const': 'error',
+      'no-var': 'error',
+    },
+  },
+  {
+    ignores: ['dist/', 'node_modules/', 'coverage/', '*.js'],
+  },
+];

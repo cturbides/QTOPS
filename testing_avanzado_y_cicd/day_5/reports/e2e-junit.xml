@@ -1,0 +1,55 @@
+<testsuites id="" name="" tests="8" failures="0" skipped="0" errors="0" time="8.250842">
+<testsuite name="cross-browser/browser-compatibility.spec.js" timestamp="2025-09-03T01:02:35.790Z" hostname="webkit" tests="8" failures="0" skipped="0" time="6.913" errors="0">
+<testcase name="Compatibilidad entre Navegadores - Funcionalidad Básica › Health Check debe funcionar en todos los navegadores" classname="cross-browser/browser-compatibility.spec.js" time="0.738">
+<system-out>
+<![CDATA[🌐 Probando Health Check en webkit
+]]>
+</system-out>
+</testcase>
+<testcase name="Compatibilidad entre Navegadores - Funcionalidad Básica › Búsqueda de cursos debe funcionar en todos los navegadores" classname="cross-browser/browser-compatibility.spec.js" time="0.665">
+<system-out>
+<![CDATA[🌐 Probando búsqueda de cursos en webkit
+]]>
+</system-out>
+</testcase>
+<testcase name="Compatibilidad entre Navegadores - Funcionalidad Básica › Lista de cursos debe funcionar en todos los navegadores" classname="cross-browser/browser-compatibility.spec.js" time="1.19">
+<system-out>
+<![CDATA[🌐 Probando lista de cursos en webkit
+]]>
+</system-out>
+</testcase>
+<testcase name="Compatibilidad entre Navegadores - Funcionalidad Básica › Búsqueda avanzada debe funcionar en todos los navegadores" classname="cross-browser/browser-compatibility.spec.js" time="0.706">
+<system-out>
+<![CDATA[🌐 Probando búsqueda avanzada en webkit
+]]>
+</system-out>
+</testcase>
+<testcase name="Compatibilidad entre Navegadores - Rendimiento › Tiempo de respuesta del Health Check debe ser consistente" classname="cross-browser/browser-compatibility.spec.js" time="1.061">
+<system-out>
+<![CDATA[⏱️ Probando rendimiento del Health Check en webkit
+   ⏱️ Tiempo de respuesta en webkit: 564ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Compatibilidad entre Navegadores - Rendimiento › Búsqueda debe ser rápida en todos los navegadores" classname="cross-browser/browser-compatibility.spec.js" time="1.15">
+<system-out>
+<![CDATA[⏱️ Probando rendimiento de búsqueda en webkit
+   ⏱️ Tiempo de búsqueda en webkit: 579ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Compatibilidad entre Navegadores - Headers y Encoding › Content-Type debe ser consistente en todos los navegadores" classname="cross-browser/browser-compatibility.spec.js" time="0.64">
+<system-out>
+<![CDATA[📋 Probando Content-Type en webkit
+   📋 Content-Type en webkit: application/json; charset=utf-8
+]]>
+</system-out>
+</testcase>
+<testcase name="Compatibilidad entre Navegadores - Headers y Encoding › Encoding UTF-8 debe funcionar en todos los navegadores" classname="cross-browser/browser-compatibility.spec.js" time="0.763">
+<system-out>
+<![CDATA[🔤 Probando encoding UTF-8 en webkit
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>

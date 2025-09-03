@@ -1,0 +1,202 @@
+{
+  "summary": {
+    "totalTests": 4,
+    "passedTests": 4,
+    "averageScore": 100,
+    "timestamp": "2025-09-03T00:54:30.282Z"
+  },
+  "results": [
+    {
+      "testName": "Health Check - Carga Ligera",
+      "url": "http://localhost:3002/health",
+      "timestamp": "2025-09-03T00:51:45.021Z",
+      "requests": {
+        "total": 14039,
+        "average": 467.97,
+        "mean": 467.97,
+        "stddev": 199.06,
+        "min": 64,
+        "max": 852
+      },
+      "latency": {
+        "average": 20.87,
+        "mean": 20.87,
+        "stddev": 82.28,
+        "min": 2,
+        "max": 1457,
+        "p50": 11,
+        "p75": 15,
+        "p90": 22,
+        "p99": 214
+      },
+      "throughput": {
+        "average": 236794.94,
+        "mean": 236794.94,
+        "stddev": 100713.71,
+        "min": 32384,
+        "max": 431112
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "duration": 30.05,
+      "performance": {
+        "passed": {
+          "checks": {
+            "averageLatency": true,
+            "p95Latency": false,
+            "p99Latency": true,
+            "throughput": true,
+            "errorRate": true,
+            "timeoutRate": true
+          },
+          "passed": false
+        },
+        "score": 100
+      }
+    },
+    {
+      "testName": "Búsqueda de Cursos - Carga Media",
+      "url": "http://localhost:3002/cursos/search/advanced?textoBusqueda=test&limit=10",
+      "timestamp": "2025-09-03T00:52:55.112Z",
+      "requests": {
+        "total": 30205,
+        "average": 503.42,
+        "mean": 503.42,
+        "stddev": 290.21,
+        "min": 1,
+        "max": 1010
+      },
+      "latency": {
+        "average": 39.24,
+        "mean": 39.24,
+        "stddev": 134.92,
+        "min": 1,
+        "max": 2146,
+        "p50": 15,
+        "p75": 22,
+        "p90": 46,
+        "p99": 679
+      },
+      "throughput": {
+        "average": 177221.54,
+        "mean": 177221.54,
+        "stddev": 102155.56,
+        "min": 352,
+        "max": 355520
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "duration": 60.05,
+      "performance": {
+        "passed": {
+          "checks": {
+            "averageLatency": true,
+            "p95Latency": false,
+            "p99Latency": true,
+            "throughput": true,
+            "errorRate": true,
+            "timeoutRate": true
+          },
+          "passed": false
+        },
+        "score": 100
+      }
+    },
+    {
+      "testName": "Health Check - Carga Alta",
+      "url": "http://localhost:3002/health",
+      "timestamp": "2025-09-03T00:53:50.188Z",
+      "requests": {
+        "total": 27527,
+        "average": 611.72,
+        "mean": 611.72,
+        "stddev": 172.58,
+        "min": 18,
+        "max": 917
+      },
+      "latency": {
+        "average": 81.26,
+        "mean": 81.26,
+        "stddev": 89.77,
+        "min": 35,
+        "max": 1086,
+        "p50": 63,
+        "p75": 80,
+        "p90": 108,
+        "p99": 586
+      },
+      "throughput": {
+        "average": 309590.49,
+        "mean": 309590.49,
+        "stddev": 87300.34,
+        "min": 9108,
+        "max": 464002
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "duration": 45.06,
+      "performance": {
+        "passed": {
+          "checks": {
+            "averageLatency": true,
+            "p95Latency": false,
+            "p99Latency": true,
+            "throughput": true,
+            "errorRate": true,
+            "timeoutRate": true
+          },
+          "passed": false
+        },
+        "score": 100
+      }
+    },
+    {
+      "testName": "Stress Test - Búsqueda Intensiva",
+      "url": "http://localhost:3002/cursos/search/advanced?textoBusqueda=performance&limit=5",
+      "timestamp": "2025-09-03T00:54:30.275Z",
+      "requests": {
+        "total": 17356,
+        "average": 578.54,
+        "mean": 578.54,
+        "stddev": 164.52,
+        "min": 315,
+        "max": 870
+      },
+      "latency": {
+        "average": 171.36,
+        "mean": 171.36,
+        "stddev": 245.32,
+        "min": 1,
+        "max": 2282,
+        "p50": 86,
+        "p75": 151,
+        "p90": 407,
+        "p99": 1286
+      },
+      "throughput": {
+        "average": 203668.27,
+        "mean": 203668.27,
+        "stddev": 57907.7,
+        "min": 110880,
+        "max": 306240
+      },
+      "errors": 0,
+      "timeouts": 0,
+      "duration": 30.06,
+      "performance": {
+        "passed": {
+          "checks": {
+            "averageLatency": true,
+            "p95Latency": false,
+            "p99Latency": true,
+            "throughput": true,
+            "errorRate": true,
+            "timeoutRate": true
+          },
+          "passed": false
+        },
+        "score": 100
+      }
+    }
+  ]
+}

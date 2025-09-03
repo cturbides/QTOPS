@@ -1,0 +1,472 @@
+{
+  "config": {
+    "configFile": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/playwright.config.ts",
+    "rootDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "reports/e2e-html"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/e2e-results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "reports/e2e-junit.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "cross-browser/browser-compatibility.spec.js",
+      "file": "cross-browser/browser-compatibility.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Compatibilidad entre Navegadores - Funcionalidad Básica",
+          "file": "cross-browser/browser-compatibility.spec.js",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Health Check debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 738,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Probando Health Check en webkit\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:36.625Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-2924c1809b359b239906",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 7,
+              "column": 3
+            },
+            {
+              "title": "Búsqueda de cursos debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 665,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Probando búsqueda de cursos en webkit\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:37.545Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-d59022892e8f4d4600e4",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "Lista de cursos debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1190,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Probando lista de cursos en webkit\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:38.249Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-85bf7b6e527e2b94bab0",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "Búsqueda avanzada debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 706,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Probando búsqueda avanzada en webkit\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:39.467Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-391cda030c2d467848ff",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 45,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Compatibilidad entre Navegadores - Rendimiento",
+          "file": "cross-browser/browser-compatibility.spec.js",
+          "line": 61,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Tiempo de respuesta del Health Check debe ser consistente",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1061,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "⏱️ Probando rendimiento del Health Check en webkit\n"
+                        },
+                        {
+                          "text": "   ⏱️ Tiempo de respuesta en webkit: 564ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:40.209Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-0e2d1dea7c18eacb8752",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 63,
+              "column": 3
+            },
+            {
+              "title": "Búsqueda debe ser rápida en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1150,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "⏱️ Probando rendimiento de búsqueda en webkit\n"
+                        },
+                        {
+                          "text": "   ⏱️ Tiempo de búsqueda en webkit: 579ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:41.288Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-74020055da381118637c",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 81,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Compatibilidad entre Navegadores - Headers y Encoding",
+          "file": "cross-browser/browser-compatibility.spec.js",
+          "line": 101,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Content-Type debe ser consistente en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 640,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📋 Probando Content-Type en webkit\n"
+                        },
+                        {
+                          "text": "   📋 Content-Type en webkit: application/json; charset=utf-8\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:42.465Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-01d8ce3093a7f5e15ce2",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "Encoding UTF-8 debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 763,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🔤 Probando encoding UTF-8 en webkit\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:43.129Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-44066cb62e18a2e3c1b4",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 115,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-09-03T01:02:35.758Z",
+    "duration": 8250.842,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
