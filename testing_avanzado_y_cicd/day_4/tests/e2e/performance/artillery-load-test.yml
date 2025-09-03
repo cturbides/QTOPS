@@ -1,0 +1,81 @@
+config:
+  target: 'http://localhost:3002'
+  phases:
+    # Fase de calentamiento
+    - duration: 60
+      arrivalRate: 2
+      name: "Calentamiento"
+    # Carga normal
+    - duration: 120
+      arrivalRate: 10
+      name: "Carga normal"
+    # Pico de carga
+    - duration: 60
+      arrivalRate: 20
+      name: "Pico de carga"
+    # Enfriamiento
+    - duration: 30
+      arrivalRate: 2
+      name: "Enfriamiento"
+  
+  defaults:
+    headers:
+      Content-Type: 'application/json'
+      User-Agent: 'Artillery-Performance-Test'
+  
+  # Métricas de rendimiento esperadas
+  ensure:
+    p95: 1000  # 95% de requests < 1000ms
+    p99: 2000  # 99% de requests < 2000ms
+    maxErrorRate: 1  # Máximo 1% de errores
+
+scenarios:
+  # Escenario principal: Búsqueda y navegación (70% del tráfico)
+  - name: "Flujo de búsqueda de cursos"
+    weight: 70
+    flow:
+      - get:
+          url: "/health"
+      
+      - think: 1
+      
+      - get:
+          url: "/cursos/search/advanced"
+          qs:
+            textoBusqueda: "Performance"
+            limit: 10
+            offset: 0
+      
+      - think: 2
+      
+      # Obtener todos los cursos
+      - get:
+          url: "/cursos"
+      
+      - think: 3
+
+  # Escenario de creación de contenido (30% del tráfico)
+  - name: "Creación de instructores y etiquetas"
+    weight: 30
+    flow:
+      - post:
+          url: "/cursos/instructores"
+          json:
+            nombre: "Instructor {{ $randomString() }}"
+            email: "instructor-{{ $randomInt(1, 10000) }}@performance.test"
+            biografia: "Instructor creado durante prueba de performance"
+      
+      - think: 1
+      
+      - post:
+          url: "/cursos/etiquetas"
+          json:
+            nombre: "Etiqueta-{{ $randomString() }}"
+      
+      - think: 2
+      
+      # Obtener instructores
+      - get:
+          url: "/cursos/instructores"
+      
+      - think: 1

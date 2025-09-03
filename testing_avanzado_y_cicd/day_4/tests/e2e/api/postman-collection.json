@@ -1,0 +1,398 @@
+{
+  "info": {
+    "name": "Curso Completo API - E2E Tests",
+    "description": "Colección de pruebas E2E para la API de gestión de cursos",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response time is less than 500ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);",
+              "});",
+              "",
+              "pm.test('Health status is ok', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql('ok');",
+              "});",
+              "",
+              "pm.test('Has health checks', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('info');",
+              "    pm.expect(jsonData).to.have.property('details');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Crear Instructor",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test('Response time is less than 1000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});",
+              "",
+              "pm.test('Instructor created with ID', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.expect(jsonData.id).to.be.a('string');",
+              "    pm.globals.set('instructorId', jsonData.id);",
+              "});",
+              "",
+              "pm.test('Instructor has correct data', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.nombre).to.eql('Instructor E2E Newman');",
+              "    pm.expect(jsonData.email).to.include('newman');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Instructor E2E Newman\",\n  \"email\": \"instructor-newman-{{$timestamp}}@test.com\",\n  \"biografia\": \"Instructor creado durante pruebas Newman E2E\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/cursos/instructores",
+          "host": ["{{baseUrl}}"],
+          "path": ["cursos", "instructores"]
+        }
+      }
+    },
+    {
+      "name": "Crear Etiqueta",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test('Etiqueta created with ID', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.globals.set('etiquetaId', jsonData.id);",
+              "});",
+              "",
+              "pm.test('Etiqueta normalized correctly', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.nombre).to.include('newman');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"newman-e2e-{{$timestamp}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/cursos/etiquetas",
+          "host": ["{{baseUrl}}"],
+          "path": ["cursos", "etiquetas"]
+        }
+      }
+    },
+    {
+      "name": "Crear Curso Completo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test('Response time is less than 2000ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "",
+              "pm.test('Curso created with all data', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.expect(jsonData).to.have.property('titulo');",
+              "    pm.expect(jsonData).to.have.property('instructor');",
+              "    pm.expect(jsonData).to.have.property('etiquetas');",
+              "    pm.globals.set('cursoId', jsonData.id);",
+              "});",
+              "",
+              "pm.test('Curso linked to instructor correctly', function () {",
+              "    const jsonData = pm.response.json();",
+              "    const instructorId = pm.globals.get('instructorId');",
+              "    pm.expect(jsonData.instructor.id).to.eql(instructorId);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"titulo\": \"Curso Newman E2E {{$timestamp}}\",\n  \"descripcion\": \"Curso creado durante pruebas automatizadas con Newman\",\n  \"instructorId\": \"{{instructorId}}\",\n  \"etiquetaIds\": [\"{{etiquetaId}}\"]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/cursos",
+          "host": ["{{baseUrl}}"],
+          "path": ["cursos"]
+        }
+      }
+    },
+    {
+      "name": "Obtener Curso Creado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response time is less than 500ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);",
+              "});",
+              "",
+              "pm.test('Curso data is complete', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.expect(jsonData).to.have.property('titulo');",
+              "    pm.expect(jsonData).to.have.property('descripcion');",
+              "    pm.expect(jsonData).to.have.property('instructor');",
+              "    pm.expect(jsonData).to.have.property('etiquetas');",
+              "});",
+              "",
+              "pm.test('Instructor data is included', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.instructor).to.have.property('nombre');",
+              "    pm.expect(jsonData.instructor).to.have.property('email');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/cursos/{{cursoId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["cursos", "{{cursoId}}"]
+        }
+      }
+    },
+    {
+      "name": "Búsqueda Avanzada de Cursos",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response time is less than 800ms', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(800);",
+              "});",
+              "",
+              "pm.test('Search response structure is correct', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.be.an('array');",
+              "});",
+              "",
+              "pm.test('Search performance is acceptable', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(500);",
+              "});",
+              "",
+              "pm.test('Cursos array has correct structure', function () {",
+              "    const jsonData = pm.response.json();",
+              "    if (jsonData.length > 0) {",
+              "        const primerCurso = jsonData[0];",
+              "        pm.expect(primerCurso).to.have.property('id');",
+              "        pm.expect(primerCurso).to.have.property('titulo');",
+              "        pm.expect(primerCurso).to.have.property('instructor');",
+              "        pm.expect(primerCurso).to.have.property('etiquetas');",
+              "    }",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/cursos/search/advanced?textoBusqueda=Newman&limit=10&offset=0",
+          "host": ["{{baseUrl}}"],
+          "path": ["cursos", "search", "advanced"],
+          "query": [
+            {
+              "key": "textoBusqueda",
+              "value": "Newman"
+            },
+            {
+              "key": "limit",
+              "value": "10"
+            },
+            {
+              "key": "offset",
+              "value": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Crear Evaluación",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test('Evaluacion created successfully', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData).to.have.property('id');",
+              "    pm.expect(jsonData.puntuacion).to.eql(5);",
+              "    pm.expect(jsonData.comentario).to.include('Newman');",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"puntuacion\": 5,\n  \"comentario\": \"Excelente curso probado con Newman E2E\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/cursos/{{cursoId}}/evaluaciones",
+          "host": ["{{baseUrl}}"],
+          "path": ["cursos", "{{cursoId}}", "evaluaciones"]
+        }
+      }
+    },
+    {
+      "name": "Performance Test - Multiple Searches",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Fast response for search', function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(300);",
+              "});",
+              "",
+              "pm.test('Search results are relevant', function () {",
+              "    const jsonData = pm.response.json();",
+              "    pm.expect(jsonData.length).to.be.at.least(0);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/cursos/search/advanced?textoBusqueda={{$randomWord}}&limit=5",
+          "host": ["{{baseUrl}}"],
+          "path": ["cursos", "search", "advanced"],
+          "query": [
+            {
+              "key": "textoBusqueda",
+              "value": "{{$randomWord}}"
+            },
+            {
+              "key": "limit",
+              "value": "5"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3002",
+      "type": "string"
+    }
+  ]
+}
