@@ -1,5 +1,5 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/operators';
 import { tap } from 'rxjs/operators';
 import { PrometheusMetricsService } from './prometheus-metrics.service';
 
