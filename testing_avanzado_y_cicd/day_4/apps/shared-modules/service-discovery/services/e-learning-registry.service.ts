@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { firstValueFrom } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { ConsulService } from './consul.service';

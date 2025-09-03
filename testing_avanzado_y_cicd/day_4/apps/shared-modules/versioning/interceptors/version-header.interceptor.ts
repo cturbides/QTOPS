@@ -4,8 +4,8 @@ import {
     ExecutionContext,
     CallHandler,
 } from '@nestjs/common';
-import { Observable } from 'rxjs/operators';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs'; 
+import { map } from 'rxjs/operators'; 
 import { Request, Response } from 'express';
 import { VersionExtractorService } from '../services/version-extractor.service';
 import { VersionConfigService } from '../services/version-config.service';

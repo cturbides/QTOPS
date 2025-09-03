@@ -1,0 +1,83 @@
+name: Feature Branch CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches-ignore: [main]
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  fast-feedback:
+    name: ⚡ Fast Feedback Loop
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔍 Lint & Security (Parallel)
+        run: |
+          npm run lint &
+          npm run security:audit &
+          wait
+
+      - name: 🧪 Unit Tests
+        run: npm run test:unit
+
+      - name: 🏗️ Build Check
+        run: npm run build
+
+      - name: 📊 Coverage Report
+        uses: codecov/codecov-action@v3
+        with:
+          directory: ./coverage
+
+  integration-check:
+    name: 🔗 Integration Check
+    runs-on: ubuntu-latest
+    needs: fast-feedback
+    if: github.event_name == 'pull_request'
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: elearning_test
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔗 Integration Tests
+        run: npm run test:integration
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USER: postgres
+          DB_PASS: password
+          DB_NAME: elearning_test

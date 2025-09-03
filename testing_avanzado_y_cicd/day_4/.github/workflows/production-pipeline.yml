@@ -1,0 +1,442 @@
+name: Production Pipeline - QTOPS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '18'
+  REGISTRY: ghcr.io
+  IMAGE_NAME_API: qtops/api-gateway
+  IMAGE_NAME_MS: qtops/curso-completo
+
+jobs:
+  # CI Phase - Quality Gates
+  continuous-integration:
+    name: 🔍 Continuous Integration
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: elearning_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🔍 Quality Gates (Parallel)
+        run: |
+          npm run lint &
+          npm run security:audit &
+          wait
+
+      - name: 🧪 Unit Tests + Coverage
+        run: npm run test:unit
+        env:
+          NODE_ENV: test
+
+      - name: 🔗 Integration Tests
+        run: npm run test:integration
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USER: postgres
+          DB_PASS: password
+          DB_NAME: elearning_test
+
+      - name: 📋 Contract Tests
+        run: npm run test:contract
+        env:
+          NODE_ENV: test
+
+      - name: 🧬 Mutation Testing
+        run: npm run test:mutation
+        continue-on-error: true # No bloqueante pero genera reporte
+
+      - name: 🏗️ Build Applications
+        run: npm run build:prod
+
+      - name: 📊 Upload Coverage Reports
+        uses: codecov/codecov-action@v3
+        with:
+          directory: ./coverage
+          fail_ci_if_error: false
+
+      - name: 📦 Archive Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            package*.json
+          retention-days: 30
+
+  # E2E Testing Phase
+  end-to-end-testing:
+    name: 🎭 End-to-End Testing
+    runs-on: ubuntu-latest
+    needs: continuous-integration
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: elearning_e2e
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🐳 Start Infrastructure
+        run: |
+          docker compose up consul postgres -d
+          sleep 15
+
+      - name: 🗄️ Run Migrations
+        run: npm run migration:run
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USER: postgres
+          DB_PASS: password
+          DB_NAME: elearning_e2e
+
+      - name: 🌱 Seed Database
+        run: npm run seed:run
+        env:
+          DB_HOST: localhost
+
+      - name: 🚀 Start Services
+        run: |
+          npm run start:dev:curso-completo &
+          npm run start:dev:api-gateway &
+          sleep 20
+
+      - name: 🎭 Playwright E2E Tests
+        run: npm run test:e2e:playwright
+        env:
+          BASE_URL: http://localhost:3002
+
+      - name: 🌊 Cypress E2E Tests
+        run: npm run test:e2e:cypress
+        env:
+          CYPRESS_baseUrl: http://localhost:3002
+
+      - name: ⚡ Performance Tests
+        run: npm run test:performance:artillery
+        continue-on-error: true
+
+      - name: 📊 Upload E2E Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-reports
+          path: |
+            reports/
+            test-results/
+
+  # Security Scanning
+  security-scan:
+    name: 🔒 Security Scanning
+    runs-on: ubuntu-latest
+    needs: continuous-integration
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔍 Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: 📋 Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Docker Build Phase
+  docker-build:
+    name: 🐳 Docker Build & Push
+    runs-on: ubuntu-latest
+    needs: [continuous-integration, security-scan]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔐 Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📝 Extract metadata
+        id: meta-api
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest
+
+      - name: 📝 Extract metadata (Microservice)
+        id: meta-ms
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_MS }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest
+
+      - name: 🏗️ Build and push API Gateway
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile.api-gateway
+          push: true
+          tags: ${{ steps.meta-api.outputs.tags }}
+          labels: ${{ steps.meta-api.outputs.labels }}
+
+      - name: 🏗️ Build and push Curso Completo MS
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./docker/Dockerfile.curso-completo
+          push: true
+          tags: ${{ steps.meta-ms.outputs.tags }}
+          labels: ${{ steps.meta-ms.outputs.labels }}
+
+  # Deployment Strategy Selection & Execution
+  deploy-strategy:
+    name: 🚀 Deployment Strategy
+    runs-on: ubuntu-latest
+    needs: [end-to-end-testing, docker-build]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    outputs:
+      strategy: ${{ steps.strategy.outputs.strategy }}
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📊 Analyze Changes
+        id: changes
+        run: |
+          echo "files_changed=$(git diff --name-only HEAD~1 HEAD | wc -l)" >> $GITHUB_OUTPUT
+          echo "has_migration=$(git diff --name-only HEAD~1 HEAD | grep -c 'migration' || echo 0)" >> $GITHUB_OUTPUT
+          echo "is_hotfix=$(echo '${{ github.event.head_commit.message }}' | grep -c 'hotfix\|fix\|urgent' || echo 0)" >> $GITHUB_OUTPUT
+
+      - name: 🎯 Select Deployment Strategy
+        id: strategy
+        run: |
+          if [ "${{ steps.changes.outputs.is_hotfix }}" -gt 0 ]; then
+            echo "strategy=blue-green" >> $GITHUB_OUTPUT
+            echo "🔵🟢 Selected: Blue-Green (Hotfix detected)"
+          elif [ "${{ steps.changes.outputs.has_migration }}" -gt 0 ] || [ "${{ steps.changes.outputs.files_changed }}" -gt 10 ]; then
+            echo "strategy=canary" >> $GITHUB_OUTPUT
+            echo "🐤 Selected: Canary (High risk changes)"
+          else
+            echo "strategy=rolling" >> $GITHUB_OUTPUT
+            echo "🔄 Selected: Rolling Update (Normal changes)"
+          fi
+
+      - name: 🏷️ Generate Version
+        id: version
+        run: |
+          VERSION="v1.0.${GITHUB_RUN_NUMBER}-$(git rev-parse --short HEAD)"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Generated version: $VERSION"
+
+  # Blue-Green Deployment
+  deploy-blue-green:
+    name: 🔵🟢 Blue-Green Deployment
+    runs-on: ubuntu-latest
+    needs: deploy-strategy
+    if: needs.deploy-strategy.outputs.strategy == 'blue-green'
+    environment: production
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔵 Deploy to Blue Environment
+        run: |
+          echo "Deploying version ${{ needs.deploy-strategy.outputs.version }} to Blue environment"
+          # kubectl apply -f k8s/blue-green/blue/
+          # kubectl set image deployment/api-gateway api-gateway=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API }}:${{ needs.deploy-strategy.outputs.version }} -n blue
+          # kubectl set image deployment/curso-completo curso-completo=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_MS }}:${{ needs.deploy-strategy.outputs.version }} -n blue
+
+      - name: 🏥 Health Check Blue
+        run: |
+          echo "Running health checks on Blue environment"
+          # ./scripts/health-check.sh blue
+
+      - name: 🔄 Switch Traffic to Blue
+        run: |
+          echo "Switching traffic from Green to Blue"
+          # kubectl patch service api-gateway-service -p '{"spec":{"selector":{"version":"blue"}}}' -n production
+
+      - name: 🧪 Smoke Tests
+        run: |
+          echo "Running smoke tests on Blue environment"
+          # npm run test:smoke:production
+
+      - name: 🟢 Cleanup Green Environment
+        run: |
+          echo "Cleaning up Green environment"
+          # kubectl delete deployment api-gateway-green curso-completo-green -n green
+
+  # Canary Deployment
+  deploy-canary:
+    name: 🐤 Canary Deployment
+    runs-on: ubuntu-latest
+    needs: deploy-strategy
+    if: needs.deploy-strategy.outputs.strategy == 'canary'
+    environment: production
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🐤 Deploy Canary (5% traffic)
+        run: |
+          echo "Deploying Canary version ${{ needs.deploy-strategy.outputs.version }} with 5% traffic"
+          # kubectl apply -f k8s/canary/canary-5.yaml
+
+      - name: 📊 Monitor Metrics (5 minutes)
+        run: |
+          echo "Monitoring Canary metrics for 5 minutes"
+          sleep 300
+          # ./scripts/check-canary-metrics.sh
+
+      - name: 🐤 Scale to 25% traffic
+        run: |
+          echo "Scaling Canary to 25% traffic"
+          # kubectl apply -f k8s/canary/canary-25.yaml
+
+      - name: 📊 Monitor Metrics (10 minutes)
+        run: |
+          echo "Monitoring Canary metrics for 10 minutes"
+          sleep 600
+          # ./scripts/check-canary-metrics.sh
+
+      - name: 🚀 Full Deployment
+        run: |
+          echo "Promoting Canary to 100% traffic"
+          # kubectl apply -f k8s/canary/canary-100.yaml
+
+      - name: 🧹 Cleanup Old Version
+        run: |
+          echo "Cleaning up old version"
+          # kubectl delete deployment api-gateway-old curso-completo-old
+
+  # Rolling Update Deployment
+  deploy-rolling:
+    name: 🔄 Rolling Update
+    runs-on: ubuntu-latest
+    needs: deploy-strategy
+    if: needs.deploy-strategy.outputs.strategy == 'rolling'
+    environment: production
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔄 Rolling Update Deployment
+        run: |
+          echo "Performing rolling update to version ${{ needs.deploy-strategy.outputs.version }}"
+          # kubectl set image deployment/api-gateway api-gateway=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_API }}:${{ needs.deploy-strategy.outputs.version }}
+          # kubectl set image deployment/curso-completo curso-completo=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_MS }}:${{ needs.deploy-strategy.outputs.version }}
+
+      - name: ⏳ Wait for Rollout
+        run: |
+          echo "Waiting for rollout to complete"
+          # kubectl rollout status deployment/api-gateway
+          # kubectl rollout status deployment/curso-completo
+
+      - name: 🧪 Post-deployment Validation
+        run: |
+          echo "Running post-deployment validation"
+          # npm run test:smoke:production
+
+  # Post-Deployment Actions
+  post-deployment:
+    name: 📋 Post-Deployment
+    runs-on: ubuntu-latest
+    needs: [deploy-blue-green, deploy-canary, deploy-rolling]
+    if: always() && (needs.deploy-blue-green.result == 'success' || needs.deploy-canary.result == 'success' || needs.deploy-rolling.result == 'success')
+
+    steps:
+      - name: 📊 Collect Deployment Metrics
+        run: |
+          echo "Collecting deployment metrics and notifications"
+
+      - name: 🔔 Notify Teams
+        run: |
+          echo "Deployment completed successfully! 🎉"
+          # Send Slack/Teams notification
+
+      - name: 📝 Update Deployment Status
+        run: |
+          echo "Updating deployment status in monitoring systems"
