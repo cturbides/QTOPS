@@ -79,6 +79,22 @@
         "metadata": {
           "actualWorkers": 1
         },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
         "id": "mobile",
         "name": "mobile",
         "testDir": "/workspaces/QTOPS/testing_avanzado_y_cicd/day_3/tests/e2e",
@@ -98,675 +114,346 @@
   },
   "suites": [
     {
-      "title": "playwright/curso-completo.e2e.spec.ts",
-      "file": "playwright/curso-completo.e2e.spec.ts",
+      "title": "cross-browser/browser-compatibility.spec.js",
+      "file": "cross-browser/browser-compatibility.spec.js",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Suite E2E - Sistema Gestión de Cursos",
-          "file": "playwright/curso-completo.e2e.spec.ts",
-          "line": 24,
+          "title": "Compatibilidad entre Navegadores - Funcionalidad Básica",
+          "file": "cross-browser/browser-compatibility.spec.js",
+          "line": 5,
           "column": 6,
-          "specs": [],
-          "suites": [
+          "specs": [
             {
-              "title": "Flujo Crítico: Gestión Completa de Cursos",
-              "file": "playwright/curso-completo.e2e.spec.ts",
-              "line": 26,
-              "column": 8,
-              "specs": [
+              "title": "Health Check debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
                 {
-                  "title": "debe crear instructor, etiquetas y curso con flujo completo",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
                     {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 738,
+                      "errors": [],
+                      "stdout": [
                         {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 694,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Servicios disponibles para pruebas E2E\n"
-                            },
-                            {
-                              "text": "✅ Instructor creado: e63f4725-b5bc-4f88-aae8-3497ed3e7619\n"
-                            },
-                            {
-                              "text": "✅ Etiquetas creadas: 83a7ad52-0653-4a7e-b26a-04254350daba 1aa3ed38-2140-41db-918d-c943b4597ea0\n"
-                            },
-                            {
-                              "text": "✅ Curso creado: 27342518-7b47-4578-858e-592a60af45ae\n"
-                            },
-                            {
-                              "text": "⏱️ Flujo completo ejecutado en: 311ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:47.437Z",
-                          "annotations": [],
-                          "attachments": []
+                          "text": "🌐 Probando Health Check en webkit\n"
                         }
                       ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-12ba6e5374875efb04e4",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 27,
-                  "column": 9
-                },
-                {
-                  "title": "debe buscar cursos con filtros avanzados",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:36.625Z",
                       "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 221,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Búsqueda completada: 10 resultados en 11ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:49.112Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
+                      "attachments": []
                     }
                   ],
-                  "id": "ea7491638a66304e0895-41d5da4c3375e5755e8e",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 89,
-                  "column": 9
-                },
-                {
-                  "title": "debe crear instructor, etiquetas y curso con flujo completo",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "firefox",
-                      "projectName": "firefox",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 2790,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Servicios disponibles para pruebas E2E\n"
-                            },
-                            {
-                              "text": "✅ Instructor creado: fe2d98e9-e4be-40fe-90a9-71909a0b6279\n"
-                            },
-                            {
-                              "text": "✅ Etiquetas creadas: 16a8692d-97e7-4612-babc-ff3eb2cad944 78e93721-9795-4083-8fa6-a0e7415f253e\n"
-                            },
-                            {
-                              "text": "✅ Curso creado: 8b7dd7f1-f8df-4edb-87e7-cd84a57153c5\n"
-                            },
-                            {
-                              "text": "⏱️ Flujo completo ejecutado en: 548ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:51.389Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-30753841ca2a5dd44be4",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 27,
-                  "column": 9
-                },
-                {
-                  "title": "debe buscar cursos con filtros avanzados",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "firefox",
-                      "projectName": "firefox",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 620,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Búsqueda completada: 10 resultados en 23ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:56.422Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-1f6c422d108ad386e259",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 89,
-                  "column": 9
-                },
-                {
-                  "title": "debe crear instructor, etiquetas y curso con flujo completo",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "mobile",
-                      "projectName": "mobile",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 3831,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Servicios disponibles para pruebas E2E\n"
-                            },
-                            {
-                              "text": "✅ Instructor creado: 97ce0e3a-d4ef-419d-a250-9923a65a161d\n"
-                            },
-                            {
-                              "text": "✅ Etiquetas creadas: c6fe9b6b-c417-45bf-b3c2-e416b39aa636 fb5b66dc-bda7-424d-96ca-21a614e89542\n"
-                            },
-                            {
-                              "text": "✅ Curso creado: ac4c6dad-fcb6-4d93-8034-3e9cfb99c4f4\n"
-                            },
-                            {
-                              "text": "⏱️ Flujo completo ejecutado en: 332ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:29:00.276Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-0af0e74db39346dd3a88",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 27,
-                  "column": 9
-                },
-                {
-                  "title": "debe buscar cursos con filtros avanzados",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "mobile",
-                      "projectName": "mobile",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 751,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Búsqueda completada: 10 resultados en 14ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:29:05.267Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-0627dda872a246293a17",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 89,
-                  "column": 9
+                  "status": "expected"
                 }
-              ]
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-2924c1809b359b239906",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 7,
+              "column": 3
             },
             {
-              "title": "Pruebas de Performance Integradas",
-              "file": "playwright/curso-completo.e2e.spec.ts",
-              "line": 130,
-              "column": 8,
-              "specs": [
+              "title": "Búsqueda de cursos debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
                 {
-                  "title": "debe manejar múltiples operaciones concurrentes",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
                     {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 665,
+                      "errors": [],
+                      "stdout": [
                         {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 246,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Operaciones exitosas: 7\n"
-                            },
-                            {
-                              "text": "❌ Operaciones fallidas: 0\n"
-                            },
-                            {
-                              "text": "⏱️ Tiempo total: 75ms\n"
-                            },
-                            {
-                              "text": "📊 Promedio: 63.57142857142857ms, P95: 74ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:49.363Z",
-                          "annotations": [],
-                          "attachments": []
+                          "text": "🌐 Probando búsqueda de cursos en webkit\n"
                         }
                       ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-85107138997139b5705c",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 131,
-                  "column": 9
-                },
-                {
-                  "title": "debe mantener performance bajo carga de búsquedas",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:37.545Z",
                       "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
-                        {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 289,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "🔍 10 búsquedas en 79ms (promedio: 66.1ms)\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:49.635Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
+                      "attachments": []
                     }
                   ],
-                  "id": "ea7491638a66304e0895-684d25ef6f1235d5ed29",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 181,
-                  "column": 9
-                },
-                {
-                  "title": "debe manejar múltiples operaciones concurrentes",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "firefox",
-                      "projectName": "firefox",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 734,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Operaciones exitosas: 7\n"
-                            },
-                            {
-                              "text": "❌ Operaciones fallidas: 0\n"
-                            },
-                            {
-                              "text": "⏱️ Tiempo total: 99ms\n"
-                            },
-                            {
-                              "text": "📊 Promedio: 82.57142857142857ms, P95: 88ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:57.082Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-b371db15a6a6fac8b4f1",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 131,
-                  "column": 9
-                },
-                {
-                  "title": "debe mantener performance bajo carga de búsquedas",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "firefox",
-                      "projectName": "firefox",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 573,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "🔍 10 búsquedas en 155ms (promedio: 128.6ms)\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:57.881Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-ca394686d670d1671866",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 181,
-                  "column": 9
-                },
-                {
-                  "title": "debe manejar múltiples operaciones concurrentes",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "mobile",
-                      "projectName": "mobile",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 518,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Operaciones exitosas: 7\n"
-                            },
-                            {
-                              "text": "❌ Operaciones fallidas: 0\n"
-                            },
-                            {
-                              "text": "⏱️ Tiempo total: 53ms\n"
-                            },
-                            {
-                              "text": "📊 Promedio: 43.42857142857143ms, P95: 52ms\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:29:06.055Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-c6913b7fafde4ac67510",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 131,
-                  "column": 9
-                },
-                {
-                  "title": "debe mantener performance bajo carga de búsquedas",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "mobile",
-                      "projectName": "mobile",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 592,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "🔍 10 búsquedas en 78ms (promedio: 63.2ms)\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:29:06.630Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-c898baa51230a233784c",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 181,
-                  "column": 9
+                  "status": "expected"
                 }
-              ]
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-d59022892e8f4d4600e4",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 17,
+              "column": 3
             },
             {
-              "title": "Validación de Contratos API",
-              "file": "playwright/curso-completo.e2e.spec.ts",
-              "line": 226,
-              "column": 8,
-              "specs": [
+              "title": "Lista de cursos debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
                 {
-                  "title": "debe mantener contratos de respuesta consistentes",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
                     {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "chromium",
-                      "projectName": "chromium",
-                      "results": [
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1190,
+                      "errors": [],
+                      "stdout": [
                         {
-                          "workerIndex": 0,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 173,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Contratos API validados correctamente\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:49.942Z",
-                          "annotations": [],
-                          "attachments": []
+                          "text": "🌐 Probando lista de cursos en webkit\n"
                         }
                       ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-172a17b82b8ef948dea0",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 227,
-                  "column": 9
-                },
-                {
-                  "title": "debe mantener contratos de respuesta consistentes",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:38.249Z",
                       "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "firefox",
-                      "projectName": "firefox",
-                      "results": [
-                        {
-                          "workerIndex": 1,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 396,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Contratos API validados correctamente\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:28:58.484Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
+                      "attachments": []
                     }
                   ],
-                  "id": "ea7491638a66304e0895-9116ee8b6fb6a1e06e29",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 227,
-                  "column": 9
-                },
-                {
-                  "title": "debe mantener contratos de respuesta consistentes",
-                  "ok": true,
-                  "tags": [],
-                  "tests": [
-                    {
-                      "timeout": 30000,
-                      "annotations": [],
-                      "expectedStatus": "passed",
-                      "projectId": "mobile",
-                      "projectName": "mobile",
-                      "results": [
-                        {
-                          "workerIndex": 2,
-                          "parallelIndex": 0,
-                          "status": "passed",
-                          "duration": 697,
-                          "errors": [],
-                          "stdout": [
-                            {
-                              "text": "✅ Contratos API validados correctamente\n"
-                            }
-                          ],
-                          "stderr": [],
-                          "retry": 0,
-                          "startTime": "2025-09-03T00:29:07.257Z",
-                          "annotations": [],
-                          "attachments": []
-                        }
-                      ],
-                      "status": "expected"
-                    }
-                  ],
-                  "id": "ea7491638a66304e0895-04b9c4f0413f201ccc59",
-                  "file": "playwright/curso-completo.e2e.spec.ts",
-                  "line": 227,
-                  "column": 9
+                  "status": "expected"
                 }
-              ]
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-85bf7b6e527e2b94bab0",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "Búsqueda avanzada debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 706,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🌐 Probando búsqueda avanzada en webkit\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:39.467Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-391cda030c2d467848ff",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 45,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Compatibilidad entre Navegadores - Rendimiento",
+          "file": "cross-browser/browser-compatibility.spec.js",
+          "line": 61,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Tiempo de respuesta del Health Check debe ser consistente",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1061,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "⏱️ Probando rendimiento del Health Check en webkit\n"
+                        },
+                        {
+                          "text": "   ⏱️ Tiempo de respuesta en webkit: 564ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:40.209Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-0e2d1dea7c18eacb8752",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 63,
+              "column": 3
+            },
+            {
+              "title": "Búsqueda debe ser rápida en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1150,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "⏱️ Probando rendimiento de búsqueda en webkit\n"
+                        },
+                        {
+                          "text": "   ⏱️ Tiempo de búsqueda en webkit: 579ms\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:41.288Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-74020055da381118637c",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 81,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Compatibilidad entre Navegadores - Headers y Encoding",
+          "file": "cross-browser/browser-compatibility.spec.js",
+          "line": 101,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Content-Type debe ser consistente en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 640,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "📋 Probando Content-Type en webkit\n"
+                        },
+                        {
+                          "text": "   📋 Content-Type en webkit: application/json; charset=utf-8\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:42.465Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-01d8ce3093a7f5e15ce2",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 103,
+              "column": 3
+            },
+            {
+              "title": "Encoding UTF-8 debe funcionar en todos los navegadores",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "webkit",
+                  "projectName": "webkit",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 763,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🔤 Probando encoding UTF-8 en webkit\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-03T01:02:43.129Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fd7eb25b7dec5fbf22c9-44066cb62e18a2e3c1b4",
+              "file": "cross-browser/browser-compatibility.spec.js",
+              "line": 115,
+              "column": 3
             }
           ]
         }
@@ -775,9 +462,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2025-09-03T00:28:46.187Z",
-    "duration": 21855.068,
-    "expected": 15,
+    "startTime": "2025-09-03T01:02:35.758Z",
+    "duration": 8250.842,
+    "expected": 8,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
