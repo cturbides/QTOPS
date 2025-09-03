@@ -1,0 +1,119 @@
+<testsuites id="" name="" tests="15" failures="0" skipped="0" errors="0" time="21.855068">
+<testsuite name="playwright/curso-completo.e2e.spec.ts" timestamp="2025-09-03T00:28:46.498Z" hostname="chromium" tests="5" failures="0" skipped="0" time="1.623" errors="0">
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Flujo Crítico: Gestión Completa de Cursos › debe crear instructor, etiquetas y curso con flujo completo" classname="playwright/curso-completo.e2e.spec.ts" time="0.694">
+<system-out>
+<![CDATA[✅ Servicios disponibles para pruebas E2E
+✅ Instructor creado: e63f4725-b5bc-4f88-aae8-3497ed3e7619
+✅ Etiquetas creadas: 83a7ad52-0653-4a7e-b26a-04254350daba 1aa3ed38-2140-41db-918d-c943b4597ea0
+✅ Curso creado: 27342518-7b47-4578-858e-592a60af45ae
+⏱️ Flujo completo ejecutado en: 311ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Flujo Crítico: Gestión Completa de Cursos › debe buscar cursos con filtros avanzados" classname="playwright/curso-completo.e2e.spec.ts" time="0.221">
+<system-out>
+<![CDATA[✅ Búsqueda completada: 10 resultados en 11ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Pruebas de Performance Integradas › debe manejar múltiples operaciones concurrentes" classname="playwright/curso-completo.e2e.spec.ts" time="0.246">
+<system-out>
+<![CDATA[✅ Operaciones exitosas: 7
+❌ Operaciones fallidas: 0
+⏱️ Tiempo total: 75ms
+📊 Promedio: 63.57142857142857ms, P95: 74ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Pruebas de Performance Integradas › debe mantener performance bajo carga de búsquedas" classname="playwright/curso-completo.e2e.spec.ts" time="0.289">
+<system-out>
+<![CDATA[🔍 10 búsquedas en 79ms (promedio: 66.1ms)
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Validación de Contratos API › debe mantener contratos de respuesta consistentes" classname="playwright/curso-completo.e2e.spec.ts" time="0.173">
+<system-out>
+<![CDATA[✅ Contratos API validados correctamente
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="playwright/curso-completo.e2e.spec.ts" timestamp="2025-09-03T00:28:46.498Z" hostname="firefox" tests="5" failures="0" skipped="0" time="5.113" errors="0">
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Flujo Crítico: Gestión Completa de Cursos › debe crear instructor, etiquetas y curso con flujo completo" classname="playwright/curso-completo.e2e.spec.ts" time="2.79">
+<system-out>
+<![CDATA[✅ Servicios disponibles para pruebas E2E
+✅ Instructor creado: fe2d98e9-e4be-40fe-90a9-71909a0b6279
+✅ Etiquetas creadas: 16a8692d-97e7-4612-babc-ff3eb2cad944 78e93721-9795-4083-8fa6-a0e7415f253e
+✅ Curso creado: 8b7dd7f1-f8df-4edb-87e7-cd84a57153c5
+⏱️ Flujo completo ejecutado en: 548ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Flujo Crítico: Gestión Completa de Cursos › debe buscar cursos con filtros avanzados" classname="playwright/curso-completo.e2e.spec.ts" time="0.62">
+<system-out>
+<![CDATA[✅ Búsqueda completada: 10 resultados en 23ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Pruebas de Performance Integradas › debe manejar múltiples operaciones concurrentes" classname="playwright/curso-completo.e2e.spec.ts" time="0.734">
+<system-out>
+<![CDATA[✅ Operaciones exitosas: 7
+❌ Operaciones fallidas: 0
+⏱️ Tiempo total: 99ms
+📊 Promedio: 82.57142857142857ms, P95: 88ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Pruebas de Performance Integradas › debe mantener performance bajo carga de búsquedas" classname="playwright/curso-completo.e2e.spec.ts" time="0.573">
+<system-out>
+<![CDATA[🔍 10 búsquedas en 155ms (promedio: 128.6ms)
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Validación de Contratos API › debe mantener contratos de respuesta consistentes" classname="playwright/curso-completo.e2e.spec.ts" time="0.396">
+<system-out>
+<![CDATA[✅ Contratos API validados correctamente
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="playwright/curso-completo.e2e.spec.ts" timestamp="2025-09-03T00:28:46.498Z" hostname="mobile" tests="5" failures="0" skipped="0" time="6.389" errors="0">
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Flujo Crítico: Gestión Completa de Cursos › debe crear instructor, etiquetas y curso con flujo completo" classname="playwright/curso-completo.e2e.spec.ts" time="3.831">
+<system-out>
+<![CDATA[✅ Servicios disponibles para pruebas E2E
+✅ Instructor creado: 97ce0e3a-d4ef-419d-a250-9923a65a161d
+✅ Etiquetas creadas: c6fe9b6b-c417-45bf-b3c2-e416b39aa636 fb5b66dc-bda7-424d-96ca-21a614e89542
+✅ Curso creado: ac4c6dad-fcb6-4d93-8034-3e9cfb99c4f4
+⏱️ Flujo completo ejecutado en: 332ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Flujo Crítico: Gestión Completa de Cursos › debe buscar cursos con filtros avanzados" classname="playwright/curso-completo.e2e.spec.ts" time="0.751">
+<system-out>
+<![CDATA[✅ Búsqueda completada: 10 resultados en 14ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Pruebas de Performance Integradas › debe manejar múltiples operaciones concurrentes" classname="playwright/curso-completo.e2e.spec.ts" time="0.518">
+<system-out>
+<![CDATA[✅ Operaciones exitosas: 7
+❌ Operaciones fallidas: 0
+⏱️ Tiempo total: 53ms
+📊 Promedio: 43.42857142857143ms, P95: 52ms
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Pruebas de Performance Integradas › debe mantener performance bajo carga de búsquedas" classname="playwright/curso-completo.e2e.spec.ts" time="0.592">
+<system-out>
+<![CDATA[🔍 10 búsquedas en 78ms (promedio: 63.2ms)
+]]>
+</system-out>
+</testcase>
+<testcase name="Suite E2E - Sistema Gestión de Cursos › Validación de Contratos API › debe mantener contratos de respuesta consistentes" classname="playwright/curso-completo.e2e.spec.ts" time="0.697">
+<system-out>
+<![CDATA[✅ Contratos API validados correctamente
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
