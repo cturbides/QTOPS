@@ -1,9 +1,3 @@
-node_modules/
-package-lock.json
-dist/
-.env
-coverage/
-
 # OSX
 #
 .DS_Store
