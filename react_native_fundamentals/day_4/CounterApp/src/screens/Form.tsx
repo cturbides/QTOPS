@@ -14,24 +14,33 @@ import {
 } from 'react-native';
 
 import validateEmail from 'src/helpers/validate-email.helper';
-import validatePassword from 'src/helpers/validate-password.helper';
+import { saveUserData } from 'src/helpers/crud-user-data.helper';
+import validateUsername from 'src/helpers/validate-username.helper';
 
-const LoginForm: React.FC = () => {
+const Form: React.FC = ({ navigation }: any) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
-  const handleLogin = () => {
+  const handleSubmit = async () => {
     if (!validateEmail(email)) {
       Alert.alert('Error', 'Por favor ingresa un correo electrónico válido.');
       return;
     }
 
-    if (!validatePassword(password)) {
-      Alert.alert('Error', 'La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial.');
+    if (!validateUsername(username)) {
+      Alert.alert('Error', 'El nombre de usuario debe tener al menos 3 caracteres y no contener espacios ni caracteres especiales.');
       return;
     }
 
-    Alert.alert('Login', `Email: ${email}\nPassword: ${password}`);
+    try {
+      await saveUserData(username, email);
+
+      Alert.alert('Login', `Email: ${email}\nUsername: ${username}`);
+
+      navigation.navigate('Home');
+    } catch (e) {
+      Alert.alert('Error', 'No se pudo guardar');
+    }
   };
 
   return (
@@ -42,7 +51,7 @@ const LoginForm: React.FC = () => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.form}>
-            <Text style={styles.title}>Iniciar Sesión</Text>
+            <Text style={styles.title}>Guardar datos de usuario</Text>
 
             <TextInput
               style={styles.input}
@@ -62,21 +71,20 @@ const LoginForm: React.FC = () => {
 
             <TextInput
               style={styles.input}
-              placeholder="Contraseña"
-              value={password}
-              onChangeText={setPassword}
-              textContentType='password'
-              onSubmitEditing={handleLogin}
+              placeholder="Username"
+              value={username}
+              onChangeText={setUsername}
+              textContentType='username'
+              onSubmitEditing={handleSubmit}
               returnKeyType='done'
               accessible={true}
-              accessibilityLabel='Campo de contrasena'
-              accessibilityHint='Ingresa tu contrasena'
-              autoComplete='password'
-              secureTextEntry
+              accessibilityLabel='Campo de nombre de usuario'
+              accessibilityHint='Ingresa tu nombre de usuario'
+              autoComplete='username'
             />
 
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
-              <Text style={styles.buttonText}>Iniciar Sesión</Text>
+            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+              <Text style={styles.buttonText}>Guardar datos</Text>
             </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>
@@ -102,4 +110,4 @@ const styles = StyleSheet.create({
   buttonText: { color: 'white', fontSize: 16, fontWeight: 'bold' }
 });
 
-export default LoginForm;
+export default Form;
