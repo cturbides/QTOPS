@@ -1,0 +1,7 @@
+{
+  "name": "CounterApp",
+  "displayName": "CounterApp",
+  "android": {
+    "package": "com.anonymous.counterapp"
+  }
+}
