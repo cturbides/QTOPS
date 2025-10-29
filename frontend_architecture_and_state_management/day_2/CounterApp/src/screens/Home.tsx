@@ -3,27 +3,27 @@ import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import UserList from 'src/components/UserList';
-import { useGetUsersQuery } from 'src/services/userApi';
+import TaskList from 'src/components/TaskList';
+import { useGetTasksQuery } from 'src/services/tasksApi';
 import { RootStackParamList } from 'src/constants/common.constants';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
     const navigation = useNavigation<HomeScreenNavigationProp>();
-    const { data: users = [], isLoading, error } = useGetUsersQuery();
+    const { data: tasks = [], isLoading, error } = useGetTasksQuery();
 
-    const handleUserPress = (userId: number) => {
-        navigation.navigate('UserDetail', { userId });
+    const handleTaskPress = (taskId: number) => {
+        navigation.navigate('TaskDetail', { taskId });
     };
 
     return (
         <View style={styles.container}>
-            <UserList 
-                users={users} 
+            <TaskList 
+                tasks={tasks} 
                 loading={isLoading} 
-                error={error ? 'Error al cargar usuarios' : null}
-                onUserPress={handleUserPress}
+                error={error ? 'Error al cargar tareas' : null}
+                onTaskPress={handleTaskPress}
             />
         </View>
     );

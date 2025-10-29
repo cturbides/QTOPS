@@ -1,15 +1,15 @@
 import React from 'react';
 import { FlatList, Text, View, StyleSheet, ActivityIndicator } from 'react-native';
 
-import UserCard from './UserCard';
-import { UserListProps } from './UserListProps.interface';
+import TaskCard from './TaskCard';
+import { TaskListProps } from './TaskListProps.interface';
 
-const UserList: React.FC<UserListProps> = ({ users, loading, error, onUserPress }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks, loading, error, onTaskPress }) => {
   if (loading) {
     return (
       <View style={styles.centered}>
         <ActivityIndicator size="large" color="#0066cc" />
-        <Text style={styles.loadingText}>Cargando usuarios...</Text>
+        <Text style={styles.loadingText}>Cargando tareas...</Text>
       </View>
     );
   }
@@ -22,22 +22,22 @@ const UserList: React.FC<UserListProps> = ({ users, loading, error, onUserPress 
     );
   }
 
-  if (users.length === 0) {
+  if (tasks.length === 0) {
     return (
       <View style={styles.centered}>
-        <Text style={styles.emptyText}>No hay usuarios disponibles</Text>
+        <Text style={styles.emptyText}>No hay tareas disponibles</Text>
       </View>
     );
   }
 
   return (
     <FlatList
-      data={users}
+      data={tasks}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
-        <UserCard 
-          user={item} 
-          onPress={onUserPress ? () => onUserPress(item.id) : undefined}
+        <TaskCard 
+          task={item} 
+          onPress={onTaskPress ? () => onTaskPress(item.id) : undefined}
         />
       )}
       contentContainerStyle={styles.list}
@@ -67,8 +67,9 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#999',
+    color: '#666',
+    textAlign: 'center',
   },
 });
 
-export default UserList;
+export default TaskList;
