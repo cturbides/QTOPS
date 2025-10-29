@@ -1,4 +1,5 @@
 export type RootStackParamList = {
     Home: undefined;
-    TaskDetail: { taskId: number };
+    AddTask: undefined;
+    TaskDetail: { taskId: string };
 };

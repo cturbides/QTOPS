@@ -1,6 +1,8 @@
 export type Task = {
-  userId: number;
-  id: number;
+  id: string;
   title: string;
   completed: boolean;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
 };

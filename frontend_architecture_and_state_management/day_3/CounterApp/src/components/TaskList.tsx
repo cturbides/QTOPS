@@ -33,7 +33,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, loading, error, onTaskPress 
   return (
     <FlatList
       data={tasks}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TaskCard 
           task={item} 

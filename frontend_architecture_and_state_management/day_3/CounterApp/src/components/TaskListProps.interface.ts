@@ -4,5 +4,5 @@ export type TaskListProps = {
     tasks: Task[];
     loading: boolean;
     error: string | null;
-    onTaskPress?: (taskId: number) => void;
+    onTaskPress?: (taskId: string) => void;
 };

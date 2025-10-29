@@ -1,64 +1,58 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
-import { useGetTaskByIdQuery } from 'src/services/tasksApi';
-import { TaskDetailProps } from 'src/types/task-details.type';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useTaskStore } from 'src/stores/useTaskStore';
+import { TaskDetailRouteProp } from 'src/types/task-details.type';
+import { RootStackParamList } from 'src/constants/common.constants';
+import TaskDetailHeader from 'src/components/task-detail/TaskDetailHeader';
+import TaskDetailInfo from 'src/components/task-detail/TaskDetailInfo';
+import TaskDetailMetadata from 'src/components/task-detail/TaskDetailMetadata';
+import TaskDetailActions from 'src/components/task-detail/TaskDetailActions';
 
+type TaskDetailNavigationProp = StackNavigationProp<RootStackParamList, 'TaskDetail'>;
 
-const TaskDetailScreen: React.FC<TaskDetailProps> = ({ route }) => {
+const TaskDetailScreen: React.FC = () => {
+  const route = useRoute<TaskDetailRouteProp>();
+  const navigation = useNavigation<TaskDetailNavigationProp>();
   const { taskId } = route.params;
-  const { data: task, isLoading, error } = useGetTaskByIdQuery(taskId);
+  
+  // Suscribirse reactivamente a la tarea específica
+  const task = useTaskStore((state) => 
+    state.tasks.find((t) => t.id === taskId)
+  );
+  const toggleTask = useTaskStore((state) => state.toggleTask);
+  const removeTask = useTaskStore((state) => state.removeTask);
 
-  if (isLoading) {
+  if (!task) {
     return (
       <View style={styles.centered}>
-        <ActivityIndicator size="large" color="#0066cc" />
-        <Text style={styles.loadingText}>Cargando detalles...</Text>
+        <Text style={styles.errorText}>Tarea no encontrada</Text>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.backButtonText}>Volver</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 
-  if (error || !task) {
-    return (
-      <View style={styles.centered}>
-        <Text style={styles.errorText}>Error al cargar la tarea</Text>
-      </View>
-    );
-  }
+  const handleToggle = () => {
+    toggleTask(taskId);
+  };
+
+  const handleDelete = () => {
+    removeTask(taskId);
+    navigation.goBack();
+  };
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <View style={[styles.statusBadge, task.completed ? styles.completedBadge : styles.pendingBadge]}>
-        <Text style={styles.statusText}>
-          {task.completed ? '✓ Completada' : '○ Pendiente'}
-        </Text>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.label}>Título</Text>
-        <Text style={[styles.title, task.completed && styles.completedText]}>
-          {task.title}
-        </Text>
-      </View>
-
-      <View style={styles.infoRow}>
-        <View style={styles.infoBox}>
-          <Text style={styles.infoLabel}>ID de Tarea</Text>
-          <Text style={styles.infoValue}>#{task.id}</Text>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.infoLabel}>ID de Usuario</Text>
-          <Text style={styles.infoValue}>#{task.userId}</Text>
-        </View>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.label}>Estado</Text>
-        <View style={styles.statusDetail}>
-          <Text style={styles.statusDetailText}>
-            Esta tarea se encuentra {task.completed ? 'completada' : 'pendiente de completar'}.
-          </Text>
-        </View>
-      </View>
+      <TaskDetailHeader task={task} />
+      <TaskDetailInfo task={task} />
+      <TaskDetailMetadata task={task} />
+      <TaskDetailActions task={task} onToggle={handleToggle} onDelete={handleDelete} />
     </ScrollView>
   );
 };
@@ -77,99 +71,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
   },
-  loadingText: {
-    marginTop: 12,
-    fontSize: 16,
-    color: '#666',
-  },
   errorText: {
     fontSize: 16,
     color: '#cc0000',
-  },
-  statusBadge: {
-    alignSelf: 'center',
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 20,
     marginBottom: 20,
   },
-  completedBadge: {
-    backgroundColor: '#d1fae5',
-  },
-  pendingBadge: {
-    backgroundColor: '#fef3c7',
-  },
-  statusText: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#333',
-  },
-  section: {
-    backgroundColor: '#fff',
+  backButton: {
+    backgroundColor: '#0066cc',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
     borderRadius: 8,
-    padding: 16,
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
   },
-  label: {
-    fontSize: 12,
+  backButtonText: {
+    color: '#fff',
+    fontSize: 16,
     fontWeight: '600',
-    color: '#666',
-    textTransform: 'uppercase',
-    marginBottom: 8,
-    letterSpacing: 0.5,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#333',
-    lineHeight: 28,
-  },
-  completedText: {
-    textDecorationLine: 'line-through',
-    color: '#999',
-  },
-  infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 12,
-  },
-  infoBox: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    padding: 16,
-    marginHorizontal: 6,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  infoLabel: {
-    fontSize: 12,
-    color: '#666',
-    marginBottom: 4,
-  },
-  infoValue: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#0066cc',
-  },
-  statusDetail: {
-    padding: 12,
-    backgroundColor: '#f8f9fa',
-    borderRadius: 6,
-  },
-  statusDetailText: {
-    fontSize: 15,
-    color: '#555',
-    lineHeight: 22,
   },
 });
 
