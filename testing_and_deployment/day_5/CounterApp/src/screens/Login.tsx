@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { usePerformanceMonitor } from '../hooks/usePerformanceMonitor';
+import { captureError } from '../utils/sentry';
+import { logEvent, logScreenView } from '../utils/analytics';
 
 type RootStackParamList = {
   Login: undefined;
@@ -18,11 +20,35 @@ const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    logScreenView('Login');
+  }, []);
+
   const handleLogin = () => {
-    if (username === 'admin' && password === '1234') {
-      navigation.navigate('Home');
-    } else {
-      Alert.alert('Error', 'Invalid credentials');
+    try {
+      if (username === 'admin' && password === '1234') {
+        logEvent('login_success', {
+          username,
+          method: 'credentials',
+        });
+
+        navigation.navigate('Home');
+      } else {
+        logEvent('login_failed', {
+          username,
+          reason: 'invalid_credentials',
+        });
+
+        Alert.alert('Error', 'Invalid credentials');
+      }
+    } catch (error) {
+      captureError(error as Error, {
+        screen: 'Login',
+        action: 'handleLogin',
+        username,
+      });
+
+      Alert.alert('Error', 'An unexpected error occurred');
     }
   };
 
