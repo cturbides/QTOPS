@@ -1,36 +1,36 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { View, StyleSheet, Text } from 'react-native';
 
-import TaskList from 'src/components/TaskList';
-import { useGetTasksQuery } from 'src/services/tasksApi';
-import { RootStackParamList } from 'src/constants/common.constants';
-
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+import LazyComponent from 'src/components/lazy/LazyComponent';
 
 const HomeScreen: React.FC = () => {
-    const navigation = useNavigation<HomeScreenNavigationProp>();
-    const { data: tasks = [], isLoading, error } = useGetTasksQuery();
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Lazy Loading Demo</Text>
+      </View>
 
-    const handleTaskPress = (taskId: number) => {
-        navigation.navigate('TaskDetail', { taskId });
-    };
-
-    return (
-        <View style={styles.container}>
-            <TaskList 
-                tasks={tasks} 
-                loading={isLoading} 
-                error={error ? 'Error al cargar tareas' : null}
-                onTaskPress={handleTaskPress}
-            />
-        </View>
-    );
-}
+      <LazyComponent />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#f5f5f5' },
+  container: {
+    flex: 1,
+    backgroundColor: '#f8fafc',
+  },
+  header: {
+    backgroundColor: '#6366f1',
+    padding: 20,
+    paddingTop: 40,
+    alignItems: 'center',
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
 });
 
 export default HomeScreen;
