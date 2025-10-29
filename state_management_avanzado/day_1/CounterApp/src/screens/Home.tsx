@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import CounterDisplay from 'src/components/CounterDisplay';
 import CounterControls from 'src/components/CounterControls';
+import { useAppDispatch, useAppSelector } from 'src/hooks';
+import { increment, decrement, reset, incrementByAmount } from 'src/store/counterSlice';
 
 const HomeScreen: React.FC = () => {
-    const [count, setCount] = useState<number>(0);
+    const count = useAppSelector(state => state.counter.value);
+    const dispatch = useAppDispatch();
 
-    const increment = () => setCount(c => c + 1);
-    const decrement = () => setCount(c => c - 1);
-    const reset = () => setCount(0);
+    const handleIncrement = () => dispatch(increment());
+    const handleDecrement = () => dispatch(decrement());
+    const handleReset = () => dispatch(reset());
+    const handleIncrementByAmount = (amount: number) => dispatch(incrementByAmount(amount));
 
     return (
         <View style={styles.container}>
             <CounterDisplay count={count} title="Contador simple" />
-            <CounterControls onIncrement={increment} onDecrement={decrement} onReset={reset} />
+            <CounterControls
+                onIncrement={handleIncrement}
+                onDecrement={handleDecrement}
+                onReset={handleReset}
+                onIncrementByAmount={handleIncrementByAmount}
+            />
         </View>
     );
 }
