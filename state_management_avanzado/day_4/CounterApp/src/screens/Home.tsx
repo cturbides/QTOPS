@@ -3,14 +3,10 @@ import { View, StyleSheet } from 'react-native';
 
 import CounterDisplay from 'src/components/CounterDisplay';
 import CounterControls from 'src/components/CounterControls';
-import { useCounterStore } from 'src/store/useCounterStore';
+import { useCounter } from 'src/contexts/CounterContext';
 
 const HomeScreen: React.FC = () => {
-    const count = useCounterStore(state => state.count);
-    const increment = useCounterStore(state => state.increment);
-    const decrement = useCounterStore(state => state.decrement);
-    const reset = useCounterStore(state => state.reset);
-    const incrementBy = useCounterStore(state => state.incrementBy);
+    const { count, increment, decrement, reset, incrementBy } = useCounter();
 
     return (
         <View style={styles.container}>
