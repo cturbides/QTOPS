@@ -4,4 +4,5 @@ export type UserListProps = {
     users: User[];
     loading: boolean;
     error: string | null;
+    onUserPress?: (userId: number) => void;
 };

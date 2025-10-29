@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { UserCardProps } from './UserCardProps.interface';
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
-  return (
+const UserCard: React.FC<UserCardProps> = ({ user, onPress }) => {
+  const content = (
     <View style={styles.card}>
       <Text style={styles.name}>{user.name}</Text>
       <Text style={styles.username}>@{user.username}</Text>
@@ -13,6 +13,16 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
       <Text style={styles.company}>🏢 {user.company.name}</Text>
     </View>
   );
+
+  if (onPress) {
+    return (
+      <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
+        {content}
+      </TouchableOpacity>
+    );
+  }
+
+  return content;
 };
 
 const styles = StyleSheet.create({

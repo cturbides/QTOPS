@@ -4,8 +4,7 @@ import { FlatList, Text, View, StyleSheet, ActivityIndicator } from 'react-nativ
 import UserCard from './UserCard';
 import { UserListProps } from './UserListProps.interface';
 
-
-const UserList: React.FC<UserListProps> = ({ users, loading, error }) => {
+const UserList: React.FC<UserListProps> = ({ users, loading, error, onUserPress }) => {
   if (loading) {
     return (
       <View style={styles.centered}>
@@ -35,7 +34,12 @@ const UserList: React.FC<UserListProps> = ({ users, loading, error }) => {
     <FlatList
       data={users}
       keyExtractor={(item) => item.id.toString()}
-      renderItem={({ item }) => <UserCard user={item} />}
+      renderItem={({ item }) => (
+        <UserCard 
+          user={item} 
+          onPress={onUserPress ? () => onUserPress(item.id) : undefined}
+        />
+      )}
       contentContainerStyle={styles.list}
     />
   );

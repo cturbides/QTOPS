@@ -1,21 +1,30 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 import UserList from 'src/components/UserList';
-import { loadUsers } from 'src/store/usersSlice';
-import { useAppDispatch, useAppSelector } from 'src/hooks';
+import { useGetUsersQuery } from 'src/services/userApi';
+import { RootStackParamList } from 'src/constants/common.constants';
+
+type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen: React.FC = () => {
-    const { users, loading, error } = useAppSelector(state => state.users);
-    const dispatch = useAppDispatch();
+    const navigation = useNavigation<HomeScreenNavigationProp>();
+    const { data: users = [], isLoading, error } = useGetUsersQuery();
 
-    useEffect(() => {
-        dispatch(loadUsers());
-    }, [dispatch]);
+    const handleUserPress = (userId: number) => {
+        navigation.navigate('UserDetail', { userId });
+    };
 
     return (
         <View style={styles.container}>
-            <UserList users={users} loading={loading} error={error} />
+            <UserList 
+                users={users} 
+                loading={isLoading} 
+                error={error ? 'Error al cargar usuarios' : null}
+                onUserPress={handleUserPress}
+            />
         </View>
     );
 }
