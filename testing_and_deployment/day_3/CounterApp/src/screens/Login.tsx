@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
+import { usePerformanceMonitor } from '../hooks/usePerformanceMonitor';
 
 type RootStackParamList = {
   Login: undefined;
@@ -11,6 +12,8 @@ type RootStackParamList = {
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
 const LoginScreen: React.FC = () => {
+  usePerformanceMonitor('LoginScreen');
+  
   const navigation = useNavigation<NavigationProp>();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

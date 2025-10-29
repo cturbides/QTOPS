@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import { usePerformanceMonitor } from '../hooks/usePerformanceMonitor';
 
 const HomeScreen: React.FC = () => {
+  usePerformanceMonitor('HomeScreen');
+
   return (
     <View style={styles.container}>
       <Text style={styles.message}>¡Hola!</Text>
